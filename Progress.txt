@@ -1,2 +1,3 @@
 WebApp V1.1 ->Connection of Express Js Server and Vue Client side App
 WebApp V1.2 ->Created the Registeration part of Web App 80% Complete
+WebApp V1.3 ->Created the Registeration part and Login Part of Web App Completed (Todo: Should we Use passport? ,Vuex should be initialised)

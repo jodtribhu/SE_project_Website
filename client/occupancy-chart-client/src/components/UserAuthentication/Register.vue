@@ -1,9 +1,9 @@
 <template>
     <div>
         <h1>Register</h1>
-        <input type="email" name="email" placeholder="email" v-model="email">
+        <input type="email" name="email" placeholder="email" v-model="email" autocomplete="new-password">
         <br>
-        <input type="password" name="password" placeholder="password" v-model="password">
+        <input type="password" name="password" placeholder="password" v-model="password" autocomplete="new-password">
         <br>
         <div>
             <p class="error" v-if="error!=''">{{error}}</p>
