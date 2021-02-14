@@ -1,0 +1,12 @@
+module.exports={
+    port:8081,
+    db:{
+        database:'occupancy-chart',
+        user:'root',
+        password:'',
+        options:{
+            dialect:'mysql',
+            host:'localhost'
+        }
+    }
+}
