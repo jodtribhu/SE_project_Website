@@ -20,20 +20,23 @@ export default {
             email:'',
             password:'',
             error:''
-        }
+        };
     },
     methods:{
         async login(){
             console.log("Button Was clicked the email is "+this.email+" "+this.password);
             try {
-                 await AuthenticateService.login({
+                const response =await AuthenticateService.login({
                 email:this.email,
                 password:this.password
             })
+            this.$store.dispatch('setToken',response.data.token);
+            this.$store.dispatch('setUser',response.data.user);
             } catch (error) {
-                this.error=error.response.data.error;
+                   console.log("The error is "+ error);
+                   this.error=error.response.data.error;      
             }
-          
+           
             // console.log(response.data);
         }
     }

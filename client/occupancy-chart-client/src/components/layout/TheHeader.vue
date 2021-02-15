@@ -5,8 +5,8 @@
                 <router-link to="/">Occupancy Chart </router-link>
             </h1>
             <ul>
-                <li><router-link to="/register">Sign Up</router-link></li>
-                <li><router-link to="/login">Login</router-link></li>
+                <li><router-link to="/register" v-if="!isLoggedIn" >Sign Up</router-link></li>
+                <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
                 <!-- <li v-if="isLoggedIn"><router-link to="/requests">Requests</router-link></li>
                 <li v-else><router-link to="/auth">Login</router-link></li>
                 <li v-if="isLoggedIn" ><base-button @click="logout()">Logout</base-button></li> -->
@@ -18,11 +18,11 @@
 
 <script>
 export default {
-//   computed:{
-//     isLoggedIn(){
-//       return this.$store.getters.isAuthenticated;
-//     }
-//   },
+  computed:{
+    isLoggedIn(){
+      return this.$store.getters.isUserLoggedIn;
+    }
+  },
 //   methods:{
 //     logout(){
 //       this.$store.dispatch('logout');

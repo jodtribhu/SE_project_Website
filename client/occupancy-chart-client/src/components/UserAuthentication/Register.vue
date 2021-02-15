@@ -26,10 +26,12 @@ export default {
         async register(){
             console.log("Button Was clicked the email is "+this.email+" "+this.password);
             try {
-                 await AuthenticateService.register({
+                  const response =await AuthenticateService.register({
                 email:this.email,
                 password:this.password
             })
+            this.$store.dispatch('setToken',response.data);
+            this.$store.dispatch('setUser',response.data);
             } catch (error) {
                 this.error=error.response.data.error;
             }
