@@ -36,7 +36,7 @@ export default {
                    console.log("The error is "+ error);
                    this.error=error.response.data.error;      
             }
-           
+            this.$router.replace('/admin');
             // console.log(response.data);
         }
     }
