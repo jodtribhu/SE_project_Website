@@ -1,8 +1,9 @@
-const {User}=require('../models');
+const User=require('../models/User');
 const jwt= require('jsonwebtoken');
 const config=require('../config/config')
 const crypto=require('crypto');
-
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
 function jwtSignUser(user)
 {
     const ONE_WEEK=60*60*24*7;
@@ -18,22 +19,23 @@ function genPassword(password)
     console.log("Inside password"+salt+" "+genhash);
     return {salt:salt,hash:genhash};
 }
-
+ function validatePassword(candiatepassword,hash,salt){
+    var hashVerify=crypto.pbkdf2Sync(candiatepassword,String(salt),10000,60,'sha512').toString('hex');
+    var bt=String(hash) === hashVerify;
+    return Promise.resolve(true); ;
+    }
 module.exports={
     async register(req,res){
         const userpassworddetails= genPassword(req.body.password);
-        try {
-            
-            const user =await User.create({
-                email:req.body.email,
-                salt:userpassworddetails.salt,
-                hash:userpassworddetails.hash});  
-            res.send(user.toJSON());
-        } catch (error) {
-            res.status(400).send({
-                error:error
-            });
-        }       
+        const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash});
+        user.save().then((user) => {
+            res.send(user); 
+        })
+        .catch((error) => {
+            console.log(err);
+            res.send(400, "Bad Request");
+        });
+         
     },
     async login(req,res){
         try {
@@ -43,34 +45,39 @@ module.exports={
                     email:email
                 }
             });  
-            if(!user)
-            {
-                res.status(403).send({
-                    error:"The login information was incorrect"
-                });
-            }
-          
-            const isPasswordValid= await user.validPassword(password);
-            if(!isPasswordValid)
-            {
-                res.status(403).send({
-                    error:"The login information was incorrect"
-                });
-            }
-            const userJson=user.toJSON();
-            res.send({
-                user:userJson,
-                token:jwtSignUser(userJson)
-            })
 
+            User.findOne({ email: email}, function (err, user) {
+                if(!user)
+                {
+                    res.status(403).send({
+                        error:"The login information was incorrect"
+                    });
+                }
+                validatePassword(password,user.hash,user.salt).then(function(isPasswordValid){
+                    console.log(isPasswordValid);
+                     if(!isPasswordValid)
+                        {
+                        res.status(403).send({error:"The login information was incorrect"});
+                        }
+                        else{
+                            afterloginuser={
+                                email:user.email,
+                            }
+                            console.log(user);
+                            res.send({user:user,token:jwtSignUser(afterloginuser)});
+                        }
+                    
+                })
+                
+            });
+           
         } catch (error) {
             console.log(error);
             res.status(500).send({
                 error:"An error has occured trying to login"
             });
         }       
-    }
-
-
+    },
+    
    
 }
