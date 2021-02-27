@@ -1,4 +1,5 @@
 const AuthenticationController=require('./controllers/AuthenticationController')
+const FacultyFetchController=require('./controllers/FacultyFetchController')
 const AuthenticationControllerPolicy=require('./policies/AuthenticationControllerPolicy');
 
 const passport=require('passport');
@@ -22,6 +23,7 @@ module.exports=(app)=>
         console.log(req.isAuthenticated());
         res.status(200).json({success:true,msg:'You are Authorized'})
     })
+
     app.post('/admin-route',passport.authenticate('jwt', { session: false }),(req,res,next)=>{
         
     if(req.isAuthenticated()&&req.user.isAdmin==true)
@@ -35,4 +37,6 @@ module.exports=(app)=>
     }
         
     })
+
+    app.get('/fetchfaculties',FacultyFetchController.fetchfaculties)
 }

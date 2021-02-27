@@ -23,14 +23,14 @@ function genPassword(password)
  function validatePassword(candiatepassword,hash,salt){
     var hashVerify=crypto.pbkdf2Sync(candiatepassword,String(salt),10000,60,'sha512').toString('hex');
     var bt=String(hash) === hashVerify;
-    return Promise.resolve(true); ;
+    return Promise.resolve(bt); ;
     }
 module.exports={
     async register(req,res){
         const userpassworddetails= genPassword(req.body.password);
         const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash,isAdmin:req.body.isAdmin});
         user.save().then((user) => {
-            res.send(user); 
+            res.send({registration:"Successfull"}); 
         })
         .catch((error) => {
             console.log(error);

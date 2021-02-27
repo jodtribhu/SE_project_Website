@@ -6,3 +6,4 @@ WebApp V1.5 ->Completed the Route setup Need To built each component  (Todo: Sho
 WebApp V1.6 ->Change the backend from mysql to mongodb (Todo: Should we Use passport?)
 WebApp V1.7 ->Implemented Passport and created admin route
 WebApp V1.8 ->Fixed FrontEnd bugs and implemented proper admin login and logout
+WebApp V1.9 ->Implemented proper admin route also created registration of faculty and displaying of all faculties

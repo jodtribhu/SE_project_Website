@@ -6,13 +6,14 @@ module.exports={
             password:Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$'))
         })
         inputvalue={
-            email:req.body.email,
-            password:req.body.password,
+            "email":req.body.email,
+            "password":req.body.password
         }
         const {error,value}=schema.validate(inputvalue);
 
         if(error)
         {
+            log
             switch(error.details[0].context.key)
             {
                 case 'email':

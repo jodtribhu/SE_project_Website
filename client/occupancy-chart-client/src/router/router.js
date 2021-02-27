@@ -1,5 +1,5 @@
 import {createRouter,createWebHistory} from 'vue-router';
-import Register from '../components/UserAuthentication/Register.vue';
+import AdminRegister from '../components/Admin/AdminRegister.vue';
 import Login from '../components/UserAuthentication/Login.vue';
 import Admin from '../components/Admin/Admin.vue';
 import NotFound from '../components/pages/NotFound.vue';
@@ -11,8 +11,8 @@ import store from '../store/index.js'
 const router=createRouter({
     history:createWebHistory(),
     routes:[
-        {path:'/',redirect:'/register'},
-        {path:'/register',component:Register},
+        {path:'/',redirect:'/login'},
+        {path:'/admin/register',component:AdminRegister,meta:{ requiresAuth:true}},
         {path:'/login',component:Login},
         {path:'/teachers',component:null},
         {path:'/teachers/:id',component:TeacherDetail,children:[
