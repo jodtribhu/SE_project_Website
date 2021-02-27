@@ -31,7 +31,6 @@ export default {
                       this.$router.replace('/admin');
                   }
                 console.log(response);
-
             } catch (error) {
                 this.error=error.response.data.error;
             }
