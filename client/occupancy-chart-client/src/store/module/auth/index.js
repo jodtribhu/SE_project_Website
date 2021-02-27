@@ -6,6 +6,7 @@ export default{
         return{
           user:null,
           token:'',
+          expiresIn:null,
           isUserLoggedIn:false
         };
         

@@ -5,3 +5,4 @@ WebApp V1.4 ->Completed the Login Part and Auth Vuex store  (Todo: Should we Use
 WebApp V1.5 ->Completed the Route setup Need To built each component  (Todo: Should we Use passport?)
 WebApp V1.6 ->Change the backend from mysql to mongodb (Todo: Should we Use passport?)
 WebApp V1.7 ->Implemented Passport and created admin route
+WebApp V1.8 ->Fixed FrontEnd bugs and implemented proper admin login and logout

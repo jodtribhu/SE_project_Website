@@ -64,10 +64,11 @@ module.exports={
                             afterloginuser={
                                 email:user.email,
                                 id:user.id,
-                                isAdmin:user.isAdmin
+                                isAdmin:user.isAdmin,
+                                expiresIn:ONE_WEEK
                             }
                             console.log(user);
-                            res.send({user:user,token:"Bearer "+jwtSignUser(afterloginuser),expiresIn:ONE_WEEK});
+                            res.send({user:user,token:"Bearer "+jwtSignUser(afterloginuser),expiresIn:ONE_WEEK,isAdmin:user.isAdmin});
                         }
                     
                 })

@@ -7,9 +7,9 @@
             <ul>
                 <li><router-link to="/register" v-if="!isLoggedIn" >Sign Up</router-link></li>
                 <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
-                <!-- <li v-if="isLoggedIn"><router-link to="/requests">Requests</router-link></li>
-                <li v-else><router-link to="/auth">Login</router-link></li>
-                <li v-if="isLoggedIn" ><base-button @click="logout()">Logout</base-button></li> -->
+                <!-- <li v-if="isLoggedIn"><router-link to="/requests">Requests</router-link></li> -->
+                <!-- <li v-else><router-link to="/auth">Login</router-link></li> -->
+                <li v-if="isLoggedIn" ><base-button @click="logout()">Logout</base-button></li>
             </ul>
         </nav>
     </header>
@@ -23,12 +23,12 @@ export default {
       return this.$store.getters.isUserLoggedIn;
     }
   },
-//   methods:{
-//     logout(){
-//       this.$store.dispatch('logout');
-//       this.$router.replace('/coaches');
-//     }
-//   }
+  methods:{
+    logout(){
+      this.$store.dispatch('logout');
+      this.$router.replace('/login');
+    }
+  }
 }
 </script>
 <style scoped>

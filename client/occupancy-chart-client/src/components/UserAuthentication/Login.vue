@@ -30,14 +30,20 @@ export default {
                 email:this.email,
                 password:this.password
             })
-            this.$store.dispatch('setToken',response.data.token);
-            this.$store.dispatch('setUser',response.data.user);
+            console.log(response.data);
+            this.$store.dispatch('setUser',response.data);
+            console.log("Inside response data "+response.data.isAdmin);
+            if(response.data.isAdmin==true)
+            {
+                console.log("It is true that the logged in is Admin");
+                this.$router.replace('/admin');
+            }
             } catch (error) {
                    console.log("The error is "+ error);
                    this.error=error.response.data.error;      
             }
-            this.$router.replace('/admin');
-            // console.log(response.data);
+            
+        
         }
     }
 }
