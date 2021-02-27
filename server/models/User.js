@@ -7,6 +7,10 @@ const UserSchema=new mongoose.Schema({
         unique:[true,"Account is already present"],
         required:[true,"Email has not been entered"]
     },
+    isAdmin:{
+        type:Boolean,
+        required:[true,"Enter whether he is an admin"]
+    },
     salt:{
         type:String
     },

@@ -5,8 +5,11 @@ module.exports={
             email:Joi.string().email(),
             password:Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$'))
         })
-
-        const {error,value}=schema.validate(req.body);
+        inputvalue={
+            email:req.body.email,
+            password:req.body.password,
+        }
+        const {error,value}=schema.validate(inputvalue);
 
         if(error)
         {

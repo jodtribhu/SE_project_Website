@@ -4,9 +4,10 @@ const config=require('../config/config')
 const crypto=require('crypto');
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
+const ONE_WEEK=60*60*24*7;
 function jwtSignUser(user)
 {
-    const ONE_WEEK=60*60*24*7;
+    
     return jwt.sign(user,config.authentication.jwtSecret,{
         expiresIn:ONE_WEEK
     })
@@ -27,12 +28,12 @@ function genPassword(password)
 module.exports={
     async register(req,res){
         const userpassworddetails= genPassword(req.body.password);
-        const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash});
+        const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash,isAdmin:req.body.isAdmin});
         user.save().then((user) => {
             res.send(user); 
         })
         .catch((error) => {
-            console.log(err);
+            console.log(error);
             res.send(400, "Bad Request");
         });
          
@@ -62,9 +63,11 @@ module.exports={
                         else{
                             afterloginuser={
                                 email:user.email,
+                                id:user.id,
+                                isAdmin:user.isAdmin
                             }
                             console.log(user);
-                            res.send({user:user,token:jwtSignUser(afterloginuser)});
+                            res.send({user:user,token:"Bearer "+jwtSignUser(afterloginuser),expiresIn:ONE_WEEK});
                         }
                     
                 })
