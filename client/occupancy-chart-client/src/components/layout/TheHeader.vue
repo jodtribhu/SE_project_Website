@@ -5,7 +5,6 @@
                 <router-link to="/">Faculty Profile Builder </router-link>
             </h1>
             <ul>
-                <li><router-link to="/register" v-if="!isLoggedIn" >Sign Up</router-link></li>
                 <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
                 <!-- <li v-if="isLoggedIn"><router-link to="/requests">Requests</router-link></li> -->
                 <!-- <li v-else><router-link to="/auth">Login</router-link></li> -->
@@ -34,8 +33,8 @@ export default {
 <style scoped>
 header {
   width: 100%;
-  height: 5rem;
-  background-color: #3d008d;
+  height: 4rem;
+  background-color: #383e56;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +42,7 @@ header {
 
 header a {
   text-decoration: none;
-  color: #f391e3;
+  color: #fb743e;
   display: inline-block;
   padding: 0.75rem 1.5rem;
   border: 1px solid transparent;
@@ -52,7 +51,7 @@ header a {
 a:active,
 a:hover,
 a.router-link-active {
-  border: 1px solid #f391e3;
+  border: 1px solid #fb743e;
 }
 
 h1 {
@@ -60,7 +59,7 @@ h1 {
 }
 
 h1 a {
-  color: white;
+  color: #fb743e;
   margin: 0;
 }
 

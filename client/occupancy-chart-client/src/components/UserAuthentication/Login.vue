@@ -3,10 +3,8 @@
   
         <div class="box">
             <h1>Login</h1>
-                <input type="email" name="email" placeholder="email" v-model="email">
-            <br>
-                <input type="password" name="password" placeholder="password" v-model="password">
-            <br>
+                <input type="email" name="email" placeholder="Email" v-model="email">
+                <input type="password" name="password" placeholder="Password" v-model="password">
             <div>
             <p class="error" v-if="error!=''">{{error}}</p>
             </div>
@@ -33,17 +31,17 @@ export default {
                 email:this.email,
                 password:this.password
             })
-            console.log(response.data);
+            console.log(response);
             this.$store.dispatch('setUser',response.data);
-            console.log("Inside response data "+response.data.isAdmin);
-            if(response.data.isAdmin==true)
-            {
+
+                if(response.data.isAdmin==true)
+                {
                 console.log("It is true that the logged in is Admin");
                 this.$router.replace('/admin');
-            }
+                }
             } catch (error) {
-                   console.log("The error is "+ error);
-                   this.error=error.response.data.error;      
+                   console.log("The error is "+ error.response.data.errormessage);
+                   this.error=error.response.data.errormessage;      
             }
             
         
@@ -54,16 +52,17 @@ export default {
 
 <style scoped>
 .error{
-    color: red;
+    color: #a75864;
 }
 .box{
+  border-radius: 5%;
   width: 300px;
-  padding: 40px;
+  padding: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  background: #a7c5eb;
+  background: #383e56;
   text-align: center;
 }
 .box h1{

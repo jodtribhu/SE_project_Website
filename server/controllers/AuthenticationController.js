@@ -49,28 +49,29 @@ module.exports={
             User.findOne({ email: email}, function (err, user) {
                 if(!user)
                 {
-                    res.status(403).send({
-                        error:"The login information was incorrect"
-                    });
+                    res.status(403).send({errormessage:"The login information was incorrect"});
                 }
-                validatePassword(password,user.hash,user.salt).then(function(isPasswordValid){
-                    console.log(isPasswordValid);
-                     if(!isPasswordValid)
-                        {
-                        res.status(403).send({error:"The login information was incorrect"});
-                        }
-                        else{
-                            afterloginuser={
-                                email:user.email,
-                                id:user.id,
-                                isAdmin:user.isAdmin,
-                                expiresIn:ONE_WEEK
+                else{
+                    validatePassword(password,user.hash,user.salt).then(function(isPasswordValid){
+                        console.log(isPasswordValid);
+                         if(!isPasswordValid)
+                            {
+                            res.status(403).send({error:"The login information was incorrect"});
                             }
-                            console.log(user);
-                            res.send({user:user,token:"Bearer "+jwtSignUser(afterloginuser),expiresIn:ONE_WEEK,isAdmin:user.isAdmin});
-                        }
-                    
-                })
+                            else{
+                                afterloginuser={
+                                    email:user.email,
+                                    id:user.id,
+                                    isAdmin:user.isAdmin,
+                                    expiresIn:ONE_WEEK
+                                }
+                                console.log(user);
+                                res.send({user:user,token:"Bearer "+jwtSignUser(afterloginuser),expiresIn:ONE_WEEK,isAdmin:user.isAdmin});
+                            }
+                        
+                    })
+                }
+             
                 
             });
            
