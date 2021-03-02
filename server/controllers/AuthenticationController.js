@@ -46,7 +46,6 @@ module.exports={
                     email:email
                 }
             });  
-
             User.findOne({ email: email}, function (err, user) {
                 if(!user)
                 {

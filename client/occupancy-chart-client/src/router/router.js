@@ -6,6 +6,7 @@ import NotFound from '../components/pages/NotFound.vue';
 import TeacherContact from '../components/Teachers/TeacherContact.vue';
 import TeacherDetail from '../components/Teachers/TeacherDetail.vue';
 import TeacherRequest from '../components/Teachers/TeacherRequest.vue';
+import StudentRegister from '../components/Admin/StudentRegister.vue';
 
 import store from '../store/index.js'
 const router=createRouter({
@@ -13,6 +14,7 @@ const router=createRouter({
     routes:[
         {path:'/',redirect:'/login'},
         {path:'/admin/register',component:AdminRegister,meta:{ requiresAuth:true}},
+        {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAuth:true}},
         {path:'/login',component:Login},
         {path:'/teachers',component:null},
         {path:'/teachers/:id',component:TeacherDetail,children:[

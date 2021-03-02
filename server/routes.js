@@ -1,6 +1,11 @@
 const AuthenticationController=require('./controllers/AuthenticationController')
 const FacultyFetchController=require('./controllers/FacultyFetchController')
+const RegisterStudentController=require('./controllers/RegisterStudentController')
+const StudentFetchController=require('./controllers/StudentFetchController')
+
 const AuthenticationControllerPolicy=require('./policies/AuthenticationControllerPolicy');
+
+
 
 const passport=require('passport');
 require('./passport')(passport) 
@@ -39,4 +44,6 @@ module.exports=(app)=>
     })
 
     app.get('/fetchfaculties',FacultyFetchController.fetchfaculties)
+    app.post('/registerStudent',RegisterStudentController.registerStudent)
+    app.get('/fetchstudents',StudentFetchController.fetchstudents)
 }

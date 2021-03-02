@@ -8,3 +8,4 @@ WebApp V1.7 ->Implemented Passport and created admin route
 WebApp V1.8 ->Fixed FrontEnd bugs and implemented proper admin login and logout
 WebApp V1.9 ->Implemented proper admin route also created registration of faculty and displaying of all faculties
 WebApp V1.10 ->Fixed a little bug in admin where the user can enter without entering password 
+WebApp V1.11 ->Created Student Registration and also enable to view students along with their tokens

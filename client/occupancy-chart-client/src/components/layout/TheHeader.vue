@@ -2,7 +2,7 @@
     <header>
         <nav>
             <h1>
-                <router-link to="/">Occupancy Chart </router-link>
+                <router-link to="/">Faculty Profile Builder </router-link>
             </h1>
             <ul>
                 <li><router-link to="/register" v-if="!isLoggedIn" >Sign Up</router-link></li>

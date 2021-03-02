@@ -10,6 +10,15 @@
             </ul>
         </ul>
     </base-card>
+      <base-card>
+    <button @click="registerStudent">Register a new Student</button>
+        <ul>
+            <ul v-for="student in students" :key="student.studentRollNo">
+                <li >Student Roll Number: {{student.studentRollNo}}</li>
+                <li >Student Token: {{student.student_token}}</li>
+            </ul>
+        </ul>
+    </base-card>
     </div>
     
 </template>
@@ -20,10 +29,15 @@ export default {
         faculties(){
             const faculties = this.$store.getters['faculties'];
             return faculties;
+        },
+        students(){
+            const students = this.$store.getters['students'];
+            return students;
         }
     },
     created() {
     this.loadfaculties();
+    this.loadstudents();
     },
     methods:{
         async loadfaculties(){
@@ -34,8 +48,19 @@ export default {
                 this.error = error.message || 'Something went wrong';
                 }
         },
+        async loadstudents(){
+            try {
+                await this.$store.dispatch('loadstudents');
+                } 
+            catch (error) {
+                this.error = error.message || 'Something went wrong';
+                }
+        },
         register(){
             this.$router.replace('/admin/register');
+        },
+        registerStudent(){
+            this.$router.replace('/admin/registerStudent');
         }
 
     }

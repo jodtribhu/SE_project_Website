@@ -11,7 +11,6 @@
         <button @click="register">Register</button>
     </div>
 </template>
-
 <script>
 import AuthenticateService from '@/services/AuthenticationService';
 export default {
