@@ -8,7 +8,7 @@
                 <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
                 <!-- <li v-if="isLoggedIn"><router-link to="/requests">Requests</router-link></li> -->
                 <!-- <li v-else><router-link to="/auth">Login</router-link></li> -->
-                <li v-if="isLoggedIn" ><base-button @click="logout()">Logout</base-button></li>
+                <li v-if="isLoggedIn"><router-link to="/login" @click="logout()">Logout</router-link></li>
             </ul>
         </nav>
     </header>
@@ -31,11 +31,13 @@ export default {
 }
 </script>
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 header {
   width: 100%;
   height: 4rem;
   background-color: #383e56;
   display: flex;
+  font-family: 'Montserrat', sans-serif;
   justify-content: center;
   align-items: center;
 }

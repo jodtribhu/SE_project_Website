@@ -27,7 +27,7 @@ export default {
             try {
                   const response =await RegisterStudent.registerStudent({ studentRollNo:this.studentRollNo,student_token:this.student_token})
                   if(response.data.registration=="Successfull"){
-                      this.$router.replace('/admin');
+                      this.$router.push('/admin');
                   }
                 console.log(response);
             } catch (error) {

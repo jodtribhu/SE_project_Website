@@ -8,14 +8,20 @@ import TeacherDetail from '../components/Teachers/TeacherDetail.vue';
 import TeacherRequest from '../components/Teachers/TeacherRequest.vue';
 import StudentRegister from '../components/Admin/StudentRegister.vue';
 
+
+
 import store from '../store/index.js'
 const router=createRouter({
     history:createWebHistory(),
     routes:[
         {path:'/',redirect:'/login'},
         {path:'/admin/register',component:AdminRegister,meta:{ requiresAuth:true}},
+        
         {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAuth:true}},
-        {path:'/login',component:Login},
+
+    
+
+        {path:'/login',component:Login,meta:{ requiresUnauth:true}},
         {path:'/teachers',component:null},
         {path:'/teachers/:id',component:TeacherDetail,children:[
             {path:'/contact',component:TeacherContact} //teachers/1/contact

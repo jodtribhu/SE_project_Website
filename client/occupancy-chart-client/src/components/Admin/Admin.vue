@@ -1,30 +1,23 @@
 <template>
-    <div>
-    <h1>Hello TO admin</h1>
-    <base-card>
-    <button @click="register">Register a new Faculty</button>
-        <ul>
-            <ul v-for="faculty in faculties" :key="faculty._id">
-                <li v-if=!faculty.isAdmin>Faculty Id: {{faculty._id}}</li>
-                <li v-if=!faculty.isAdmin>Faculty Email: {{faculty.email}}</li>
-            </ul>
-        </ul>
-    </base-card>
-      <base-card>
-    <button @click="registerStudent">Register a new Student</button>
-        <ul>
-            <ul v-for="student in students" :key="student.studentRollNo">
-                <li >Student Roll Number: {{student.studentRollNo}}</li>
-                <li >Student Token: {{student.student_token}}</li>
-            </ul>
-        </ul>
-    </base-card>
+    <div >
+    <admin-sidebar @messageFromChild="childMessageRecieved"></admin-sidebar>
+    <admin-student v-if="gotoComponent=='Student'"></admin-student>
+    <admin-faculty v-if="gotoComponent=='Faculty'"></admin-faculty>
     </div>
     
 </template>
 
 <script>
+import AdminSidebar from './AdminSidebar.vue';
+import AdminStudent from './AdminStudent.vue';
+import AdminFaculty from './AdminFaculty.vue';
 export default {
+  components: { AdminSidebar,AdminFaculty,AdminStudent },
+  data(){
+      return{
+          gotoComponent:'Faculty'
+      }
+  },
     computed:{
         faculties(){
             const faculties = this.$store.getters['faculties'];
@@ -35,11 +28,15 @@ export default {
             return students;
         }
     },
+
     created() {
     this.loadfaculties();
     this.loadstudents();
     },
     methods:{
+        childMessageRecieved(message){
+           this.gotoComponent=message
+        },
         async loadfaculties(){
             try {
                 await this.$store.dispatch('loadfaculties');
@@ -57,10 +54,10 @@ export default {
                 }
         },
         register(){
-            this.$router.replace('/admin/register');
+            this.$router.push('/admin/register');
         },
         registerStudent(){
-            this.$router.replace('/admin/registerStudent');
+            this.$router.push('/admin/registerStudent');
         }
 
     }
@@ -68,5 +65,9 @@ export default {
 </script>
 
 <style scoped>
-
+ 
+  html {
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+}
 </style>
