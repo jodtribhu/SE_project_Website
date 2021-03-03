@@ -3,8 +3,10 @@
         <div class="navigation-icons">
             <i @click="executeStudent" class="fas fa-user-graduate "></i>
             <p class="center">Student</p>
+            <hr >
             <i @click="executeFaculty" class="fas fa-chalkboard-teacher"></i>
             <p class="center">Faculty</p>
+            <hr >
             <i class="fas fa-passport"></i>
             <p class="center">Password</p>
         </div>
@@ -25,21 +27,24 @@ export default {
 </script>
 
 <style scoped>
+hr {width: 100%;margin-left: auto;margin-right: auto;}
 .center{
     text-align: center;
+     color: rgb(158, 150, 150);
+     padding: 0px 1px 0px 10px;
 }
  .container{
-     border-radius: 10%;
+     border-radius: 0 5% 5% 0;
       position: absolute;
       top:100px;
       bottom:40%;
       left:5px;
-      width:60px;
+      width:65px;
       padding:10px;
       min-height: calc(100vh-20px);
-      background-color:#ffff ;
-      border: solid rgb(26, 25, 25);
-      border-width: 0 1px 0 0;
+      background-color:rgb(42, 45, 53) ;
+      border: solid rgb(97, 95, 95);
+      border-width: 1px 5px 3px 0;
       z-index: 999;
       transition: all .5s ease-in-out;
   }
@@ -52,6 +57,7 @@ export default {
     }
     .contol i {
         font-size: 2rem;
+        
         cursor: pointer;
         transition: all .5s ease-in-out;
       }
@@ -60,17 +66,22 @@ export default {
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      
       width: 50px;
       float: left;
      
     }
     .navigation-icons i {
         font-size: 2rem;
-        padding: 30px 0 0px 0;
+        padding: 20px 0 0px 0;
+        
         cursor: pointer;
         transition: all .5s ease-in-out;
     }
     i:hover {
           color: #fff;
         }
+    .fa-user-graduate ,.fa-chalkboard-teacher,.fa-passport{
+  color: rgb(158, 150, 150);
+}
 </style>

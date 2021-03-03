@@ -46,7 +46,7 @@ header a {
   text-decoration: none;
   color: #fb743e;
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 0.5rem;
   border: 1px solid transparent;
 }
 
@@ -72,7 +72,7 @@ h1 a.router-link-active {
 }
 
 header nav {
-  width: 90%;
+  width: 95%;
   margin: auto;
   display: flex;
   justify-content: space-between;
