@@ -25,7 +25,7 @@ export default {
         async register(){
             console.log("Button Was clicked the email is "+this.email+" "+this.password);
             try {
-                  const response =await AuthenticateService.register({ email:this.email,password:this.password,isAdmin:false})
+                  const response =await AuthenticateService.register({email:this.email,password:this.password,isAdmin:false})
                   if(response.data.registration=="Successfull"){
                       this.$router.replace('/admin');
                   }

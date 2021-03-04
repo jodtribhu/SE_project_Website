@@ -15,7 +15,7 @@ const router=createRouter({
     history:createWebHistory(),
     routes:[
         {path:'/',redirect:'/login'},
-        {path:'/admin/register',component:AdminRegister,meta:{ requiresAuth:true}},
+        {path:'/admin/register',component:AdminRegister,meta:{ requiresAuth:true, title: 'Admin' }},
         
         {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAuth:true}},
 
@@ -27,12 +27,21 @@ const router=createRouter({
             {path:'/contact',component:TeacherContact} //teachers/1/contact
         ]},
         {path:'/requests',component:TeacherRequest},
-        {path:'/admin',component:Admin,meta:{ requiresAuth:true}},
+        {path:'/admin',component:Admin,meta:{ requiresAuth:true,title: 'Admin'}},
         {path:'/:notFound(.*)',component:NotFound}, //any other route
        //any other route
     ]
 });
 router.beforeEach(function(to,_,next){
+    if(to.meta.title)
+    {
+        document.title = to.meta.title || 'Profile Builder';
+
+    }
+    else
+    {
+        document.title = 'Profile Builder';
+    }
     if(to.meta.requiresAuth && !store.getters.isAuthenticated)
     {
         next('/login');
@@ -46,4 +55,6 @@ router.beforeEach(function(to,_,next){
         next()
     }
  });
+
+
 export default router;

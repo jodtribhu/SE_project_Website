@@ -46,4 +46,5 @@ module.exports=(app)=>
     app.get('/fetchfaculties',FacultyFetchController.fetchfaculties)
     app.post('/registerStudent',RegisterStudentController.registerStudent)
     app.get('/fetchstudents',StudentFetchController.fetchstudents)
+    app.post('/deletefaculty',FacultyFetchController.deleteFaculty)
 }

@@ -13,6 +13,4 @@ WebApp V1.12 ->Stylised the Login Screen
 WebApp V1.13 ->Created the side bar and made adjustments to components to work properly as intended
 <--------->Changed Folder Name from occupancy chart to profile builder
 WebApp V1.14 ->Finished Design of the sidebar of Admin
-
-Todo
-Create Created at and Modified At Arrtibutes
+WebApp V1.15 ->Create Created at and Modified At Arrtibutes Done.Finished Faculty Component with proper design and also deletion

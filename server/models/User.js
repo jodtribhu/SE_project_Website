@@ -16,6 +16,12 @@ const UserSchema=new mongoose.Schema({
     },
     hash:{
         type:String,
+    },
+    created_at:{
+        type:Date
+    },
+    modified_at:{
+        type:Date
     }
 })
 module.exports=mongoose.model("User",UserSchema);

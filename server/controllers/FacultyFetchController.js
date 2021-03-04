@@ -6,5 +6,17 @@ module.exports={
         User.find(function(err,faculties){
             res.send(faculties);
         })
+    },
+    deleteFaculty(req,res){
+        console.log(req.body);
+        User.findByIdAndDelete(req.body.id,function(err){
+            if(err){
+                console.log(err);
+            }
+            else
+            {
+                console.log("Successfully Deleted");
+            }
+        })
     }
 }

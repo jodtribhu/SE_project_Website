@@ -1,19 +1,20 @@
 <template>
     <div >
-    <base-card>
-    <button @click="register">Register a new Faculty</button>
-        <ul>
-            <ul v-for="faculty in faculties" :key="faculty._id">
-                <li v-if=!faculty.isAdmin>Faculty Id: {{faculty._id}}</li>
-                <li v-if=!faculty.isAdmin>Faculty Email: {{faculty.email}}</li>
-            </ul>
-        </ul>
+    <h1>Faculty</h1>
+    <base-card >
+    <button  @click="register">Register a new Faculty</button>
+    <p v-for="faculty in faculties" :key="faculty._id">
+        <faculty-item  @messageFromChild="childMessageRecieved" v-if="!faculty.isAdmin" :id=faculty._id :email=faculty.email :created_at=faculty.created_at :modified_at=faculty.modified_at ></faculty-item> 
+    </p>
     </base-card>
+   
     </div>
 </template>
 
 <script>
+import FacultyItem from './FacultyItem.vue';
 export default {
+    components: { FacultyItem },
     computed:{
         faculties(){
             const faculties = this.$store.getters['faculties'];
@@ -24,6 +25,11 @@ export default {
     this.loadfaculties();
     },
     methods:{
+        childMessageRecieved(message){
+          if(message=="valueChanged"){
+            this.loadfaculties();
+          }
+        },
         async loadfaculties(){
             try {
                 await this.$store.dispatch('loadfaculties');
@@ -43,5 +49,45 @@ export default {
  
   div {
   text-align: center;
+}
+
+button {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  margin-left:60%;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #3a0061;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+button:hover,
+button:active {
+  background-color: #270041;
+  border-color: #270041;
+}
+
+.flat {
+  background-color: transparent;
+  color: #3a0061;
+  border: none;
+}
+
+.outline {
+  background-color: transparent;
+  border-color: #270041;
+  color: #270041;
+}
+
+.flat:hover,
+.flat:active,
+.outline:hover,
+.outline:active {
+  background-color: #edd2ff;
+}
+h1{
+    font-family: 'Montserrat', sans-serif;
 }
 </style>

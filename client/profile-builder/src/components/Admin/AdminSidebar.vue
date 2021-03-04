@@ -1,11 +1,11 @@
 <template>
 <div class="container"> 
         <div class="navigation-icons">
+             <i @click="executeFaculty" class="fas fa-chalkboard-teacher"></i>
+            <p class="center">Faculty</p>
+            <hr >
             <i @click="executeStudent" class="fas fa-user-graduate "></i>
             <p class="center">Student</p>
-            <hr >
-            <i @click="executeFaculty" class="fas fa-chalkboard-teacher"></i>
-            <p class="center">Faculty</p>
             <hr >
             <i class="fas fa-passport"></i>
             <p class="center">Password</p>
@@ -29,6 +29,7 @@ export default {
 <style scoped>
 hr {width: 100%;margin-left: auto;margin-right: auto;}
 .center{
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
      color: rgb(158, 150, 150);
      padding: 0px 1px 0px 10px;

@@ -28,7 +28,7 @@ function genPassword(password)
 module.exports={
     async register(req,res){
         const userpassworddetails= genPassword(req.body.password);
-        const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash,isAdmin:req.body.isAdmin});
+        const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash,isAdmin:req.body.isAdmin,created_at:new Date(),modified_at:new Date()});
         user.save().then((user) => {
             res.send({registration:"Successfull"}); 
         })
