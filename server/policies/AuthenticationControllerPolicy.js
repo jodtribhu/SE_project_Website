@@ -3,17 +3,18 @@ module.exports={
     register(req,res,next){
         const schema=Joi.object({
             email:Joi.string().email(),
-            password:Joi.string().regex(new RegExp('^[a-zA-Z0-9]{8,32}$'))
+            password:Joi.string().regex(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
         })
         inputvalue={
             "email":req.body.email,
             "password":req.body.password
         }
+        console.log(inputvalue);
         const {error,value}=schema.validate(inputvalue);
 
         if(error)
         {
-            log
+            
             switch(error.details[0].context.key)
             {
                 case 'email':
