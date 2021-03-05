@@ -6,5 +6,20 @@ module.exports={
         Student.find(function(err,students){
             res.send(students);
         })
+    },
+    deletestudent(req,res){
+        console.log(req.body);
+        Student.remove({ studentRollNo: req.body.rollno },function(err){
+            console.log("Inside");
+            if(err){
+                console.log(err);
+                res.send(err)
+            }
+            else
+            {
+                res.send("Successfully Deleted")
+                console.log("Successfully Deleted");
+            }
+        })
     }
 }

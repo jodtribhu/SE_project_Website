@@ -7,7 +7,7 @@ export default{
         faculties.push(response.data[key])
        }
         context.commit('setFaculties',faculties);
-       
+        return {responsestatus:response.status}
     }
     
 }

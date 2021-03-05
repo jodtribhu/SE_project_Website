@@ -4,5 +4,5 @@ export default{
     registerStudent(credentials){
         return Api().post('registerStudent',credentials);
     },
-
+    
 }

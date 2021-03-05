@@ -15,7 +15,7 @@ export default {
   components: { AdminSidebar,AdminFaculty,AdminStudent },
   data(){
       return{
-          gotoComponent:'Faculty'
+          gotoComponent:'Faculty',
       }
   },
     computed:{
@@ -26,12 +26,19 @@ export default {
         students(){
             const students = this.$store.getters['students'];
             return students;
-        }
+        },
     },
 
     created() {
     this.loadfaculties();
     this.loadstudents();
+    console.log(this.$route.params.load);
+    if(this.$route.params.load=="Student"){
+        this.gotoComponent='Student'
+    }
+    else if(this.$route.params.load=="Faculty"){
+        this.gotoComponent='Faculty'
+    }
     },
     methods:{
         childMessageRecieved(message){
@@ -39,19 +46,23 @@ export default {
         },
         async loadfaculties(){
             try {
-                await this.$store.dispatch('loadfaculties');
+               await this.$store.dispatch('loadfaculties');
+               
                 } 
             catch (error) {
                 this.error = error.message || 'Something went wrong';
                 }
+                console.log("inside faculty loading");
         },
         async loadstudents(){
             try {
                 await this.$store.dispatch('loadstudents');
+              
                 } 
             catch (error) {
                 this.error = error.message || 'Something went wrong';
                 }
+                console.log("inside student loading");
         },
         register(){
             this.$router.push('/admin/register');

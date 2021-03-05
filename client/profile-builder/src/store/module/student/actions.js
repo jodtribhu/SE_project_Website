@@ -7,7 +7,7 @@ export default{
         students.push(response.data[key])
        }
         context.commit('setStudents',students);
-       
+       return {responsestatus:response.status}
     }
     
 }

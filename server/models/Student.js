@@ -10,6 +10,9 @@ const StudentSchema=new mongoose.Schema({
     student_token:{
         type:String,
         required:[true,"Token has not been entered"]
-    }
+    },
+    created_at:{
+        type:Date
+    },
 })
 module.exports=mongoose.model("Student",StudentSchema);

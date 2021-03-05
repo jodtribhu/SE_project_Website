@@ -27,7 +27,7 @@ export default {
             try {
                   const response =await AuthenticateService.register({email:this.email,password:this.password,isAdmin:false})
                   if(response.data.registration=="Successfull"){
-                      this.$router.replace('/admin');
+                      this.$router.replace({name: 'admin', params: { load: "Faculty" }});
                   }
                 console.log(response);
             } catch (error) {

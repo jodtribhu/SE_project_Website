@@ -1,29 +1,31 @@
 <template>
     <div  class="card">
-        <i @click="deleteuser" class="fas  fa-user-times"></i>
-        <h4><i class="far fa-id-badge"> </i>   Faculty Id: <span>{{id}}</span></h4>
-        <h4><i class="far fa-envelope"></i> Faculty Email: <span>{{ email }}</span></h4>
-        <p class="left">Created At : {{ created_at }} <span class="right">Modified At: {{ modified_at }}</span> </p>
+        <i @click="deletestudent" class="fas  fa-user-times"></i>
+        <h4><i class="fas fa-id-card-alt"></i>  Student Roll Number: <span>{{rollno}}</span></h4>
+        <h4><i class="fas fa-key"></i> Student Token: <span>{{ token }}</span></h4>
+        <p class="left">Created At : {{ created_at }}  </p>
     </div>
 </template>
 
 
 <script>
-import DeleteFaculty from '@/services/FetchingFaculties';
+import DeleteStudent from '@/services/FetchingStudents';
 export default {
-    props:['id','email','created_at','modified_at','isAdmin'],
+    props:['rollno','token','created_at'],
   methods:{
-    async deleteuser(){
-      console.log(this.id);
-       DeleteFaculty.deleteFaculty({id:this.id}).then((response)=>{
-          if(response.status==200){
-             this.$emit('messageFromChild','valueChanged')
-          }
-          else{
-            console.log("Error in Faculty deletion");
-          }
-         
-      })
+    async deletestudent(){
+      console.log(this.rollno);
+       DeleteStudent.deleteStudent({rollno:this.rollno}).then((response)=>{
+           console.log("Inside After promise");
+           if(response.status==200){
+               this.$emit('messageFromStudentChild','valueChanged')
+           }
+           else
+           {
+               console.log("Error in Student deletion");
+           }
+        
+       })
       
     }
   }
@@ -53,7 +55,7 @@ export default {
   margin: 2rem auto;
   max-width: 40rem;
 }
-.far {
+.far,.fas {
     font-size: 2.0rem;
     padding: 5px 2px 2px 0;
     }

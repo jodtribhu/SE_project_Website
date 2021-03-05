@@ -27,7 +27,7 @@ const router=createRouter({
             {path:'/contact',component:TeacherContact} //teachers/1/contact
         ]},
         {path:'/requests',component:TeacherRequest},
-        {path:'/admin',component:Admin,meta:{ requiresAuth:true,title: 'Admin'}},
+        {path:'/admin',name: 'admin',component:Admin,meta:{ requiresAuth:true,title: 'Admin'}},
         {path:'/:notFound(.*)',component:NotFound}, //any other route
        //any other route
     ]

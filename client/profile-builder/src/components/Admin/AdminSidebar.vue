@@ -39,7 +39,7 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
      border-radius: 0 5% 5% 0;
       position: absolute;
       top:100px;
-      bottom:30%;
+      bottom:35%;
       left:5px;
       width:65px;
       padding:10px;

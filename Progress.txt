@@ -15,3 +15,5 @@ WebApp V1.13 ->Created the side bar and made adjustments to components to work p
 WebApp V1.14 ->Finished Design of the sidebar of Admin
 WebApp V1.15 ->Create Created at and Modified At Arrtibutes Done.Finished Faculty Component with proper design and also deletion
 WebApp V1.16 ->Did the No of Incorrect login attempts which blocks the user to login 
+WebApp V1.17 ->Corrected the navigation between faculty and student after registeration.Completed the student page
+		with proper design and all functionalties like add and delete

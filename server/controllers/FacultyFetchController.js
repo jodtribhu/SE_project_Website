@@ -12,9 +12,11 @@ module.exports={
         User.findByIdAndDelete(req.body.id,function(err){
             if(err){
                 console.log(err);
+                res.send(err)
             }
             else
             {
+                res.send("successful")
                 console.log("Successfully Deleted");
             }
         })

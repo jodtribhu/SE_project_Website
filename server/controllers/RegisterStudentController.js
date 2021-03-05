@@ -9,7 +9,7 @@ module.exports={
         // })
 
         //Need to implement to check for duplicate enteries
-    const student=new Student({studentRollNo:req.body.studentRollNo,student_token:student_token});
+    const student=new Student({studentRollNo:req.body.studentRollNo,student_token:student_token,created_at:new Date()});
     student.save().then((student) => {
         res.send({registration:"Successfull"}); 
     })
