@@ -15,7 +15,8 @@ export default{
     {
       console.log(state);
       return !!state.token;
-    }
+    },
+  
     // didAutoLogout(state){
     //   return state.didAutoLogout;
     // }

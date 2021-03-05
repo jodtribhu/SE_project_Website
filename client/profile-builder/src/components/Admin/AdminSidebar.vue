@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style scoped>
+
 hr {width: 100%;margin-left: auto;margin-right: auto;}
 .center{
     font-family: 'Montserrat', sans-serif;
@@ -38,7 +39,7 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
      border-radius: 0 5% 5% 0;
       position: absolute;
       top:100px;
-      bottom:40%;
+      bottom:30%;
       left:5px;
       width:65px;
       padding:10px;
@@ -81,6 +82,7 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
     }
     i:hover {
           color: #fff;
+          
         }
     .fa-user-graduate ,.fa-chalkboard-teacher,.fa-passport{
   color: rgb(158, 150, 150);

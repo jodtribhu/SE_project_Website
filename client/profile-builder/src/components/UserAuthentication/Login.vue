@@ -1,6 +1,5 @@
 <template>
     <div>
-  
         <div class="box">
             <h1>Login</h1>
                 <input type="email" name="email" placeholder="Email" v-model="email">
@@ -8,29 +7,63 @@
             <div>
             <p class="error" v-if="error!=''">{{error}}</p>
             </div>
-            <button @click="login">Login</button>
+            <button v-if="incorrect_login" @click="login">Login</button>
+             <p @click="forgotpassword">Forgot Password</p>
         </div> 
+        <div>
+  
+        </div>
+      
     </div>
 </template>
 
 <script>
+
 import AuthenticateService from '@/services/AuthenticationService';
 export default {
+ 
     data(){
         return{
             email:'',
             password:'',
-            error:''
+            error:'',
+            incorrect_login:true,
+            nooftimes:0
         };
     },
+    created(){
+        
+      if(localStorage.getItem('nooffailedlogins')==null){
+          localStorage.setItem('nooffailedlogins', 0);
+      }
+       if(localStorage.getItem('nooftimes')==null){
+          localStorage.setItem('nooftimes', 0);
+      }
+       
+      },
     methods:{
+      onVerify(response){
+          if (response) {
+              console.log("true");
+          }
+            
+      },
+      changeVisibility(){
+        this.incorrect_login = !this.incorrect_login;
+      },
+       changeError(msg){
+        this.error = msg;
+      },
+      
         async login(){
+            console.log("inside login "+localStorage.getItem('nooffailedlogins'));
             console.log("Button Was clicked the email is "+this.email+" "+this.password);
             try {
                 const response =await AuthenticateService.login({
                 email:this.email,
                 password:this.password
             })
+            localStorage.setItem('nooftimes', 0);
             console.log(response);
             this.$store.dispatch('setUser',response.data);
 
@@ -40,8 +73,28 @@ export default {
                 this.$router.replace('/admin');
                 }
             } catch (error) {
-                   console.log("The error is "+ error.response.data.errormessage);
-                   this.error=error.response.data.errormessage;      
+              console.log("inside error catch "+localStorage.getItem('nooffailedlogins'));
+                   var failedlogins = parseInt(localStorage.getItem('nooffailedlogins'));
+                   this.changeError(error.response.data.errormessage);
+                   if(failedlogins>4)
+                   {
+                    this.changeVisibility();
+                    this.nooftimes= parseInt(localStorage.getItem('nooftimes'));
+                     this.nooftimes+=1;
+                     localStorage.setItem('nooftimes', this.nooftimes)
+                     var timeouttime=2000*this.nooftimes;
+                      this.changeError("Please Wait for "+timeouttime/1000+" seconds"); 
+                     console.log(timeouttime);
+                     const insidethis=this;
+                     setTimeout(function(){ 
+                        insidethis.changeVisibility();
+                        localStorage.setItem('nooffailedlogins', 0);
+                        insidethis.changeError("");  
+                     }, timeouttime);
+                   }
+                   failedlogins=failedlogins+1
+                    localStorage.setItem('nooffailedlogins', failedlogins);
+                        
             }
             
         

@@ -18,6 +18,7 @@ export default{
         console.log("State token"+state.token);
     },
 
+  
     // logoutUser(state,payload){
     //     console.log("Inside user");
     //     state.isUserLoggedIn=false;

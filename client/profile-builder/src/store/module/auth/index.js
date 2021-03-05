@@ -7,7 +7,7 @@ export default{
           user:null,
           token:'',
           expiresIn:null,
-          isUserLoggedIn:false
+          isUserLoggedIn:false,
         };
         
       },

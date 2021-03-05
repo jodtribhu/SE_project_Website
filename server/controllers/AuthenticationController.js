@@ -56,7 +56,7 @@ module.exports={
                         console.log(isPasswordValid);
                          if(!isPasswordValid)
                             {
-                            res.status(403).send({error:"The login information was incorrect"});
+                            res.status(403).send({errormessage:"The login information was incorrect"});
                             }
                             else{
                                 afterloginuser={
