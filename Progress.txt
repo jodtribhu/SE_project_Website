@@ -17,5 +17,5 @@ WebApp V1.15 ->Create Created at and Modified At Arrtibutes Done.Finished Facult
 WebApp V1.16 ->Did the No of Incorrect login attempts which blocks the user to login 
 WebApp V1.17 ->Corrected the navigation between faculty and student after registeration.Completed the student page
 		with proper design and all functionalties like add and delete
-WebApp V1.18 ->Corrected the mistake that was giving out status code 500 when the password does not match criteria
+WebApp V1.18 ->(Ashwin Pointed out)Corrected the mistake that was giving out status code 500 when the password does not match criteria
 	       .Changed the password Strength to strong to medium(https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript)
