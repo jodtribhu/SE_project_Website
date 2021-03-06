@@ -19,3 +19,4 @@ WebApp V1.17 ->Corrected the navigation between faculty and student after regist
 		with proper design and all functionalties like add and delete
 WebApp V1.18 ->Corrected the mistake that was giving out status code 500 when the password does not match criteria
 	       .Changed the password Strength to strong to medium(https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript)
+WebApp V1.19 ->Created SSE events to monitor changes in faculty and students which would automatically update the browser if there is any changes

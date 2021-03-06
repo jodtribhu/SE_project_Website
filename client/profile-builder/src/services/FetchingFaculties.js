@@ -6,6 +6,9 @@ export default{
     },
     deleteFaculty(credentials){
         return Api().post('deletefaculty',credentials);
-    }
+    },
+    // check_update_faculty(){
+    //     return Api().get('check-faculty-updates');
+    // }
 
 }

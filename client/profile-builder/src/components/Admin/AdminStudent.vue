@@ -23,8 +23,28 @@ export default {
     },
     created() {
     this.loadstudents();
+    this.checkupdateStudents();
+    },
+     unmounted(){
+      this.deregisterStudentSSE()
     },
     methods:{
+       async deregisterStudentSSE(){
+        try {
+              await this.$store.dispatch('deregisterStudentSSE');
+                } 
+        catch (error) {
+              this.error = error.message || 'Something went wrong';
+                }
+      },
+        async checkupdateStudents(){
+            try {
+                await this.$store.dispatch('checkupdatestudents');
+                } 
+            catch (error) {
+                this.error = error.message || 'Something went wrong';
+                }
+        },
       childMessageRecieved(message){
           if(message=="valueChanged"){
             this.loadstudents();

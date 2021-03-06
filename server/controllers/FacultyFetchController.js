@@ -20,5 +20,30 @@ module.exports={
                 console.log("Successfully Deleted");
             }
         })
-    }
+    },
+    checkupdatefaculties(req,res){
+        var allfaculties;
+        res.writeHead(200, {
+            'Connection': 'keep-alive',
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache'
+          });
+                 
+        var ticker = setInterval(function() {
+            console.log("Running In Faculty ticker");
+                User.find(function(err,faculties){
+                    allfaculties=faculties
+                 }).then(()=>{res.write('data: ' + JSON.stringify(allfaculties) + '\n\n');})
+            }, 2500);
+
+            req.on('close', function() {
+                console.log('Client disconnected from event stream ');
+                res.end();
+                clearInterval(ticker);
+            });    
+              
+      
+    
+      
+    },
 }

@@ -23,12 +23,32 @@ export default {
     },
     created() {
     this.loadfaculties();
+    this.checkupdateFaculties();
+    },
+    unmounted(){
+      this.deregisterFacultySSE()
     },
     methods:{
+      async deregisterFacultySSE(){
+        try {
+              await this.$store.dispatch('deregisterFacultySSE');
+                } 
+        catch (error) {
+              this.error = error.message || 'Something went wrong';
+                }
+      },
         childMessageRecieved(message){
           if(message=="valueChanged"){
             this.loadfaculties();
           }
+        },
+        async checkupdateFaculties(){
+            try {
+                await this.$store.dispatch('checkupdatefaculties');
+                } 
+            catch (error) {
+                this.error = error.message || 'Something went wrong';
+                }
         },
         async loadfaculties(){
             try {

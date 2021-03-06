@@ -48,4 +48,10 @@ module.exports=(app)=>
     app.get('/fetchstudents',StudentFetchController.fetchstudents)
     app.post('/deletefaculty',FacultyFetchController.deleteFaculty)
     app.post('/deletestudent',StudentFetchController.deletestudent)
+
+
+//SSE events
+
+    app.get('/check-faculty-updates',FacultyFetchController.checkupdatefaculties);
+    app.get('/check-student-updates',StudentFetchController.checkupdatestudents);
 }
