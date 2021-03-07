@@ -1,0 +1,23 @@
+WebApp V1.1 ->Connection of Express Js Server and Vue Client side App
+WebApp V1.2 ->Created the Registeration part of Web App 80% Complete
+WebApp V1.3 ->Created the Registeration part and Login Part of Web App Completed (Todo: Should we Use passport? ,Vuex should be initialised)
+WebApp V1.4 ->Completed the Login Part and Auth Vuex store  (Todo: Should we Use passport?)
+WebApp V1.5 ->Completed the Route setup Need To built each component  (Todo: Should we Use passport?)
+WebApp V1.6 ->Change the backend from mysql to mongodb (Todo: Should we Use passport?)
+WebApp V1.7 ->Implemented Passport and created admin route
+WebApp V1.8 ->Fixed FrontEnd bugs and implemented proper admin login and logout
+WebApp V1.9 ->Implemented proper admin route also created registration of faculty and displaying of all faculties
+WebApp V1.10 ->Fixed a little bug in admin where the user can enter without entering password 
+WebApp V1.11 ->Created Student Registration and also enable to view students along with their tokens
+WebApp V1.12 ->Stylised the Login Screen
+WebApp V1.13 ->Created the side bar and made adjustments to components to work properly as intended
+<--------->Changed Folder Name from occupancy chart to profile builder
+WebApp V1.14 ->Finished Design of the sidebar of Admin
+WebApp V1.15 ->Create Created at and Modified At Arrtibutes Done.Finished Faculty Component with proper design and also deletion
+WebApp V1.16 ->Did the No of Incorrect login attempts which blocks the user to login 
+WebApp V1.17 ->Corrected the navigation between faculty and student after registeration.Completed the student page
+		with proper design and all functionalties like add and delete
+WebApp V1.18 ->(Ashwin Pointed out)Corrected the mistake that was giving out status code 500 when the password does not match criteria
+	       .Changed the password Strength to strong to medium(https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript)
+WebApp V1.19->Implemented SSE events that will update changes if it occurs for any users automatically
+WebApp V1.20->Implemented search bar
