@@ -2,6 +2,7 @@
     <div >
     <h1>Faculty</h1>
     <base-card >
+    <input type="text" class="searchbar" v-model="searchkey" placeholder="Search..">
     <button  @click="register">Register a new Faculty</button>
     <p v-for="faculty in faculties" :key="faculty._id">
         <faculty-item  @messageFromChild="childMessageRecieved" v-if="!faculty.isAdmin" :id=faculty._id :email=faculty.email :created_at=faculty.created_at :modified_at=faculty.modified_at ></faculty-item> 
@@ -15,9 +16,19 @@
 import FacultyItem from './FacultyItem.vue';
 export default {
     components: { FacultyItem },
+    data(){
+      return {
+        searchkey:''
+      };
+    },
     computed:{
         faculties(){
-            const faculties = this.$store.getters['faculties'];
+            let faculties = this.$store.getters['faculties'];
+            faculties=faculties.filter((faculty) => {
+              if (faculty.email.includes(this.searchkey)) {
+                return true;
+               }
+            });
             return faculties;
         }
     },
@@ -67,14 +78,27 @@ export default {
 
 <style scoped>
  
-  div {
-  text-align: center;
+ h1{
+   text-align: center;
+ }
+.searchbar {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
 }
+
+.searchbar {
+    border: 1px solid #ccc;
+  }
+ 
 
 button {
   text-decoration: none;
   padding: 0.75rem 1.5rem;
-  margin-left:60%;
+  margin-top: 8px;
   font-family: 'Montserrat', sans-serif;
   background-color: #3a0061;
   border: 1px solid #3a0061;

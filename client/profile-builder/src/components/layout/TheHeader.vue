@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="flex-gap">
         <nav>
             <h1>
                 <router-link to="/">Faculty Profile Builder </router-link>
@@ -37,6 +37,7 @@ header {
   height: 4rem;
   background-color: #383e56;
   display: flex;
+
   font-family: 'Montserrat', sans-serif;
   justify-content: center;
   align-items: center;

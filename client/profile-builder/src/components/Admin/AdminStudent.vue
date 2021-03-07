@@ -2,6 +2,7 @@
     <div >
     <h1>Students</h1>
     <base-card>
+    <input class="searchbar" type="text" v-model="searchkey" placeholder="Search..">
     <button  @click="registerStudent">Register a new Student</button>
     <p v-for="student in students" :key="student.studentRollNo">
     <student-item  @messageFromStudentChild="childMessageRecieved"  :rollno=student.studentRollNo :created_at=student.created_at :token=student.student_token></student-item> 
@@ -15,9 +16,19 @@
 import StudentItem from './StudentItem.vue';
 export default {
     components: { StudentItem },
+    data(){
+      return{
+        searchkey:''
+      }
+    },
     computed:{
         students(){
-            const students = this.$store.getters['students'];
+            let students = this.$store.getters['students'];
+             students=students.filter((student) => {
+              if (student.studentRollNo.includes(this.searchkey)) {
+                return true;
+               }
+            });
             return students;
         }
     },
@@ -67,6 +78,18 @@ export default {
 </script>
 
 <style scoped>
+.searchbar {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+.searchbar {
+    border: 1px solid #ccc;
+  }
  
   html {
   font-family: "Roboto", sans-serif;
@@ -75,7 +98,7 @@ export default {
 button {
   text-decoration: none;
   padding: 0.75rem 1.5rem;
-  margin-left:65%;
+  margin-top: 8px;
   font-family: 'Montserrat', sans-serif;
   background-color: #3a0061;
   border: 1px solid #3a0061;

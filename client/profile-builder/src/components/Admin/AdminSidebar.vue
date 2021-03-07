@@ -35,11 +35,11 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
      color: rgb(158, 150, 150);
      padding: 0px 1px 0px 10px;
 }
- .container{
+ /* .container{
      border-radius: 0 5% 5% 0;
       position: absolute;
       top:100px;
-      bottom:35%;
+      bottom:100px;
       left:5px;
       width:65px;
       padding:10px;
@@ -49,6 +49,20 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
       border-width: 1px 5px 3px 0;
       z-index: 999;
       transition: all .5s ease-in-out;
+  } */
+
+  .container{
+      border-radius: 0 5% 5% 0;
+      display: flex;
+      position: absolute;
+      background-color:rgb(42, 45, 53) ;
+      width:60px;
+      padding:15px;
+      margin-left: 0;
+      border: solid rgb(97, 95, 95);
+      border-width: 1px 5px 3px 0;
+      z-index: 999;
+
   }
       .control {
       display: flex;
