@@ -21,3 +21,4 @@ WebApp V1.18 ->(Ashwin Pointed out)Corrected the mistake that was giving out sta
 	       .Changed the password Strength to strong to medium(https://www.thepolyglotdeveloper.com/2015/05/use-regex-to-test-password-strength-in-javascript)
 WebApp V1.19->Implemented SSE events that will update changes if it occurs for any users automatically
 WebApp V1.20->Implemented search bar
+WebApp v1.21-> Added faculty registeration form
