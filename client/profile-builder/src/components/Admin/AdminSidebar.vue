@@ -7,8 +7,8 @@
             <i @click="executeStudent" class="fas fa-user-graduate "></i>
             <p class="center">Student</p>
             <hr >
-            <i class="fas fa-passport"></i>
-            <p class="center">Password</p>
+            <i @click="executeForgetRequests" class="far fa-comments"></i>
+            <p class="center">Requests</p>
         </div>
 </div>
     
@@ -21,6 +21,9 @@ export default {
         },
         executeFaculty(){
              this.$emit('messageFromChild','Faculty')
+        },
+        executeForgetRequests(){
+             this.$emit('messageFromChild','ForgetRequests')
         }
     }
 }
@@ -98,7 +101,7 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
           color: #fff;
           
         }
-    .fa-user-graduate ,.fa-chalkboard-teacher,.fa-passport{
+    .fa-user-graduate ,.fa-chalkboard-teacher,.fa-comments{
   color: rgb(158, 150, 150);
 }
 </style>

@@ -5,6 +5,7 @@ const StudentFetchController=require('./controllers/StudentFetchController')
 
 const AuthenticationControllerPolicy=require('./policies/AuthenticationControllerPolicy');
 
+const ForgetRequestController=require('./controllers/ForgetRequestController')
 
 
 const passport=require('passport');
@@ -43,11 +44,20 @@ module.exports=(app)=>
         
     })
 
+
+    //Faculties
     app.get('/fetchfaculties',FacultyFetchController.fetchfaculties)
+    app.post('/deletefaculty',FacultyFetchController.deleteFaculty)
+    //Students
     app.post('/registerStudent',RegisterStudentController.registerStudent)
     app.get('/fetchstudents',StudentFetchController.fetchstudents)
-    app.post('/deletefaculty',FacultyFetchController.deleteFaculty)
     app.post('/deletestudent',StudentFetchController.deletestudent)
+
+
+    //forgetPassword
+    app.post('/addforgetrequest',ForgetRequestController.newForgetRequest)
+    app.get('/fetchforgetrequest',ForgetRequestController.fetchforgetrequests)
+    app.post('/deleteforgetrequest',ForgetRequestController.deleteforgetrequests)
 
 
 //SSE events
