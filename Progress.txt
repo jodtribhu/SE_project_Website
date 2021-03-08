@@ -22,3 +22,4 @@ WebApp V1.18 ->(Ashwin Pointed out)Corrected the mistake that was giving out sta
 WebApp V1.19->Implemented SSE events that will update changes if it occurs for any users automatically
 WebApp V1.20->Implemented search bar
 WebApp v1.21-> Added faculty registeration form
+WebApp v1.22-> Added the Forget Password Component

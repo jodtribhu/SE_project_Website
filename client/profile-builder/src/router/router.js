@@ -8,6 +8,7 @@ import TeacherDetail from '../components/Teachers/TeacherDetail.vue';
 import TeacherRequest from '../components/Teachers/TeacherRequest.vue';
 import StudentRegister from '../components/Admin/StudentRegister.vue';
 
+import ForgotPassword from '../components/UserAuthentication/ForgotPassword.vue';
 
 
 import store from '../store/index.js'
@@ -19,7 +20,7 @@ const router=createRouter({
         
         {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAuth:true}},
 
-    
+        {path:'/ForgotPassword',component:ForgotPassword},
 
         {path:'/login',component:Login,meta:{ requiresUnauth:true}},
         {path:'/teachers',component:null},

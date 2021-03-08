@@ -42,6 +42,9 @@ export default {
        
       },
     methods:{
+      forgotpassword(){
+        this.$router.push("/ForgotPassword")
+      },
       onVerify(response){
           if (response) {
               console.log("true");
