@@ -25,3 +25,4 @@ WebApp v1.21-> Added faculty registeration form
 WebApp v1.22-> Added the Forget Password Component
 WebApp v1.23-> Finished the Forget Password Module in Admin Page where admin can see all the requests from forgetpassword
 WebApp v1.24-> Completed forget password interface
+WebApp v1.25-> Converted the html code into vue forgot password interface

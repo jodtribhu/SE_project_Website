@@ -1,152 +1,179 @@
 <template>
-        <form class="box" method="post">
-            <h2>Enter credentials</h2>
-            <div class="container">
-                <input type="email" placeholder="Email">
-                <h5>Description:</h5>
-                <textarea id="description" name="description" rows="7" cols="40"> </textarea>
-            </div>
-            <p id="question"></p><input id="ans" type="text">
-			<div id="message">Please verify.</div>
-			<div id="success">Validation complete :)</div>
-			<div id="fail">Validation failed :(</div>			
-			<button type="submit" value="submit">Submit</button>
-			<button type="reset" value="reset">Reset</button>
-        </form>
+  <div>
+    <h1 class="aligncenter">Forget Password</h1>
+    <base-card>
+      <label for="facultyemail">Email:</label>
+      <input
+        name="facultyemail"
+        type="email"
+        placeholder="Email"
+        v-model="email" 
+      />
+      <label for="description">Description:</label>
+      <textarea id="description" v-model="description" name="description" rows="7" cols="40" required>  </textarea>
+      <h4>Please Answer the Question Given Below:</h4>
+      <p>{{ randomFirstNumber }} + {{ randomSecondNumber }} - {{ randomThirdNumber }}</p>
+      <input v-model="answer" type="number" />
+      <p v-if="error!=''"  class="wrong">{{error}}</p>
+      <button @click="checkSubmit" type="submit" value="submit">Submit</button>
+      <button @click="randomCreation" type="reset" value="reset">Reset</button>
+    </base-card>
+  </div>
 </template>
+
 <script>
+import BaseCard from "../layout/BaseCard.vue";
 export default {
+  components: { BaseCard },
+  data() {
+    return {
+      total: 0,
+      email: "",
+      description: "",
+      tried: 0,
+      success: true,
+      randomFirstNumber: 0,
+      randomSecondNumber: 0,
+      randomThirdNumber: 0,
+      answer: 0,
+      error:''
+    };
+  },
+  created() {
+    this.randomCreation();
+  },
+  methods: {
+    randomCreation() {
+      this.randomFirstNumber = Math.ceil(Math.random() * 20);
+      this.randomSecondNumber = Math.ceil(Math.random() * 20);
+      this.randomThirdNumber = Math.ceil(Math.random() * 20);
+    },
+    checkSubmit(){
+      var Actualanswer=(this.randomFirstNumber+this.randomSecondNumber)-this.randomThirdNumber;
     
-}
-var total;
+      if(this.email=='' || this.description=='')
+      {
+        console.log("inside");
+        this.error="Please enter the Necessary details";
+      }
+      else
+      {
+        if(this.answer==Actualanswer)
+        {
+          this.tried+=1;
+          this.sucess=true;
+          this.error=""
+        }
+      else if(this.answer!=Actualanswer)
+      {
+        this.tried+=1;
+          this.sucess=false;
+          this.error="Validation failed.Please Try Again!!"
+      }
+      }
+      
+    }
 
-function getRandom(){return Math.ceil(Math.random()* 20);}
-function createSum(){
-		var randomNum1 = getRandom(),
-			randomNum2 = getRandom();
-	total =randomNum1 + randomNum2;
-  $( "#question" ).text("Enter captcha: "+ randomNum1 + " + " + randomNum2 + "=" );  
-  $("#ans").val('');
-  checkInput();
-}
+  },
 
-function checkInput(){
-		var input = $("#ans").val(), 
-    	slideSpeed = 200,
-      hasInput = !!input, 
-      valid = hasInput && input == total;
-    $('#message').toggle(!hasInput);
-    $('button[type=submit]').prop('disabled', !valid);  
-    $('#success').toggle(valid);
-    $('#fail').toggle(hasInput && !valid);
-}
-
-$(document).ready(function(){
-	//create initial sum
-	createSum();
-	// On "reset button" click, generate new random sum
-	$('button[type=reset]').click(createSum);
-	// On user input, check value
-	$( "#ans" ).keyup(checkInput);
-});
+};
 </script>
 
 <style scoped>
-    div{
-    margin: 0;
-    }
-#success, #fail{
-	display: none;
-    color: white;
+.right{
+  color: green;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+.wrong{
+  color: red;
+  font-family: 'Montserrat', sans-serif;
+}
+.aligncenter{
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+}
+.form-control {
+  margin: 0.5rem 0;
 }
 
-#message, #success, #fail{
-    color: white;
-	margin-top: 10px;
-	margin-bottom: 10px;
+label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  display: block;
+  padding-top: 2%;
+  margin-bottom: 0.5rem;
 }
 
 
-.box{
-    border-radius: 5%;
-    width: 400px;
-    padding: 20px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background: #383e56;
-    text-align: center;
-  }
-  .box h2{
-    color: white;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .box input[type = "email"]{
-    border:0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #3498db;
-    padding: 14px 10px;
-    width: 200px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-  }
-  .box input[type = "email"]:focus{
-    width: 280px;
-    border-color: #2ecc71;
-  }
-.box h5{
-    color:white;
-    padding-right: 240px;
-    margin-bottom:0px;
+input,
+textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #ccc;
+  font: inherit;
 }
-.box .container{
-    padding-left: 2px;
-    padding-right: 2px;
-    
-}
-  p {
-    color: white;
-    display: inline;
-    margin-right: 5px;
 
-  }
-  #ans{
-    border:0;
-    background: none;
-    display: inline;
-    margin: 2px auto;
-    text-align: center;
-    border: 2px solid #3498db;
-    padding: 2px 2px;
-    width: 42px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
- }
-  button {
-    border: none;
-    border-radius: 1.5em;
-    color: #FFF;
-    background:  #2ecc71;
-    padding: 2.5px 10px;
-    width: 75px;
-    height: 30px;
-    cursor: pointer;
-    transition: background .5s ease-in-out;
-  }
-  button:hover:enabled {
-    background: #303030;
-  }
-  button:disabled {
-    opacity: .5;
-    cursor: default;
-  }
+input:focus,
+textarea:focus {
+  background-color: #f0e6fd;
+  outline: none;
+  border-color: #3d008d;
+}
+
+
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.invalid label {
+  color: red;
+}
+
+.invalid input,
+.invalid textarea {
+  border: 1px solid red;
+}
+
+
+button {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #3a0061;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+button:hover,
+button:active {
+  background-color: #270041;
+  border-color: #270041;
+}
+
+.flat {
+  background-color: transparent;
+  color: #3a0061;
+  border: none;
+}
+
+.outline {
+  background-color: transparent;
+  border-color: #270041;
+  color: #270041;
+}
+
+.flat:hover,
+.flat:active,
+.outline:hover,
+.outline:active {
+  background-color: #edd2ff;
+}
 </style>
