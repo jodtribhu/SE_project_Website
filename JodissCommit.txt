@@ -24,3 +24,4 @@ WebApp V1.20->Implemented search bar
 WebApp V1.22->WebApp V1.20->Implemented search bar
 WebApp v1.23-> Finished the Forget Password Module in Admin Page where admin can see all the requests from forgetpassword
 WebApp v1.25-> Converted the html code into vue forgot password interface
+WebApp v1.26-> Redesigned the captcha code

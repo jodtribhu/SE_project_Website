@@ -12,7 +12,8 @@
       <label for="description">Description:</label>
       <textarea id="description" v-model="description" name="description" rows="7" cols="40" required>  </textarea>
       <h4>Please Answer the Question Given Below:</h4>
-      <p>{{ randomFirstNumber }} + {{ randomSecondNumber }} - {{ randomThirdNumber }}</p>
+    
+      <p ><span class="n1"> {{ randomFirstNumber }} </span> <span  class="n1"> + </span> <span class="n1">{{ randomSecondNumber }} </span>  <span  class="n1"> - </span> <span class="n1"> {{ randomThirdNumber }} </span></p>
       <input v-model="answer" type="number" />
       <p v-if="error!=''"  class="wrong">{{error}}</p>
       <button @click="checkSubmit" type="submit" value="submit">Submit</button>
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+
 import BaseCard from "../layout/BaseCard.vue";
 export default {
   components: { BaseCard },
@@ -80,6 +82,22 @@ export default {
 </script>
 
 <style scoped>
+.n2{
+    padding: 4px 2px 2px 2px;
+   display:inline-block;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+    -moz-transform:rotate(45deg);
+     transform-origin: 50% 0%;
+}
+.n1 { 
+  padding: 4px 2px 2px 2px;
+   display:inline-block;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+    -moz-transform:rotate(-45deg);
+     transform-origin: 50% 0%;
+    } 
 .right{
   color: green;
   font-family: 'Montserrat', sans-serif;
