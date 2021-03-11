@@ -16,6 +16,10 @@ export default{
       console.log(state);
       return !!state.token;
     },
+    idofuserloggedIn(state)
+    {
+      return state.user;
+    },
   
     // didAutoLogout(state){
     //   return state.didAutoLogout;

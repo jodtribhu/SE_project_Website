@@ -74,9 +74,11 @@ export default {
                 {
                 console.log("It is true that the logged in is Admin");
                 this.$router.replace('/admin');
+                }else{
+                 
+                   this.$router.replace('/faculties/'+response.data.user._id);
                 }
             } catch (error) {
-              console.log("inside error catch "+localStorage.getItem('nooffailedlogins'));
                    var failedlogins = parseInt(localStorage.getItem('nooffailedlogins'));
                    this.changeError(error.response.data.errormessage);
                    if(failedlogins>4)

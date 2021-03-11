@@ -3,9 +3,10 @@ import AdminRegister from '../components/Admin/AdminRegister.vue';
 import Login from '../components/UserAuthentication/Login.vue';
 import Admin from '../components/Admin/Admin.vue';
 import NotFound from '../components/pages/NotFound.vue';
-// import TeacherContact from '../components/Teachers/TeacherContact.vue';
-// import TeacherDetail from '../components/Teachers/TeacherDetail.vue';
-import TeacherRequest from '../components/Teachers/TeacherRequest.vue';
+// import FacultyContact from '../components/Faculty/FacultyContact.vue';
+import FacultyProfile from '../components/Faculty/FacultyProfile.vue';
+import FacultiesPage from '../components/Faculty/FacultiesPage.vue';
+// import FacultyRequest from '../components/Faculty/FacultyRequest.vue';
 import StudentRegister from '../components/Admin/StudentRegister.vue';
 
 import ForgotPassword from '../components/UserAuthentication/ForgotPassword.vue';
@@ -15,7 +16,7 @@ import store from '../store/index.js'
 const router=createRouter({
     history:createWebHistory(),
     routes:[
-        {path:'/',redirect:'/login'},
+        {path:'/',redirect:'/faculties'},
         {path:'/admin/register',component:AdminRegister,meta:{ requiresAuth:true, title: 'Admin' }},
         
         {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAuth:true}},
@@ -23,11 +24,9 @@ const router=createRouter({
         {path:'/ForgotPassword',component:ForgotPassword},
 
         {path:'/login',component:Login,meta:{ requiresUnauth:true}},
-        // {path:'/teachers',component:null},
-        // {path:'/teachers/:id',component:TeacherDetail,children:[
-        //     {path:'/contact',component:TeacherContact} //teachers/1/contact
-        // ]},
-        {path:'/requests',component:TeacherRequest},
+        {path:'/faculties',component:FacultiesPage},
+        {path:'/faculties/:id',component:FacultyProfile},
+        // {path:'/requests',component:TeacherRequest},
         {path:'/admin',name: 'admin',component:Admin,meta:{ requiresAuth:true,title: 'Admin'}},
         {path:'/:notFound(.*)',component:NotFound}, //any other route
        //any other route
