@@ -1,11 +1,11 @@
 <template>
     <div class="main-block">
-        <h1>Add a new Student </h1>
+        <h1>Add a new student </h1>
         <label id="icon" for="name"><i class="fas fa-user"></i></label>
         <input type="text" name="student_roll_no" placeholder="Student Roll Number" v-model="studentRollNo" autocomplete="new-password">
         <br>
-        <label id="icon" for="name"><i class="fas fa-key"></i></label>
-        <input  name="student_token" placeholder="Student Token" v-model="student_token" autocomplete="new-password">
+        <label id="icon" for="token"><i class="fas fa-key"></i></label>
+        <input type='text' name="student_token" placeholder="Student Token" v-model="student_token" autocomplete="new-password">
         <br>
         <div>
             <p class="error" v-if="error!=''">{{error}}</p>
@@ -48,13 +48,17 @@ export default {
 }
 .main-block {
     max-width: 340px; 
-    min-height: 340px; 
-    padding: 10px 0;
+    min-height: 250px; 
+    padding: 5px 25px;
     margin: auto;
     border-radius: 5px; 
     border: solid 1px #ccc;
     box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
     background: #ebebeb; 
+    position: absolute;
+    text-align: center;
+    margin-left:38%;
+    margin-top: 30px;
     }
 
     body, div, h1, form, input, p { 
@@ -64,7 +68,7 @@ export default {
     font-family: 'Ubuntu', sans-serif;
     font-size: 16px;
     color: #666;
-    test-align:center;
+    text-align:center;
     }
     h1 {
     padding: 10px 0;
@@ -78,5 +82,44 @@ export default {
     hr {
     color: #a9a9a9;
     opacity: 0.3;
+    }
+    input[type=text], input[type=password] {
+    width: calc(100% - 57px);
+    height: 36px;
+    margin: 13px 0 0 -5px;
+    padding-left: 10px; 
+    border-radius: 0 5px 5px 0;
+    border: solid 1px #cbc9c9; 
+    box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+    background: #fff; 
+    }
+    input[type=password] {
+    margin-bottom: 15px;
+    }
+    .btn-block {
+    margin-top: 10px;
+    text-align: center;
+    }
+    button {
+    width: 100%;
+    padding: 10px 0;
+    margin: 10px auto;
+    border-radius: 5px; 
+    border: none;
+    background: #383e56; 
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    }
+    button:hover {
+    background: #142850;
+    }
+    #icon {
+    display: inline-block;
+    padding: 9.3px 15px;
+    box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+    background: #383e56;
+    color: #fff;
+    text-align: center;
     }
 </style>

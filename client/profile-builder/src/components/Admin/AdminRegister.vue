@@ -1,13 +1,13 @@
 <template>
     <div class="main-block">
-        <h1>Add a new Faculty </h1>
+        <h1>Add a new faculty </h1>
         <label id="icon" for="name"><i class="fas fa-user"></i></label>
 
-        <input type="email" name="email" placeholder="email" v-model="email" autocomplete="new-password">
+        <input type="email" name="email" placeholder="Email" v-model="email" autocomplete="new-password">
         <br>
         <label id="icon" for="name"><i class="fas fa-key"></i></label>
 
-        <input type="password" name="password" placeholder="password" v-model="password" autocomplete="new-password">
+        <input type="password" name="password" placeholder="Password" v-model="password" autocomplete="new-password">
         <br>
         <div>
             <p class="error" v-if="error!=''">{{error}}</p>
@@ -60,7 +60,7 @@ export default {
     background: #ebebeb; 
     position: absolute;
     text-align: center;
-    margin-left:40%;
+    margin-left:38%;
     margin-top: 30px;
     }
 
@@ -109,19 +109,19 @@ export default {
     margin: 10px auto;
     border-radius: 5px; 
     border: none;
-    background: #1c87c9; 
+    background: #383e56; 
     font-size: 14px;
     font-weight: 600;
     color: #fff;
     }
     button:hover {
-    background: #26a9e0;
+    background: #142850;
     }
     #icon {
     display: inline-block;
     padding: 9.3px 15px;
     box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
-    background: #1c87c9;
+    background: #383e56;
     color: #fff;
     text-align: center;
     }
