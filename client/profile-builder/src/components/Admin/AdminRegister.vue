@@ -71,7 +71,7 @@ export default {
     font-family: 'Ubuntu', sans-serif;
     font-size: 16px;
     color: #666;
-    test-align:center;
+    text-align:center;
     }
     h1 {
     padding: 10px 0;
