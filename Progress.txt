@@ -27,3 +27,4 @@ WebApp v1.23-> Finished the Forget Password Module in Admin Page where admin can
 WebApp v1.24-> Completed forget password interface
 WebApp v1.25-> Converted the html code into vue forgot password interface
 WebApp v1.26-> Redesigned the captcha code 
+WebApp v1.27-> Completed Forget Password And Report Bug Component Fully Functional

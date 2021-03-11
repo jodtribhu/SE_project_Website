@@ -9,8 +9,13 @@
         placeholder="Email"
         v-model="email" 
       />
-      <label for="description">Description:</label>
-      <textarea id="description" v-model="description" name="description" rows="7" cols="40" required>  </textarea>
+       <label for="problem">Please Select the problem:</label>
+       <select id="cars" name="problem" v-model="problem">
+        <option value="Forgot Password">Forgot Password</option>
+        <option value="Report An Bug">Report An Bug</option>
+      </select>
+      <label v-if="problem=='Report An Bug'" for="description">Description:</label>
+      <textarea  v-if="problem=='Report An Bug'" id="description" v-model="description" name="description" rows="7" cols="40" required>  </textarea>
       <h4>Please Answer the Question Given Below:</h4>
     
       <p ><span class="n1"> {{ randomFirstNumber }} </span> <span  class="n1"> + </span> <span class="n1">{{ randomSecondNumber }} </span>  <span  class="n1"> - </span> <span class="n1"> {{ randomThirdNumber }} </span></p>
@@ -23,7 +28,7 @@
 </template>
 
 <script>
-
+import FetchingForgetRequests from '@/services/FetchingForgetRequests';
 import BaseCard from "../layout/BaseCard.vue";
 export default {
   components: { BaseCard },
@@ -38,7 +43,8 @@ export default {
       randomSecondNumber: 0,
       randomThirdNumber: 0,
       answer: 0,
-      error:''
+      error:'',
+      problem:'Forgot Password'
     };
   },
   created() {
@@ -50,10 +56,10 @@ export default {
       this.randomSecondNumber = Math.ceil(Math.random() * 20);
       this.randomThirdNumber = Math.ceil(Math.random() * 20);
     },
-    checkSubmit(){
+   async  checkSubmit(){
       var Actualanswer=(this.randomFirstNumber+this.randomSecondNumber)-this.randomThirdNumber;
     
-      if(this.email=='' || this.description=='')
+      if(this.email=='' || (this.description=='' && this.problem=="Report An Bug"))
       {
         console.log("inside");
         this.error="Please enter the Necessary details";
@@ -65,6 +71,16 @@ export default {
           this.tried+=1;
           this.sucess=true;
           this.error=""
+           try {
+                await FetchingForgetRequests.addForgetRequests({
+                faculty_email:this.email,
+                faculty_problem:this.problem,
+                faculty_description:this.description,
+            })
+             this.$router.replace("/login");
+            } catch (error) {
+                this.error=error.response.data.error;
+            }
         }
       else if(this.answer!=Actualanswer)
       {
@@ -125,7 +141,7 @@ label {
 
 
 input,
-textarea {
+textarea,select {
   display: block;
   width: 100%;
   border: 1px solid #ccc;
@@ -133,7 +149,7 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,select:focus {
   background-color: #f0e6fd;
   outline: none;
   border-color: #3d008d;

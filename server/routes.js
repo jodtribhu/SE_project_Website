@@ -24,6 +24,9 @@ function isAdmin(req,res,next)
 module.exports=(app)=>
 {
     app.post('/register',AuthenticationControllerPolicy.register,AuthenticationController.register)
+
+    app.post('/changePassword',AuthenticationController.changePassword)
+
     app.post('/login',AuthenticationController.login)
     app.post('/protected-route',passport.authenticate('jwt', { session: false }),(req,res,next)=>{
         console.log(req.isAuthenticated());
@@ -43,8 +46,7 @@ module.exports=(app)=>
     }
         
     })
-
-
+ 
     //Faculties
     app.get('/fetchfaculties',FacultyFetchController.fetchfaculties)
     app.post('/deletefaculty',FacultyFetchController.deleteFaculty)
@@ -55,7 +57,7 @@ module.exports=(app)=>
 
 
     //forgetPassword
-    app.post('/addforgetrequest',ForgetRequestController.newForgetRequest)
+    app.post('/addForgetRequests',ForgetRequestController.newForgetRequest)
     app.get('/fetchforgetrequest',ForgetRequestController.fetchforgetrequests)
     app.post('/deleteforgetrequest',ForgetRequestController.deleteforgetrequests)
 
