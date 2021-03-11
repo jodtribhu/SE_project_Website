@@ -7,14 +7,25 @@
             <i @click="executeStudent" class="fas fa-user-graduate "></i>
             <p class="center">Student</p>
             <hr >
-            <i @click="executeForgetRequests" class="far fa-comments"></i>
-            <p class="center">Requests</p>
+            <i  @click="executeForgetRequests" class="far fa-comments  "></i>
+            <p class="center notification">Requests <span v-if="noofrequests>0" class="badge">{{noofrequests}}</span></p>
+         
+       
         </div>
 </div>
     
 </template>
 <script>
 export default {
+    computed:{
+        noofrequests(){
+            console.log(this.$store.getters.noofforgetrequests);
+            return this.$store.getters.noofforgetrequests;
+        }
+    },
+    created(){
+
+    },
     methods:{
         executeStudent(){
             this.$emit('messageFromChild','Student')
@@ -38,6 +49,7 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
      color: rgb(158, 150, 150);
      padding: 0px 1px 0px 10px;
 }
+
  /* .container{
      border-radius: 0 5% 5% 0;
       position: absolute;
@@ -101,7 +113,21 @@ hr {width: 100%;margin-left: auto;margin-right: auto;}
           color: #fff;
           
         }
+        
     .fa-user-graduate ,.fa-chalkboard-teacher,.fa-comments{
   color: rgb(158, 150, 150);
+}
+
+.notification{
+    position: relative;
+}
+ .badge {
+  position: absolute;
+  top:-60px;
+  right: -6px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
 }
 </style>

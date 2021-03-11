@@ -31,3 +31,4 @@ WebApp v1.27-> Completed Forget Password And Report Bug Component Fully Function
 WebApp V1.28-> Added form for student registration.
 WebApp V1.29-> Changed style for faculty and student registration.
 WebApp V1.30-> Add No faculties and students and requests available
+WebApp V1.31-> Added a badge which keeps tracks of no of requests present
