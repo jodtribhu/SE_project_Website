@@ -34,7 +34,7 @@ export default {
 }
 html {
   font-family: "Roboto", sans-serif;
-  background-color: #fefffe;
+  background-color: #e7e6e1;
  
 }
 

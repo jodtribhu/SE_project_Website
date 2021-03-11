@@ -3,6 +3,7 @@
     <h1>Requests</h1>
     <base-card>
     <input class="searchbar" type="text" v-model="searchkey" placeholder="Search..">
+    <h4 v-if="forgetrequests.length==0">There are no requests available</h4>
     <p v-for="forgetrequest in forgetrequests" :key="forgetrequest.id">
     <forget-request-item  @messageFromStudentChild="childMessageRecieved" :problem=forgetrequest.problem :id=forgetrequest._id :completed=forgetrequest.completed :email=forgetrequest.email :created_at=forgetrequest.created_at :description=forgetrequest.Description></forget-request-item > 
     </p>
@@ -58,6 +59,10 @@ export default {
 </script>
 
 <style scoped>
+h4{
+  text-align:center;
+  font-family: 'Montserrat', sans-serif;
+}
 .searchbar {
   margin-left:60%;
   padding: 6px;

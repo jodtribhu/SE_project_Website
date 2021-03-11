@@ -4,6 +4,7 @@
     <base-card>
     <input class="searchbar" type="text" v-model="searchkey" placeholder="Search..">
     <button  @click="registerStudent">Register a new Student</button>
+     <h4 v-if="students.length==0">There are no students available</h4>
     <p v-for="student in students" :key="student.studentRollNo">
     <student-item  @messageFromStudentChild="childMessageRecieved"  :rollno=student.studentRollNo :created_at=student.created_at :token=student.student_token></student-item> 
     </p>
@@ -78,6 +79,11 @@ export default {
 </script>
 
 <style scoped>
+ h4{
+  text-align:center;
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+}
 .searchbar {
   float: right;
   padding: 6px;

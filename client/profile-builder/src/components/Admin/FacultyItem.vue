@@ -46,6 +46,7 @@ export default {
   padding-left: 18%;
 }
 .card {
+  background-color:#fcfcfc;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border: 1px solid #424242;

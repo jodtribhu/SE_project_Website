@@ -1,9 +1,11 @@
 <template>
     <div >
     <h1>Faculty</h1>
+    
     <base-card >
     <input type="text" class="searchbar" v-model="searchkey" placeholder="Search..">
     <button  @click="register">Register a new Faculty</button>
+    <h4 v-if="faculties.length==1">There are no faculty available</h4>
     <p v-for="faculty in faculties" :key="faculty._id">
         <faculty-item  @messageFromChild="childMessageRecieved" v-if="!faculty.isAdmin" :id=faculty._id :email=faculty.email :created_at=faculty.created_at :modified_at=faculty.modified_at ></faculty-item> 
     </p>
@@ -18,7 +20,7 @@ export default {
     components: { FacultyItem },
     data(){
       return {
-        searchkey:''
+        searchkey:'',
       };
     },
     computed:{
@@ -77,7 +79,11 @@ export default {
 </script>
 
 <style scoped>
- 
+ h4{
+  text-align:center;
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+}
  h1{
    text-align: center;
  }
