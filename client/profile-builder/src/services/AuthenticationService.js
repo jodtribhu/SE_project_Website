@@ -6,6 +6,9 @@ export default{
     },
     login(credentials){
         return Api().post('login',credentials);
-    }
+    },
+    changePassword(credentials){
+        return Api().post('changePassword',credentials);
+    },
 }
 

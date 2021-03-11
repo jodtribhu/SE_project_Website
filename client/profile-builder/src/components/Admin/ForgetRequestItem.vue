@@ -2,17 +2,52 @@
     <div  class="card">
         <i @click="deleteFacultyRequest" class="far fa-trash-alt"></i>
         <h4><i class="fas fa-envelope-open"></i>  Faculty Email: <span>{{email}}</span></h4>
-        <h4><i class="fas fa-align-justify"></i> Description: <span>{{ description }}</span></h4>
+        <h4><i class="fa fa-exclamation-circle"></i> Issue: <span>{{ problem }}</span></h4>
+        
+        
+        <div class="center">
+           <h5  @click="showtheDescription" v-if="problem=='Report An Bug'">Show Description</h5>
+           <p v-if="showDescription">{{description}}</p>
+           <h4 v-if="completed" class="green">Done</h4>
+           <button @click="resetPassword" class="outline" v-if="problem=='Forgot Password' && !completed">Reset Password</button>
+        </div>
+       
         <p class="left">Created At : {{ created_at }}  </p>
     </div>
 </template>
 
 
 <script>
+import AuthenticateService from '@/services/AuthenticationService';
 import DeleteForgetRequest from '@/services/FetchingForgetRequests';
 export default {
-    props:['email','description','created_at','id'],
+    props:['email','description','created_at','id','problem','completed'],
+    data(){
+      return{
+        changed:false,
+        showDescription:false
+      }
+      
+    },
   methods:{
+    showtheDescription(){
+      this.showDescription=!this.showDescription;
+    },
+    async resetPassword(){
+      console.log(this.id);
+      try {
+            const response =await AuthenticateService.changePassword({email:this.email,id:this.id})
+            if(response.data.msg=="Successfull"){
+                console.log("successfull");
+               this.$emit('messageFromStudentChild','valueChanged')
+            }
+            console.log(response);
+            } catch (error) {
+                console.log(error);
+                this.error=error.response.data.error;
+            }
+  
+    },
     async deleteFacultyRequest(){
       console.log(this.id);
        DeleteForgetRequest.deleteForgetRequest({id:this.id}).then((response)=>{
@@ -24,7 +59,6 @@ export default {
            {
                console.log("Error in Student deletion");
            }
-        
        })
       
     }
@@ -35,7 +69,12 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
+.green{
+  color: green;
+}
+.center{
+  text-align:center
+}
 .left
 {
   text-align: left;
@@ -55,7 +94,7 @@ export default {
   margin: 2rem auto;
   max-width: 40rem;
 }
-.far,.fas {
+.far,.fas,.fa {
     font-size: 2.0rem;
     padding: 5px 2px 2px 0;
     }
@@ -71,7 +110,7 @@ h4 {
 }
 
 h3,
-h4 {
+h4,h5 {
   font-family: 'Montserrat', sans-serif;
   margin: 0.5rem 0.5rem;
 }
@@ -102,5 +141,43 @@ span{
 }
 .fa-trash-alt:hover{
     color: grey;
+}
+
+button {
+  
+  text-align:center;
+  padding: 0.75rem 1.5rem;
+  
+  font-family: 'Montserrat', sans-serif;
+  background-color: #3a0061;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+button:hover,
+button:active {
+  background-color: #270041;
+  border-color: #270041;
+}
+
+.flat {
+  background-color: transparent;
+  color: #3a0061;
+  border: none;
+}
+
+.outline {
+  background-color: transparent;
+  border-color: #270041;
+  color: #270041;
+}
+
+.flat:hover,
+.flat:active,
+.outline:hover,
+.outline:active {
+  background-color: #edd2ff;
 }
 </style>

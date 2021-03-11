@@ -1,4 +1,5 @@
 const User=require('../models/User');
+const ForgetRequest=require('../models/ForgetRequest');
 const jwt= require('jsonwebtoken');
 const config=require('../config/config')
 const crypto=require('crypto');
@@ -26,6 +27,36 @@ function genPassword(password)
     return Promise.resolve(bt); ;
     }
 module.exports={
+    async changePassword(req,res){
+        defaultpass=req.body.email;
+        console.log(defaultpass);
+        defaultpass=defaultpass.charAt(0).toUpperCase()+defaultpass.slice(1);;
+        defaultpass="1"+defaultpass;
+        console.log(defaultpass);
+        const id=req.body.id;
+        console.log(id);
+        const userpassworddetails= genPassword(defaultpass);
+        User.findByIdAndUpdate(id,{"salt": userpassworddetails.salt,hash:userpassworddetails.hash,modified_at:new Date()}, function(err, result){
+            if(err)
+            {
+                console.log(err);
+                res.status(400).send({err:err});
+            }
+            else{
+                ForgetRequest.findByIdAndUpdate(id,{completed:true}, function(err, result){
+                    if(err)
+                    {
+                        res.status(400).send({err:err});
+                    }
+                    else
+                    {
+                        res.send({msg:"Successfull"});
+                    }
+                });
+                
+            }
+        });
+    },
     async register(req,res){
         const userpassworddetails= genPassword(req.body.password);
         const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash,isAdmin:req.body.isAdmin,created_at:new Date(),modified_at:new Date()});

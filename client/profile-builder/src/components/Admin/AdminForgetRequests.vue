@@ -4,7 +4,7 @@
     <base-card>
     <input class="searchbar" type="text" v-model="searchkey" placeholder="Search..">
     <p v-for="forgetrequest in forgetrequests" :key="forgetrequest.id">
-    <forget-request-item  @messageFromStudentChild="childMessageRecieved" :id=forgetrequest._id :email=forgetrequest.email :created_at=forgetrequest.created_at :description=forgetrequest.Description></forget-request-item > 
+    <forget-request-item  @messageFromStudentChild="childMessageRecieved" :problem=forgetrequest.problem :id=forgetrequest._id :completed=forgetrequest.completed :email=forgetrequest.email :created_at=forgetrequest.created_at :description=forgetrequest.Description></forget-request-item > 
     </p>
     </base-card>
     </div>
