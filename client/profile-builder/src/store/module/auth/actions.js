@@ -1,3 +1,4 @@
+import AuthenticateService from '@/services/AuthenticationService';
 export default{
     setUser(context,payload)
     {
@@ -12,10 +13,33 @@ export default{
         localStorage.setItem('token', payload.token);
         return context.commit('setUser',newpayload);
     },
-    tryLogin(context) {
+    async tryLogin(context) {
         const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('userId');
-        const expiresIn = localStorage.getItem('expiresIn');
+        var userId=localStorage.getItem('userId');
+        var expiresIn;
+        if(token!=null)
+        {
+            try {
+                const response =await AuthenticateService.checkUser(token);
+                console.log(response);
+                var tuserId= response.data.id;
+                var isAdmin=response.data.isAdmin;
+                if(userId!=tuserId){
+                    localStorage.setItem('userId', tuserId);
+                    userId=tuserId;
+                }
+                expiresIn= localStorage.getItem('expiresIn');
+            } catch (error) {
+                // this.$router.replace('/login');
+                context.dispatch('logout');
+            }
+            if (token && userId ) {
+                console.log("inside setting user");
+                context.commit('setUser', {userId: userId,expiresIn:expiresIn,token:token,isAdminLoggedIn:isAdmin});
+            }
+        }
+       
+        
         // const tokenExpiration = localStorage.getItem('tokenExpiration');
 
         // const expiresIn = +tokenExpiration - new Date().getTime();
@@ -27,10 +51,7 @@ export default{
         //         context.dispatch('autoLogout');
         //     },expiresIn)
         // }
-        console.log("Ins");
-        if (token && userId ) {
-            context.commit('setUser', {userId: userId,expiresIn:expiresIn,token:token});
-        }
+
     },
     logout(context) {
         context.commit('setUser', {

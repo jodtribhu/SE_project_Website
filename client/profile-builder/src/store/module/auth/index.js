@@ -8,6 +8,7 @@ export default{
           token:'',
           expiresIn:null,
           isUserLoggedIn:false,
+          isAdminLoggedIn:false,
         };
         
       },

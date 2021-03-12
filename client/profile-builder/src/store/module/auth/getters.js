@@ -20,6 +20,11 @@ export default{
     {
       return state.user;
     },
+    isAdminLoggedIn(state)
+    {
+      return state.isAdminLoggedIn;
+    }
+   
   
     // didAutoLogout(state){
     //   return state.didAutoLogout;

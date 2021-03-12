@@ -12,6 +12,8 @@ const options={
 };
 
 const strategy=new JwtStrategy(options,(payload,done)=>{
+    console.log("Inside Strategy");
+    console.log(payload.id);
     User.findOne({_id:payload.id}).then((user)=>{
         if(user){
             return done(null,user);

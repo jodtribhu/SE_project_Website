@@ -10,5 +10,15 @@ export default{
     changePassword(credentials){
         return Api().post('changePassword',credentials);
     },
+    // checkAdmin(credentials){
+    //     console.log("Inside check Admin");
+    //     return Api().post('checkAdmin',credentials);
+    // },
+    checkUser(credentials){
+        console.log(credentials);
+        return Api().get('checkUser',  { headers:
+            { Authorization: credentials }
+        });
+    }
 }
 

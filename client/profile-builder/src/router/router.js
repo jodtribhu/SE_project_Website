@@ -17,22 +17,23 @@ const router=createRouter({
     history:createWebHistory(),
     routes:[
         {path:'/',redirect:'/faculties'},
-        {path:'/admin/register',component:AdminRegister,meta:{ requiresAuth:true, title: 'Admin' }},
+        {path:'/admin/register',component:AdminRegister,meta:{ requiresAdminAuth:true, title: 'Admin' }},
         
-        {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAuth:true}},
+        {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAdminAuth:true}},
 
         {path:'/ForgotPassword',component:ForgotPassword},
 
         {path:'/login',component:Login,meta:{ requiresUnauth:true}},
-        {path:'/faculties',component:FacultiesPage},
+        {path:'/faculties',component:FacultiesPage,},
         {path:'/faculties/:id',component:FacultyProfile},
         // {path:'/requests',component:TeacherRequest},
-        {path:'/admin',name: 'admin',component:Admin,meta:{ requiresAuth:true,title: 'Admin'}},
+        {path:'/admin',name: 'admin',component:Admin,meta:{ requiresAdminAuth:true,title: 'Admin'}},
         {path:'/:notFound(.*)',component:NotFound}, //any other route
        //any other route
     ]
 });
-router.beforeEach(function(to,_,next){
+router.beforeEach(async function(to,_,next){
+    await store.dispatch('tryLogin');
     if(to.meta.title)
     {
         document.title = to.meta.title || 'Profile Builder';
@@ -46,12 +47,22 @@ router.beforeEach(function(to,_,next){
     {
         next('/login');
     }
-    else if(to.meta.requiresUnauth && store.getters.isAuthenticated)
+    else if(to.meta.requiresAdminAuth && store.getters.isAuthenticated  && !store.getters.isAdminLoggedIn)
+    {
+        console.log("requires requiresAdminAuth");
+        console.log(store.getters.isAdminLoggedIn);
+        next('/NotFound');
+    }
+    else if(to.meta.requiresUnauth && store.getters.isAuthenticated )
     {
         next('/admin');
     }
     else
     {
+        console.log("Inside else next");
+        console.log(store.getters.isAdminLoggedIn);
+        console.log("Inside else next store.getters.isAuthenticated");
+        console.log(store.getters.isAuthenticated);
         next()
     }
  });

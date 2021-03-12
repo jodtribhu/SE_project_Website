@@ -33,3 +33,4 @@ WebApp V1.29-> Changed style for faculty and student registration.
 WebApp V1.30-> Add No faculties and students and requests available
 WebApp V1.31-> Added a badge which keeps tracks of no of requests present
 WebApp V1.32-> Created routes for build profile and checks whether the user is logged in
+WebApp V1.33-> Fixed the bug which had improper authorization 

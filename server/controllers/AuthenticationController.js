@@ -27,6 +27,23 @@ function genPassword(password)
     return Promise.resolve(bt); ;
     }
 module.exports={
+    async checkUser(req,res){
+        console.log("inside checkuser");
+        console.log(req.isAuthenticated);
+        res.send({id:req.user._id,isAdmin:req.user.isAdmin})
+    },
+    // async checkAdmin(req,res){
+    //     console.log("inside check admin");
+    //     user_id=req.body.id;
+    //     User.findById(user_id, function (err, user) {
+    //         if(user.isAdmin){
+    //             res.status(200).send({isAdmin:true})
+    //         }
+    //         else{
+    //             res.status(200).send({isAdmin:false})
+    //         }
+    //     });
+    // },
     async changePassword(req,res){
         defaultpass=req.body.email;
         console.log(defaultpass);
@@ -70,6 +87,7 @@ module.exports={
          
     },
     async login(req,res){
+       
         try {
             const {email,password}=req.body;
             const user =await User.findOne({
