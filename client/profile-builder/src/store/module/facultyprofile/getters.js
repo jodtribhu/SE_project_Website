@@ -1,5 +1,5 @@
 export default {
-     faculties(state){
+   facultyprofile(state){
         return state.facultyprofile;
      },
   

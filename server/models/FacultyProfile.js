@@ -15,7 +15,19 @@ const FacultyProfileSchema=new mongoose.Schema({
     },
     Address:{
         type:String,
-        required:[true,"LastName has not been entered"]
+        required:[true,"Address has not been entered"]
+    },
+    City:{
+        type:String,
+        required:[true,"City has not been entered"]
+    },
+    Description:{
+        type:String,
+        required:[true,"Description has not been entered"]
+    },
+    PhoneNo:{
+        type:String,
+        required:[true,"Description has not been entered"]
     },
     created_at:{
         type:Date

@@ -1,9 +1,10 @@
 import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 export default{
-    async loadthefacultyprofile(){
-        const response =await FetchingEachFacultyProfile.fetchFacultyProfile();
-        console.log(response.data);        
-         return {responsestatus:response.status}
-    }
-  
+    async loadthefacultyprofile(context,payload){
+        const response =await FetchingEachFacultyProfile.fetchFacultyProfile({id:payload.id});
+        const facultyprofile=response.data;
+        context.commit('setFacultyProfile',facultyprofile);     
+         return facultyprofile
+    },
+
 }

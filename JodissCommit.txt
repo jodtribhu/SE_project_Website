@@ -32,3 +32,4 @@ WebApp V1.32-> Created routes for build profile and checks whether the user is l
 WebApp V1.33-> Fixed the bug which had improper authorization 
 WebApp V1.34-> Started with Build Profile
 WebApp V1.36-> Modifed faculty profile layout
+WebApp V1.37-> Fixed Some more bugs related to multiple profiles

@@ -13,7 +13,7 @@
   padding: 1rem;
   margin: 2rem auto;
   background-color: #f6f6f6;
-  max-width: 40rem;
+  max-width: 45rem;
 }
 
 </style>
