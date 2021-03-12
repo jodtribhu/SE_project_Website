@@ -5,9 +5,10 @@
         <img src="picture.png" alt="profile-picture" class="profile-picture">
        </div>
        <div class="profile-info">
+           <a href="#" class="myButton">Edit Profile</a>
             <h2 class="profile-name">Kanakan Pampadi</h2>
             <h3 class="profile-intro">My name is kanakan pampadi and i am a bad boi.</h3>
-            <a href="#" class="myButton">Edit Profile</a>
+            
        </div>
        </div>
        
@@ -110,14 +111,16 @@ flex-wrap: wrap;
 }
 .divrelative{
     position: relative;
+  
 }
 h2,h3{
     font-family: Arial, Helvetica, sans-serif;
 }
 .background-field{
+     margin: auto;
     text-align: center;
     height: 5%;
-    width:100%;
+    width:60%;
     background-color:#d3e0ea;
     border-radius:10px;
     padding: 100px 0px 100px 0px;
@@ -132,8 +135,9 @@ h2,h3{
     position: absolute;
 }
 .profile-info{
+    margin: auto;
     height: 2%;
-    width:100%;
+    width:60%;
     background-color:#f4f9f9;
     border-radius:10px;
     padding: 100px 0px 0px 0px;
@@ -142,16 +146,16 @@ h2,h3{
 .profile-name{
     padding: 0 20px;
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 2.5rem;
+    
     margin-top: 0;
 }
 .profile-intro{
-    padding: 0 20px 20px 0px;
+    padding: 0 20px 20px 20px;
     font-family: 'Lato', sans-serif;
-    font-size: 1.2rem;
+
 
 }
-.myButton {
+/* .myButton {
 	background-color:#79bbff;
 	border-radius:5px;
 	border:1px solid #337bc4;
@@ -168,7 +172,27 @@ h2,h3{
     top: 230px;
     right: 100px;
     position: absolute;
-}
+} */
+ .myButton {
+    background-color:#79bbff;
+	border-radius:5px;
+	border:1px solid #337bc4;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:16px;
+	font-weight:bold;
+	padding:12px 44px;
+	text-decoration:none;
+    position: relative;
+	text-shadow:0px 1px 0px #276bb0;
+    top: 5px;
+    margin-left:80%;
+     
+
+ 
+ }
 .myButton:hover {
 	background-color:#378de5;
 }
