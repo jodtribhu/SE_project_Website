@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="facultyProfile!=null " class="divrelative">
+    <div v-if="Object.keys(facultyProfile).length != 0 " class="divrelative">
       <div class="background-field">
-        <img src="picture.png" alt="profile-picture" class="profile-picture" />
+        <img :src="require(`@/assets/picture.png`)"  alt="profile-picture" class="profile-picture" />
       </div>
       <div class="profile-info">
         <a href="#" v-if="isLoggedIn" class="myButton">Edit Profile</a>
@@ -12,15 +12,14 @@
           <h3 class="profile-details"><i class="fas fa-map-marker-alt"></i> {{facultyProfile.Address}}</h3>
         <h3 class="profile-details"><i class="fas fa-phone-alt"></i>{{facultyProfile.PhoneNo}}</h3>
         </div>
-        
       </div>
     </div>
 
-    <base-card v-if="facultyProfile!=null">
+    <!-- <base-card v-if="Object.keys(facultyProfile).length != 0">
       <h1>Hi Faculty {{ facultyId }}</h1>
       <h2>Is he logged in {{ isLoggedIn }}</h2>
-    </base-card>
-    <base-card v-if="facultyProfile == null && isLoggedIn">
+    </base-card> -->
+    <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
       <h2 >Build Profile</h2>
       <div class="flex-container">
         <label class="flex-items" for="profileFirstName">First Name: </label>
@@ -71,7 +70,8 @@
        <label class="flex-items" for="profileDescription">Short Description Of Yourself: </label>
       <input class="flex-items" name="profileDescription" type="text" placeholder="Short Description" v-model="profileDescription"/>
  
-      <button @click="buildprofile" class="myButton">Build</button>
+      <button @click="buildprofile" class="editButton">Build</button>
+
     </base-card>
   </div>
 </template>
@@ -100,9 +100,6 @@ export default {
     isLoggedIn() {
       if (this.$store.getters.isUserLoggedIn) {
         if (this.$store.getters.idofuserloggedIn != this.facultyId) {
-          console.log(
-            "The id of logged in user " + this.$store.getters.idofuserloggedIn
-          );
           return false;
         } else {
           return true;
@@ -113,6 +110,8 @@ export default {
     },
     facultyProfile() {
       let facultyProfile = this.$store.getters["facultyprofile"];
+      console.log("fa");
+      console.log(facultyProfile);
       return facultyProfile;
     },
   },
@@ -122,7 +121,7 @@ export default {
         console.log("Inside Build Profile");
         if(this.profileFirstName!="" && this.profileLastName!="" && this.profileAddress!="" && this.City!=""){
             try {
-                const response =await FetchingEachFacultyProfile.addFacultyBasicDetails({
+                await FetchingEachFacultyProfile.addFacultyBasicDetails({
                     id:this.facultyId,
                     fname:this.profileFirstName,
                     lname:this.profileLastName,
@@ -131,13 +130,12 @@ export default {
                     city:this.profileCity,
                     description:this.profileDescription
                     })
-                  if(response.data.registration=="Successfull"){
-                      this.$router.replace("/faculties/"+this.facultyId);
-                  }
+                       
             } catch (error) {
                 console.log(error);
                 this.error=error.response.data.error;
             }
+            this.$router.replace("/faculties/"+this.facultyId); 
         }
         else
         {
@@ -148,7 +146,7 @@ export default {
     async loadfacultyprofile() {
       try {
        const response =await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
-        if(Object.keys(response).length === 0 )
+        if(Object.keys(response).length === 0 && !this.isLoggedIn)
         {
           console.log("Inside nulllll");
           this.$router.replace("/NotFound")
@@ -214,8 +212,8 @@ h3 {
   height: 180px;
   width: 180px;
   z-index: 1;
-  top: 150px;
-  left: 100px;
+  top: 120px;
+  left: 320px;
   position: absolute;
 }
 .profile-info {
@@ -279,6 +277,24 @@ h3 {
   text-shadow: 0px 1px 0px #276bb0;
   top: 60px;
   right: 60px;
+  margin-left: 80%;
+}
+.editButton{
+    background-color: #79bbff;
+  border-radius: 5px;
+  border: 1px solid #337bc4;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 44px;
+  text-decoration: none;
+  position: relative;
+  text-shadow: 0px 1px 0px #276bb0;
+  top: 10px;
+  margin-bottom: 2%;
   margin-left: 80%;
 }
 .myButton:hover {
