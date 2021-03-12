@@ -12,9 +12,9 @@ export default {
   components: {
       'the-header':TheHeader
   },
-   created(){
-      this.$store.dispatch('tryLogin')
-    },
+  //  created(){
+  //     this.$store.dispatch('tryLogin')
+  //   },
     mounted() {
     let themejs = document.createElement('script')
     themejs.setAttribute('src', 'https://kit.fontawesome.com/5a55e4b82b.js')

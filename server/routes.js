@@ -1,11 +1,13 @@
-const AuthenticationController=require('./controllers/AuthenticationController')
-const FacultyFetchController=require('./controllers/FacultyFetchController')
-const RegisterStudentController=require('./controllers/RegisterStudentController')
-const StudentFetchController=require('./controllers/StudentFetchController')
+const AuthenticationController=require('./controllers/AuthenticationController');
+const FacultyFetchController=require('./controllers/FacultyFetchController');
+const RegisterStudentController=require('./controllers/RegisterStudentController');
+const StudentFetchController=require('./controllers/StudentFetchController');
 
 const AuthenticationControllerPolicy=require('./policies/AuthenticationControllerPolicy');
 
-const ForgetRequestController=require('./controllers/ForgetRequestController')
+const ForgetRequestController=require('./controllers/ForgetRequestController');
+
+const EachFacultyProfileFetchController=require('./controllers/EachFacultyProfileFetchController');
 
 
 const passport=require('passport');
@@ -72,4 +74,9 @@ module.exports=(app)=>
 
     app.get('/check-faculty-updates',FacultyFetchController.checkupdatefaculties);
     app.get('/check-student-updates',StudentFetchController.checkupdatestudents);
+
+
+
+//FacultyProfile
+app.get('/fetchTheFacultyProfile',EachFacultyProfileFetchController.fetchEachFacultyProfile)
 }
