@@ -1,9 +1,12 @@
 <template>
   <div>
      <the-header></the-header>
-    <div v-if="Object.keys(facultyProfile).length != 0 " class="divrelative">
+    <div v-if="Object.keys(facultyProfile).length != 0 " >
       <div class="background-field">
+       <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-picture" />
+
         <img :src="require(`@/assets/picture.png`)"  alt="profile-picture" class="profile-picture" />
+
       </div>
       <div class="profile-info">
         <a href="#" v-if="isLoggedIn" class="myButton">Edit Profile</a>
@@ -201,12 +204,20 @@ h3 {
 }
 .background-field {
   margin: auto;
-  text-align: center;
-  height: 5%;
-  width: 60%;
-  background-color: #d3e0ea;
-  border-radius: 10px;
-  padding: 100px 0px 100px 0px;
+    text-align: center;
+    height: 5%;
+    width: 60%;
+    background-color: #d3e0ea;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.cover-image{
+    object-fit: cover;
+   width: 4000px;
+   height: 200px;
 }
 .profile-picture {
   border-radius: 100%;
