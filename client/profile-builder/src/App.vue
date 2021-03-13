@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style >
+
 @import url('https://kit.fontawesome.com/5a55e4b82b.js');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');

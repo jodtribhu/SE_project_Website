@@ -53,7 +53,7 @@ router.beforeEach(async function(to,_,next){
         console.log(store.getters.isAdminLoggedIn);
         next('/NotFound');
     }
-    else if(to.meta.requiresUnauth && store.getters.isAuthenticated )
+    else if(to.meta.requiresUnauth && store.getters.isAuthenticated  && store.getters.isAdminLoggedIn)
     {
         next('/admin');
     }

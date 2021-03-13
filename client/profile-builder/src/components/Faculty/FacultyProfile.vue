@@ -1,6 +1,6 @@
 <template>
   <div>
-     <the-header></the-header>
+     <user-header></user-header>
     <div v-if="Object.keys(facultyProfile).length != 0 " >
       <div class="background-field">
        <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-picture" />

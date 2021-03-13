@@ -1,6 +1,7 @@
 <template>
     <div>
       <the-header></the-header>
+      
         <div class="box">
             <h1>Login</h1>
                 <input type="email" name="email" placeholder="Email" v-model="email">
