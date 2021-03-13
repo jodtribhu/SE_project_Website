@@ -39,3 +39,4 @@ WebApp V1.35-> Developed faculty profile layout
 WebApp V1.36-> Modifed faculty profile layout
 WebApp V1.37-> Fixed Some more bugs related to multiple profiles
 WebApp V1.38-> Fixed Profile Photo
+WebApp V1.39->User Header Template

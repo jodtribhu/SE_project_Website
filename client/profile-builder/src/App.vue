@@ -1,17 +1,13 @@
 <template >
 <div class="background">
-<the-header></the-header>
+
 <router-view ></router-view>
 </div>
 </template>
 
 <script>
-import TheHeader from './components/layout/TheHeader.vue'
-
 export default {
-  components: {
-      'the-header':TheHeader
-  },
+  
   //  created(){
   //     this.$store.dispatch('tryLogin')
   //   },

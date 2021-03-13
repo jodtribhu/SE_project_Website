@@ -1,5 +1,8 @@
 <template>
-    <div class="main-block">
+    <div>
+        <the-header></the-header>
+        <div class="main-block">
+        
         <h1>Add a new faculty </h1>
         <label id="icon" for="name"><i class="fas fa-user"></i></label>
 
@@ -16,6 +19,8 @@
         <button @click="register">Register</button>
         </div>
     </div>
+    </div>
+    
 </template>
 <script>
 import AuthenticateService from '@/services/AuthenticationService';

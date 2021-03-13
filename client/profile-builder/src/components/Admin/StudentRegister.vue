@@ -1,5 +1,7 @@
 <template>
-    <div class="main-block">
+<div>
+        <the-header></the-header>
+       <div class="main-block">
         <h1>Add a new student </h1>
         <label id="icon" for="name"><i class="fas fa-user"></i></label>
         <input type="text" name="student_roll_no" placeholder="Student Roll Number" v-model="studentRollNo" autocomplete="new-password">
@@ -14,6 +16,8 @@
         <button @click="registerStudent">Register</button>
         </div>
     </div>
+</div>
+ 
 </template>
 <script>
 import RegisterStudent from '@/services/RegisterStudent';

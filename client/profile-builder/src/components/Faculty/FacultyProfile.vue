@@ -1,5 +1,6 @@
 <template>
   <div>
+     <the-header></the-header>
     <div v-if="Object.keys(facultyProfile).length != 0 " class="divrelative">
       <div class="background-field">
         <img :src="require(`@/assets/picture.png`)"  alt="profile-picture" class="profile-picture" />
