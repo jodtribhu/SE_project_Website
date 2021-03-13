@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="fullpage">
      <user-header></user-header>
-    <div v-if="Object.keys(facultyProfile).length != 0 " >
+     <div class="page">
+         <div v-if="Object.keys(facultyProfile).length != 0 " >
       <div class="background-field">
        <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-picture" />
 
@@ -77,6 +78,8 @@
       <button @click="buildprofile" class="editButton">Build</button>
 
     </base-card>
+     </div>
+  
   </div>
 </template>
 
@@ -165,6 +168,12 @@ export default {
 </script>
 
 <style scoped>
+.page
+{
+  position: absolute;
+  width: 100%;
+  top: 100px;
+}
 .detailsstyle{
   padding-bottom: 10px;
 }
@@ -203,6 +212,7 @@ h3 {
   font-family: Arial, Helvetica, sans-serif;
 }
 .background-field {
+ 
   margin: auto;
     text-align: center;
     height: 5%;
@@ -215,6 +225,7 @@ h3 {
     overflow: hidden
 }
 .cover-image{
+  
     object-fit: cover;
    width: 4000px;
    height: 200px;

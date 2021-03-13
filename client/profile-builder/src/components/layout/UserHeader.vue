@@ -1,6 +1,6 @@
 <template >
    <div  class="background">
-        <header class="flex-gap">
+        <header >
         <nav>
             <h1>
                 <router-link to="/">Profile Builder </router-link>
@@ -36,13 +36,27 @@
 
 <script>
 export default {
-    
+    computed:{
+    isLoggedIn(){
+      return this.$store.getters.isUserLoggedIn;
+    }
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('logout');
+      this.$router.replace('/login');
+    }
+  }
 }
 </script>
 <style scoped>
 .background{
      
-  
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    
     background-color: whitesmoke
 }
 .fas{
@@ -106,6 +120,7 @@ h1 a:hover
 }
 
 header nav {
+  
   left:0;
   width: 100%;
   margin: auto;
