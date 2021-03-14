@@ -24,7 +24,7 @@ const router=createRouter({
         {path:'/ForgotPassword',component:ForgotPassword},
 
         {path:'/login',component:Login,meta:{ requiresUnauth:true}},
-        {path:'/faculties',component:FacultiesPage,},
+        {path:'/home',component:FacultiesPage,},
         {path:'/faculties/:id',component:FacultyProfile},
         // {path:'/requests',component:TeacherRequest},
         {path:'/admin',name: 'admin',component:Admin,meta:{ requiresAdminAuth:true,title: 'Admin'}},
@@ -59,10 +59,10 @@ router.beforeEach(async function(to,_,next){
     }
     else
     {
-        console.log("Inside else next");
-        console.log(store.getters.isAdminLoggedIn);
-        console.log("Inside else next store.getters.isAuthenticated");
-        console.log(store.getters.isAuthenticated);
+        // console.log("Inside else next");
+        // console.log(store.getters.isAdminLoggedIn);
+        // console.log("Inside else next store.getters.isAuthenticated");
+        // console.log(store.getters.isAuthenticated);
         next()
     }
  });

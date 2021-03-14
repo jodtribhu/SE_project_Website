@@ -7,14 +7,14 @@ module.exports={
             if (err){
                 console.log("errr",err);
             }else{
-                console.log(facultyProfile);
+                
                 res.send(facultyProfile);
             }
         })
 
     },
     addFacultyBasicDetails(req,res){
-        console.log("Inside addFacultyBasicDetails "+req.body.lname );
+        
         const facultyprofile=new FacultyProfile({_id:req.body.id,
             FirstName:req.body.fname,
             LastName:req.body.lname, 

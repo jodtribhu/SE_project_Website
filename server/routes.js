@@ -9,6 +9,7 @@ const ForgetRequestController=require('./controllers/ForgetRequestController');
 
 const EachFacultyProfileFetchController=require('./controllers/EachFacultyProfileFetchController');
 
+const AllFacultyProfileFetchController=require('./controllers/AllFacultyProfileFetchController');
 
 const passport=require('passport');
 require('./passport')(passport) 
@@ -80,4 +81,7 @@ module.exports=(app)=>
 //FacultyProfile
 app.post('/fetchTheFacultyProfile',EachFacultyProfileFetchController.fetchEachFacultyProfile)
 app.post('/addFacultyBasicDetails',EachFacultyProfileFetchController.addFacultyBasicDetails)
+
+//AllFacultyProfiles
+app.get('/fetchallfacultyprofiles',AllFacultyProfileFetchController.fetchAllFacultyProfiles)
 }

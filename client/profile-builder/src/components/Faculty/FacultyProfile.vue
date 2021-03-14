@@ -97,12 +97,16 @@ export default {
       profilePhoneNo:"",
       profileAddress:"",
       profileDescription:"",
+      search:''
     };
   },
   created() {
     this.facultyId = this.$route.params.id;
+    console.log("Inside created profilesssssss");
     this.loadfacultyprofile();
+   
   },
+
   computed: {
     isLoggedIn() {
       if (this.$store.getters.isUserLoggedIn) {
@@ -123,7 +127,6 @@ export default {
     },
   },
   methods: {
-    
     async buildprofile(){
         console.log("Inside Build Profile");
         if(this.profileFirstName!="" && this.profileLastName!="" && this.profileAddress!="" && this.City!=""){
@@ -142,7 +145,7 @@ export default {
                 console.log(error);
                 this.error=error.response.data.error;
             }
-            this.$router.replace("/faculties/"+this.facultyId); 
+            this.loadfacultyprofile();
         }
         else
         {

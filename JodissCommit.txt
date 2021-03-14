@@ -36,3 +36,5 @@ WebApp V1.37-> Fixed Some more bugs related to multiple profiles
 WebApp V1.39->User Header Template
 WebApp V1.41->Fixed User Header Template
 WebApp V1.42->Fixed User Header Spacing 
+WebApp V1.43->Finished Search Bar and navigation when clicked and also finished retrieving all faculty profiles
+	      Fixed Bug related to build Profile

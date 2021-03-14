@@ -26,11 +26,14 @@ export default {
     computed:{
         faculties(){
             let faculties = this.$store.getters['faculties'];
+          
+           
             faculties=faculties.filter((faculty) => {
               if (faculty.email.includes(this.searchkey)) {
                 return true;
                }
             });
+            
             return faculties;
         }
     },

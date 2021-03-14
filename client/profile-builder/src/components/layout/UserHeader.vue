@@ -1,19 +1,19 @@
 <template >
-   <div  class="background">
-        <header >
+   <div  >
+        <header class="background" >
         <nav>
             <h1>
                 <router-link to="/">Profile Builder </router-link>
             </h1>
              <div class="search-bar">
                     
-                    <span><i class="fas fa-search"></i> <input type="search" class="search" placeholder="Search" ></span>
+                    <span><i class="fas fa-search"></i> <input type="search" autoComplete="on" :list="allFacultyProfiles" v-model="search" class="search" placeholder="Search" ></span>
                     
             </div>
             <ul>
                 <li> 
                     <div class="container-items">
-                         <i class="fas fa-home"></i> <p class="navigation-item">Home</p><span class="sr-only"></span>
+                         <i class="fas fa-home"></i><router-link class="navigation-item" to="/home" >Home</router-link> <span class="sr-only"></span>
                     </div> 
                 </li>
                 <li>
@@ -21,37 +21,104 @@
                         <i class="fas fa-globe"></i> <p class="navigation-item">Network</p>
                     </div> 
                 </li>
-                <div class="container-login">
+                <div class="container-login" v-if="!isLoggedIn">
                       <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
-                      <li v-if="isLoggedIn"><router-link to="/login" @click="logout()">Logout</router-link></li>
+                </div>
+                <div class="container-login" v-if="isLoggedIn">
+                      <li><router-link to="/login" @click="logout()">Logout</router-link></li>
                 </div>
               
               
             </ul>
         </nav>
     </header>
+    <ul class="SelectItems">
+      <li   v-on:click="goToSearch($event)" class="SelectListItems" v-for="facultyprofile in allFacultyProfiles" :id="facultyprofile._id" :key="facultyprofile._id">{{facultyprofile.FirstName}}  {{facultyprofile.LastName}} </li>
+    </ul>
+    
    </div>
 </template>
 
 
 <script>
+
 export default {
-    computed:{
-    isLoggedIn(){
-      return this.$store.getters.isUserLoggedIn;
+ 
+   created() {
+    this.loadAllfacultyProfiles();
+  },
+  data(){
+    return{
+      search:""
     }
   },
+   computed:{
+    isLoggedIn(){
+      return this.$store.getters.isUserLoggedIn;
+    },
+     allFacultyProfiles(){
+            let allfacultyprofiles = this.$store.getters['allFacultyProfiles'];
+            if(this.search=="")
+            {
+              return ""
+            }
+             allfacultyprofiles=allfacultyprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.FirstName.toUpperCase().includes(this.search.toUpperCase()) || allFacultyProfile.LastName.toUpperCase().includes(this.search.toUpperCase())  ) {
+                return true;
+               }
+            });
+            return allfacultyprofiles;
+        },
+  },
   methods:{
+    async goToSearch(event){
+      await this.$router.push("/faculties/"+event.currentTarget.id);
+      this.search=""
+      this.$store.dispatch("loadthefacultyprofile",{id:this.$route.params.id});
+    },
     logout(){
       this.$store.dispatch('logout');
       this.$router.replace('/login');
-    }
+    },
+    async loadAllfacultyProfiles()
+    {
+      try {
+        await this.$store.dispatch("loadallfacultyprofiles");
+        
+      } catch (error) {
+        this.error = error.message || "Something went wrong";
+      }
+    },
+    
   }
 }
 </script>
 <style scoped>
+.SelectItems{
+  position: relative;
+  left: 21%;
+  max-width: 30%;
+  margin-top: 3.6%;
+   list-style-type: none;
+   
+  z-index:9999;
+}
+.SelectListItems{
+   font-family: 'Montserrat', sans-serif;
+  border-radius: 5px;
+  padding-left: 2px;
+  box-shadow: rgb(99, 97, 96);
+  margin-top:0.5px;
+  padding: 8px 2px 8px 8px;
+  
+  border-bottom: 4px solid rgb(145, 137, 137);
+  background-color: white;
+}
+.SelectListItems:hover{
+  background-color: rgb(192, 186, 186);
+}
 .background{
-     
+   
     position: absolute;
     top: 0;
     width: 100%;
@@ -66,6 +133,7 @@ export default {
 
 .navigation-item{
     font-size: 0.8rem;
+    color: black;
     
 }
 .search {
