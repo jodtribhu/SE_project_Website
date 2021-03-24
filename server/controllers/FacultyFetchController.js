@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
 const User=require('../models/User');
+const FacultyProfile=require('../models/FacultyProfile');
 module.exports={
     fetchfaculties(req,res){
         User.find(function(err,faculties){
@@ -16,10 +17,20 @@ module.exports={
             }
             else
             {
-                res.send("successful")
-                console.log("Successfully Deleted");
+                FacultyProfile.findByIdAndDelete(req.body.id,function(err){
+                    if(err){
+                        console.log(err);
+                        res.send(err)
+                    }
+                    else
+                    {
+                        res.send("successful")
+                        console.log("Successfully Deleted");
+                    }
+                });
             }
-        })
+        });
+     
     },
     checkupdatefaculties(req,res){
         var allfaculties;

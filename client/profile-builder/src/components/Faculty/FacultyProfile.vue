@@ -189,12 +189,15 @@ export default {
     },
     async loadfacultyprofile() {
       try {
+       await this.$store.dispatch("loadallfacultyprofiles");
        const response =await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
+       
         if(Object.keys(response).length === 0 && !this.isUserLoggedIn())
         {
           console.log("Inside nulllll");
           this.$router.replace("/NotFound")
         }
+        
         
       } catch (error) {
         this.error = error.message || "Something went wrong";
