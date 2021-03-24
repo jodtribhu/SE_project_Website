@@ -40,3 +40,4 @@ WebApp V1.43->Finished Search Bar and navigation when clicked and also finished 
 	      Fixed Bug related to build Profile
 WebApp V1.44->Fixed Bug related to selection of profiles Now can differentiate between logged in and logged out users
 WebApp V1.45->Finished Creating Links to external Sources for faculty profiles
+WebApp V1.46->Fixed a big relating to links
