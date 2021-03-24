@@ -81,6 +81,9 @@ module.exports=(app)=>
 //FacultyProfile
 app.post('/fetchTheFacultyProfile',EachFacultyProfileFetchController.fetchEachFacultyProfile)
 app.post('/addFacultyBasicDetails',EachFacultyProfileFetchController.addFacultyBasicDetails)
+app.post('/addFacultyLinks',EachFacultyProfileFetchController.addFacultyLinks)
+
+
 
 //AllFacultyProfiles
 app.get('/fetchallfacultyprofiles',AllFacultyProfileFetchController.fetchAllFacultyProfiles)

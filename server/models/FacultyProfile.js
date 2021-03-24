@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
+const LinkSchema = new mongoose.Schema({ link: String });
 const FacultyProfileSchema=new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -29,6 +30,7 @@ const FacultyProfileSchema=new mongoose.Schema({
         type:String,
         required:[true,"Description has not been entered"]
     },
+    links:[LinkSchema],
     created_at:{
         type:Date
     },

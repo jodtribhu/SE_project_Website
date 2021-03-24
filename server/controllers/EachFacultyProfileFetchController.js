@@ -13,6 +13,16 @@ module.exports={
         })
 
     },
+    addFacultyLinks(req,res){
+        var link = { link:req.body.link };
+        FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $push: { links: link  } },function (error, success) {
+            if (error) {
+            console.log(error);
+            } else {
+            res.send({message:"success"})
+        }
+    });
+    },
     addFacultyBasicDetails(req,res){
         
         const facultyprofile=new FacultyProfile({_id:req.body.id,

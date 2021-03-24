@@ -8,5 +8,8 @@ export default{
     addFacultyBasicDetails(credentials){
         return Api().post('addFacultyBasicDetails',credentials);
     },
+    addFacultyLinks(credentials){
+        return Api().post('addFacultyLinks',credentials);
+    }
 
 }

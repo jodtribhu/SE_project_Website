@@ -4,13 +4,14 @@
      <div class="page">
          <div v-if="Object.keys(facultyProfile).length != 0 " >
       <div class="background-field">
-       <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-picture" />
-
+       <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-image" />
         <img :src="require(`@/assets/picture.png`)"  alt="profile-picture" class="profile-picture" />
-
       </div>
       <div class="profile-info">
-        <a href="#"  v-if="computedisUserLoggedIn" class="myButton">Edit Profile</a>
+        <div class="buttonposition">
+          <button href="#"  v-if="computedisUserLoggedIn" class="myButton">Edit Profile</button>
+        </div>
+        
         <h2 class="profile-name">{{facultyProfile.FirstName}} {{facultyProfile.LastName}}</h2>
         <h3 class="profile-intro">{{facultyProfile.Description}}</h3>
         <div class="detailsstyle">
@@ -19,11 +20,14 @@
         </div>
       </div>
     </div>
-
+     <faculty-links :id=$route.params.id :facultyProfilelinks="facultyProfilelinks" :computedisUserLoggedIn="computedisUserLoggedIn" @addedALink="refreshTheContent" ></faculty-links>
     <!-- <base-card v-if="Object.keys(facultyProfile).length != 0">
       <h1>Hi Faculty {{ facultyId }}</h1>
       <h2>Is he logged in {{ isLoggedIn }}</h2>
     </base-card> -->
+
+<!-- BuildProfile Card -->
+
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
       <h2 >Build Profile</h2>
       <div class="flex-container">
@@ -78,16 +82,20 @@
       <button @click="buildprofile" class="editButton">Build</button>
 
     </base-card>
+   
      </div>
-  
+   
   </div>
 </template>
 
 <script>
+
 import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 import BaseCard from "../layout/BaseCard.vue";
+import FacultyLinks from "./FacultyLinks.vue";
+
 export default {
-  components: { BaseCard },
+  components: { BaseCard,FacultyLinks},
   data() {
     return {
       facultyId: "",
@@ -109,17 +117,31 @@ export default {
   },
 
   computed: {
+    facultyProfilelinks(){
+      let facultyProfile = this.$store.getters["facultyprofile"];
+      return facultyProfile.links;
+    },
     facultyProfile() {
       let facultyProfile = this.$store.getters["facultyprofile"];
       
       console.log(facultyProfile);
       return facultyProfile;
     },
-    computedisUserLoggedIn(){
-       return this.isLoggedIn;
+     computedisUserLoggedIn(){
+        this.isUserLoggedIn()
+       return  this.isLoggedIn;
     }
   },
   methods: {
+    refreshTheContent(){
+      console.log("inside refresh content");
+      this.loadfacultyprofile();
+      this.facultyProfilelinks;
+      
+    },
+    handleUploaded(resp) {
+        this.userAvatar = resp.relative_url;
+      },
      isUserLoggedIn() {
        this.facultyId = this.$route.params.id;
       if (this.$store.getters.isUserLoggedIn) {
@@ -183,6 +205,9 @@ export default {
 </script>
 
 <style scoped>
+.buttonposition{
+  position: relative;
+}
 .page
 {
   position: absolute;
@@ -231,7 +256,7 @@ h3 {
   margin: auto;
     text-align: center;
     height: 5%;
-    width: 60%;
+    max-width: 60%;
     background-color: #d3e0ea;
     border-radius: 10px 10px 0 0;
     display: flex;
@@ -243,7 +268,7 @@ h3 {
   
     object-fit: cover;
    width: 4000px;
-   height: 200px;
+   height: 250px;
 }
 .profile-picture {
   border-radius: 100%;
@@ -257,7 +282,7 @@ h3 {
 .profile-info {
   margin: auto;
   height: 2%;
-  width: 60%;
+  max-width: 60%;
   background-color: #f4f9f9;
   border-radius: 10px;
   padding: 100px 0px 0px 0px;
@@ -303,7 +328,7 @@ h3 {
   background-color: #79bbff;
   border-radius: 5px;
   border: 1px solid #337bc4;
-  display: inline-block;
+  
   cursor: pointer;
   color: #ffffff;
   font-family: Arial;
@@ -311,11 +336,11 @@ h3 {
   font-weight: bold;
   padding: 12px 44px;
   text-decoration: none;
-  position: relative;
+  position: absolute;
   text-shadow: 0px 1px 0px #276bb0;
-  top: 60px;
-  right: 60px;
-  margin-left: 80%;
+  top:20px;
+   right:20px
+
 }
 .editButton{
     background-color: #79bbff;
