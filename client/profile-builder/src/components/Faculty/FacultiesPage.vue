@@ -1,6 +1,6 @@
 <template>
     <div >
-        <user-header></user-header>
+        <user-header ></user-header>
         <div class="bellowzindex">
           <h1>Welcome to faculty page</h1>
             <ul>
@@ -25,6 +25,7 @@ export default {
         },
     },
     methods: {
+     
     async loadAllfacultyProfiles()
     {
       try {

@@ -1,6 +1,6 @@
 <template>
   <div class="fullpage">
-     <user-header></user-header>
+     <user-header @messageFromUserHeader="UserHasChanged"></user-header>
      <div class="page">
          <div v-if="Object.keys(facultyProfile).length != 0 " >
       <div class="background-field">
@@ -10,7 +10,7 @@
 
       </div>
       <div class="profile-info">
-        <a href="#" v-if="isLoggedIn" class="myButton">Edit Profile</a>
+        <a href="#"  v-if="computedisUserLoggedIn" class="myButton">Edit Profile</a>
         <h2 class="profile-name">{{facultyProfile.FirstName}} {{facultyProfile.LastName}}</h2>
         <h3 class="profile-intro">{{facultyProfile.Description}}</h3>
         <div class="detailsstyle">
@@ -73,7 +73,7 @@
         />
       </div>
        <label class="flex-items" for="profileDescription">Short Description Of Yourself: </label>
-      <input class="flex-items" name="profileDescription" type="text" placeholder="Short Description" v-model="profileDescription"/>
+       <input class="flex-items" name="profileDescription" type="text" placeholder="Short Description" v-model="profileDescription"/>
  
       <button @click="buildprofile" class="editButton">Build</button>
 
@@ -97,36 +97,48 @@ export default {
       profilePhoneNo:"",
       profileAddress:"",
       profileDescription:"",
-      search:''
+      search:'',
+      isLoggedIn:false
     };
   },
   created() {
     this.facultyId = this.$route.params.id;
-    console.log("Inside created profilesssssss");
+ 
     this.loadfacultyprofile();
    
   },
 
   computed: {
-    isLoggedIn() {
-      if (this.$store.getters.isUserLoggedIn) {
-        if (this.$store.getters.idofuserloggedIn != this.facultyId) {
-          return false;
-        } else {
-          return true;
-        }
-      } else {
-        return false;
-      }
-    },
     facultyProfile() {
       let facultyProfile = this.$store.getters["facultyprofile"];
-      console.log("fa");
+      
       console.log(facultyProfile);
       return facultyProfile;
     },
+    computedisUserLoggedIn(){
+       return this.isLoggedIn;
+    }
   },
   methods: {
+     isUserLoggedIn() {
+       this.facultyId = this.$route.params.id;
+      if (this.$store.getters.isUserLoggedIn) {
+        if (this.$store.getters.idofuserloggedIn != this.facultyId) {
+          this.isLoggedIn=false;
+        } else {
+          this.isLoggedIn=true;
+        }
+      } else {
+        this.isLoggedIn= false;
+      }
+      return this.isLoggedIn;
+    },
+     UserHasChanged(args1){
+        if(args1==true)
+        { 
+         this.isUserLoggedIn()
+        }
+      },
     async buildprofile(){
         console.log("Inside Build Profile");
         if(this.profileFirstName!="" && this.profileLastName!="" && this.profileAddress!="" && this.City!=""){
@@ -156,7 +168,7 @@ export default {
     async loadfacultyprofile() {
       try {
        const response =await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
-        if(Object.keys(response).length === 0 && !this.isLoggedIn)
+        if(Object.keys(response).length === 0 && !this.isUserLoggedIn())
         {
           console.log("Inside nulllll");
           this.$router.replace("/NotFound")

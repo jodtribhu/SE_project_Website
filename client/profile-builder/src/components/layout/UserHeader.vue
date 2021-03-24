@@ -72,7 +72,9 @@ export default {
   },
   methods:{
     async goToSearch(event){
+     
       await this.$router.push("/faculties/"+event.currentTarget.id);
+       this.$emit('messageFromUserHeader',true)
       this.search=""
       this.$store.dispatch("loadthefacultyprofile",{id:this.$route.params.id});
     },

@@ -16,7 +16,7 @@ import store from '../store/index.js'
 const router=createRouter({
     history:createWebHistory(),
     routes:[
-        {path:'/',redirect:'/faculties'},
+        {path:'/',redirect:'/home'},
         {path:'/admin/register',component:AdminRegister,meta:{ requiresAdminAuth:true, title: 'Admin' }},
         
         {path:'/admin/registerStudent',component:StudentRegister,meta:{ requiresAdminAuth:true}},
@@ -32,6 +32,7 @@ const router=createRouter({
        //any other route
     ]
 });
+
 router.beforeEach(async function(to,_,next){
     await store.dispatch('tryLogin');
     if(to.meta.title)
@@ -67,5 +68,10 @@ router.beforeEach(async function(to,_,next){
     }
  });
 
-
+ router.afterEach((to)=>{
+    console.log(to.params);
+    // if(to.params!=null){
+        
+    // }
+ });
 export default router;
