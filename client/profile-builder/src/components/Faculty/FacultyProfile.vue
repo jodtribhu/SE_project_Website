@@ -21,6 +21,7 @@
       </div>
     </div>
      <faculty-links  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilelinks="facultyProfilelinks" :computedisUserLoggedIn="computedisUserLoggedIn" @addedALink="refreshTheContent" ></faculty-links>
+    <faculty-preference v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilePreferences="facultyProfilePreferences" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPreference="refreshTheContent"></faculty-preference>
     <!-- <base-card v-if="Object.keys(facultyProfile).length != 0">
       <h1>Hi Faculty {{ facultyId }}</h1>
       <h2>Is he logged in {{ isLoggedIn }}</h2>
@@ -93,9 +94,9 @@
 import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 import BaseCard from "../layout/BaseCard.vue";
 import FacultyLinks from "./FacultyLinks.vue";
-
+import FacultyPreference from "./FacultyPreference.vue";
 export default {
-  components: { BaseCard,FacultyLinks},
+  components: { BaseCard,FacultyLinks,FacultyPreference},
   data() {
     return {
       facultyId: "",
@@ -120,6 +121,10 @@ export default {
     facultyProfilelinks(){
       let facultyProfile = this.$store.getters["facultyprofile"];
       return facultyProfile.links;
+    },
+    facultyProfilePreferences(){
+      let facultyProfile = this.$store.getters["facultyprofile"];
+      return facultyProfile.preferences;
     },
     facultyProfile() {
       let facultyProfile = this.$store.getters["facultyprofile"];

@@ -31,6 +31,9 @@ const FacultyProfileSchema=new mongoose.Schema({
         required:[true,"Description has not been entered"]
     },
     links:[LinkSchema],
+    preferences:{
+        type:Array
+    },
     created_at:{
         type:Date
     },

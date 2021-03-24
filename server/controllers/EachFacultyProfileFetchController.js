@@ -23,6 +23,20 @@ module.exports={
         }
     });
     },
+
+   
+    addFacultyPreferences(req,res){
+        var preferencelist = req.body.preference;
+        console.log(preferencelist);
+        console.log(req.body.id );
+        FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $addToSet:{'preferences': req.body.preference}},function (error, success) {
+            if (error) {
+            console.log(error);
+            } else {
+            res.send({message:"success"})
+        }
+    });
+    },
     addFacultyBasicDetails(req,res){
         
         const facultyprofile=new FacultyProfile({_id:req.body.id,

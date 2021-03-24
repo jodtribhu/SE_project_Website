@@ -10,6 +10,9 @@ export default{
     },
     addFacultyLinks(credentials){
         return Api().post('addFacultyLinks',credentials);
+    },
+    addFacultyPreferences(credentials){
+        return Api().post('addFacultyPreferences',credentials);
     }
-
+    
 }
