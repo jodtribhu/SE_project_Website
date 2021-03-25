@@ -51,3 +51,4 @@ WebApp V1.46->Fixed a big relating to links
 WebApp V1.47->Fixed a big relating to deletion of faculty and search bar error which was not loading properly with all data
 WebApp V1.48->Created A preference tag System
 WebApp V1.49->Finished Image Upload Feature And succesful display of image 
+WebApp V1.50->Header for users is fixed at top 

@@ -1,5 +1,5 @@
 <template >
-   <div  >
+   <div class="fixed" >
         <header class="background" >
         <nav>
             <h1>
@@ -96,6 +96,13 @@ export default {
 }
 </script>
 <style scoped>
+.fixed{
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  z-index: 100;
+}
 .SelectItems{
   position: relative;
   left: 21%;
