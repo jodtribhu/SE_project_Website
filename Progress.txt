@@ -53,3 +53,4 @@ WebApp V1.48->Created A preference tag System
 WebApp V1.49->Finished Image Upload Feature And succesful display of image 
 WebApp V1.50->Header for users is fixed at top 
 WebApp V1.51->Fixed images for users in faculty page
+WebApp V1.52->Developed form for adding new projects
