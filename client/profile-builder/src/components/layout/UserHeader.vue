@@ -3,7 +3,8 @@
         <header class="background" >
         <nav>
             <h1>
-                <router-link to="/">Profile Builder </router-link>
+                <router-link to="/"> Profile Builder</router-link>
+               
             </h1>
              <div class="search-bar">
                     
@@ -96,6 +97,9 @@ export default {
 }
 </script>
 <style scoped>
+.logo{
+ 
+}
 .fixed{
   position: fixed;
   width: 100%;

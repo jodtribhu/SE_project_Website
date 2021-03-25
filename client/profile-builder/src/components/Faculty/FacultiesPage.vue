@@ -2,12 +2,15 @@
     <div >
         <user-header ></user-header>
         <div class="bellowzindex">
-          <h1>Welcome to faculty page</h1>
+       
           <base-card>
           <h4 class="heading">People</h4>
-          
              <div class="eachpeople" v-for="facultyprofile in allFacultyProfiles" :key="facultyprofile._id">
                <search-item>
+                
+                <div :style="{ 'background-image': `url(${converturl(facultyprofile.ProfilePhotoPath) })` }"  class="profile-picture" />
+                 
+                 
                <li class="name">
                  {{facultyprofile.FirstName}} {{facultyprofile.LastName}}  
                </li>
@@ -35,6 +38,11 @@ export default {
     created() {
     this.loadAllfacultyProfiles();
   },
+  data(){
+    return{
+      serverpath:"http://localhost:8081/upload/ "
+    }
+  },
     computed:{
           allFacultyProfiles(){
             let allfacultyprofiles = this.$store.getters['allFacultyProfiles'];
@@ -44,6 +52,22 @@ export default {
         },
     },
     methods: {
+      converturl(filepath){
+        console.log("inside ffffffffffff");
+           
+              var fileloc="";
+              if(filepath!=null)
+              {
+                var filename = filepath.replace(/^.*[\\]/, '');
+              fileloc="http://localhost:8081/upload/"+filename;
+              }
+              else
+              {
+                  fileloc="http://localhost:8081/upload/"+"default.png";
+              }
+               console.log(fileloc);
+              return fileloc;
+      },
      
     async loadAllfacultyProfiles()
     {
@@ -59,6 +83,18 @@ export default {
 </script>
 
 <style scoped>
+.profile-picture {
+  float: left;
+   display: block;
+   background-size: cover;
+  background-position: center center;
+  margin-right: 20px;
+  border-radius: 100%;
+  height: 80px;
+  width: 80px;
+  z-index: 1;
+ 
+}
 .heading{
   font-size:25px;
    font-family: "Montserrat", sans-serif;

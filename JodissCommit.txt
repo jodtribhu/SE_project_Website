@@ -40,8 +40,9 @@ WebApp V1.43->Finished Search Bar and navigation when clicked and also finished 
 	      Fixed Bug related to build Profile
 WebApp V1.44->Fixed Bug related to selection of profiles Now can differentiate between logged in and logged out users
 WebApp V1.45->Finished Creating Links to external Sources for faculty profiles
-WebApp V1.46->Fixed a big relating to links
-WebApp V1.47->Fixed a big relating to deletion of faculty and search bar error which was not loading properly with all data
+WebApp V1.46->Fixed a bug relating to links
+WebApp V1.47->Fixed a bug relating to deletion of faculty and search bar error which was not loading properly with all data
 WebApp V1.48->Created A preference tag System
 WebApp V1.49->Finished Image Upload Feature And succesful display of image .
 WebApp V1.50->Header for users is fixed at top 
+WebApp V1.51->Fixed images for users in faculty page
