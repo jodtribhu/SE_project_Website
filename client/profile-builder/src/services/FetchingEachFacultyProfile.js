@@ -13,6 +13,9 @@ export default{
     },
     addFacultyPreferences(credentials){
         return Api().post('addFacultyPreferences',credentials);
+    },
+    addFacultyProfilePhoto(credentials){
+        return Api().post('uploadProfilePhoto',credentials);
     }
     
 }

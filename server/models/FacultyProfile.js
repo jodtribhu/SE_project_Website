@@ -34,6 +34,9 @@ const FacultyProfileSchema=new mongoose.Schema({
     preferences:{
         type:Array
     },
+    ProfilePhotoPath:{
+        type:String,
+    },
     created_at:{
         type:Date
     },

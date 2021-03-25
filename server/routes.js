@@ -24,6 +24,42 @@ function isAdmin(req,res,next)
         res.status(409).json({success:false,msg:'You are not Authorized'})
     }
 }
+
+
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination:  './public/upload/',
+    filename: function(req, file, cb) {
+      console.log("inside file naming");
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  });
+
+    function checkFileType(file, cb) {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb('Error: Images Only!');
+    }
+  }
+const upload = multer({
+    storage: storage,
+    limits: {
+      fileSize: 100000000000
+    },
+    fileFilter: function(req, file, cb) {
+      checkFileType(file, cb);
+    }
+  });
+
+
+
+
 module.exports=(app)=>
 {
     app.use(passport.initialize());
@@ -83,6 +119,13 @@ app.post('/fetchTheFacultyProfile',EachFacultyProfileFetchController.fetchEachFa
 app.post('/addFacultyBasicDetails',EachFacultyProfileFetchController.addFacultyBasicDetails);
 app.post('/addFacultyLinks',EachFacultyProfileFetchController.addFacultyLinks);
 app.post('/addFacultyPreferences',EachFacultyProfileFetchController.addFacultyPreferences);
+
+
+
+
+
+
+app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );
 
 
 //AllFacultyProfiles

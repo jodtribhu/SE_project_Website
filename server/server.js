@@ -7,14 +7,20 @@ const config=require('./config/config');
 const passport = require('passport');
 
 const app=express();
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: '50mb',extended:false,parameterLimit: 1000000 }));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors());
 app.use(morgan('dev'));
-
+app.use(express.static('public'));
 require('./routes')(app)
 
+/*multer*/
 
+
+
+
+
+/*multer end*/
 
 
 app.listen(config.port||8081,function(err)

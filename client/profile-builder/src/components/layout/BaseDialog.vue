@@ -13,7 +13,7 @@
         </section>
         <menu v-if="!fixed">
           <slot name="actions">
-            <base-button @click="tryClose">Close</base-button>
+            <a @click="tryClose">Close</a>
           </slot>
         </menu>
       </dialog>
@@ -22,7 +22,9 @@
 </template>
 
 <script>
+
 export default {
+  inheritAttrs: false,
   props: {
     show: {
       type: Boolean,

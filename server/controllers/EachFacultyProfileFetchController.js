@@ -56,4 +56,19 @@ module.exports={
             res.send(400, "Bad Request");
         });
     },
+
+    addFacultyProfilePhoto(req,res){
+     console.log(req.body.id);
+      console.log(req.file.path);
+      FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ProfilePhotoPath:req.file.path },function (error, success) 
+      {
+        if (error) 
+        {
+        console.log(error);
+        } 
+        else {
+        res.send({message:"success"})
+        }
+    });
+  },
 }

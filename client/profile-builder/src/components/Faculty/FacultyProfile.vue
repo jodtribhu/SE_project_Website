@@ -3,9 +3,9 @@
      <user-header @messageFromUserHeader="UserHasChanged"></user-header>
      <div class="page">
          <div v-if="Object.keys(facultyProfile).length != 0 " >
+         <faculty-image  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyprofilephotolink="facultyprofilephotolink" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProfilePhoto="refreshTheContent"></faculty-image>
       <div class="background-field">
        <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-image" />
-        <img :src="require(`@/assets/picture.png`)"  alt="profile-picture" class="profile-picture" />
       </div>
       <div class="profile-info">
         <div class="buttonposition">
@@ -95,8 +95,9 @@ import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 import BaseCard from "../layout/BaseCard.vue";
 import FacultyLinks from "./FacultyLinks.vue";
 import FacultyPreference from "./FacultyPreference.vue";
+import FacultyImage from "./FacultyImage.vue";
 export default {
-  components: { BaseCard,FacultyLinks,FacultyPreference},
+  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage},
   data() {
     return {
       facultyId: "",
@@ -118,6 +119,10 @@ export default {
   },
 
   computed: {
+    facultyprofilephotolink(){
+       let facultyProfile = this.$store.getters["facultyprofile"];
+      return facultyProfile.ProfilePhotoPath;
+    },
     facultyProfilelinks(){
       let facultyProfile = this.$store.getters["facultyprofile"];
       return facultyProfile.links;
@@ -278,15 +283,7 @@ h3 {
    width: 4000px;
    height: 250px;
 }
-.profile-picture {
-  border-radius: 100%;
-  height: 180px;
-  width: 180px;
-  z-index: 1;
-  top: 120px;
-  left: 320px;
-  position: absolute;
-}
+
 .profile-info {
   margin: auto;
   height: 2%;
