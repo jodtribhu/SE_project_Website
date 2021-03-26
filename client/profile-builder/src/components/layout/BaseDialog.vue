@@ -2,7 +2,7 @@
   <teleport to="body">
     <div v-if="show" @click="tryClose" class="backdrop"></div>
     <transition name="dialog">
-      <dialog open v-if="show">
+      <dialog class="scroll" open v-if="show">
         <header>
           <slot name="header">
             <h2>{{ title }}</h2>
@@ -124,5 +124,31 @@ menu {
 .dialog-leave-from{
   opacity:1;
   transform:scale(1);
+}
+
+.scroll{
+  overflow-y: scroll;
+  max-height: 80%;
+}
+
+
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f100; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 </style>

@@ -269,7 +269,7 @@ input{
 
 .proj-start-date{
     position: absolute;
-    right: 30px;
+    right: 20px;
 }
 .proj-end-date{
     position: absolute;
