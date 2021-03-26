@@ -119,7 +119,7 @@ app.post('/fetchTheFacultyProfile',EachFacultyProfileFetchController.fetchEachFa
 app.post('/addFacultyBasicDetails',EachFacultyProfileFetchController.addFacultyBasicDetails);
 app.post('/addFacultyLinks',EachFacultyProfileFetchController.addFacultyLinks);
 app.post('/addFacultyPreferences',EachFacultyProfileFetchController.addFacultyPreferences);
-
+app.post('/addFacultyProject',EachFacultyProfileFetchController.addFacultyProject);
 
 
 

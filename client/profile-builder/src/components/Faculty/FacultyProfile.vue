@@ -26,7 +26,7 @@
       <h1>Hi Faculty {{ facultyId }}</h1>
       <h2>Is he logged in {{ isLoggedIn }}</h2>
     </base-card> -->
-
+    <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
 <!-- BuildProfile Card -->
 
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
@@ -96,8 +96,9 @@ import BaseCard from "../layout/BaseCard.vue";
 import FacultyLinks from "./FacultyLinks.vue";
 import FacultyPreference from "./FacultyPreference.vue";
 import FacultyImage from "./FacultyImage.vue";
+import FacultyProject from "./FacultyProject.vue";
 export default {
-  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage},
+  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject},
   data() {
     return {
       facultyId: "",
@@ -119,6 +120,10 @@ export default {
   },
 
   computed: {
+    facultyProjects(){
+      let facultyProfile = this.$store.getters["facultyprofile"];
+      return facultyProfile.projects;
+    },
     facultyprofilephotolink(){
        let facultyProfile = this.$store.getters["facultyprofile"];
       return facultyProfile.ProfilePhotoPath;

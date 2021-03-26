@@ -130,7 +130,7 @@ export default {
   width: 180px;
   z-index: 1;
   top: 120px;
-  left: 320px;
+  left: 360px;
   position: absolute;
 }
 .profile-picture-button {
@@ -141,7 +141,7 @@ export default {
     width: 40px;
     z-index: 1;
     top: 260px;
-    left: 450px;
+    left: 480px;
     position: absolute;
 }
 .dialogprofilebutton{

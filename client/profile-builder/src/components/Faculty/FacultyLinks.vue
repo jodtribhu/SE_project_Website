@@ -105,6 +105,7 @@ export default {
     padding: 0px 2px 12px 2px;
 }
 .card {
+     min-height: 90px;
   position: relative;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26);
@@ -180,6 +181,9 @@ a:hover {
 }
 h2{
     font-family: "Montserrat", sans-serif;
-    padding: 4% 4% 1% 4% ;
+     position: relative;
+    top:20px;
+    left:20px; 
+    padding-bottom: 20px;
 }
 </style>

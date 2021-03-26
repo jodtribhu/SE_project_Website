@@ -16,6 +16,9 @@ export default{
     },
     addFacultyProfilePhoto(credentials){
         return Api().post('uploadProfilePhoto',credentials);
+    },
+    addFacultyProject(credentials){
+        return Api().post('addFacultyProject',credentials);
     }
     
 }

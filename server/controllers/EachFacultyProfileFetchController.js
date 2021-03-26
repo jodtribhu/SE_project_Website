@@ -23,8 +23,24 @@ module.exports={
         }
     });
     },
-
-   
+    addFacultyProject(req,res){
+        var project = { projectName:req.body.projectName,
+            currentlyworking:req.body.currentlyworking,
+            startdate:req.body.startdate,
+            enddate:req.body.enddate,
+            contributers:req.body.contributers,
+            associated_with:req.body.associated_with,
+            project_url:req.body.project_url,
+            project_description:req.body.project_description
+         };
+        FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $push: { projects: project} },function (error, success) {
+            if (error) {
+            console.log(error);
+            } else {
+            res.send({message:"success"})
+        }
+    });
+    },
     addFacultyPreferences(req,res){
         var preferencelist = req.body.preference;
         console.log(preferencelist);
