@@ -55,3 +55,4 @@ WebApp V1.50->Header for users is fixed at top
 WebApp V1.51->Fixed images for users in faculty page
 WebApp V1.52->Developed form for adding new projects
 WebApp V1.53->Finished Building project module
+WebApp V1.54->Fixed Add profie dialog box spacing.
