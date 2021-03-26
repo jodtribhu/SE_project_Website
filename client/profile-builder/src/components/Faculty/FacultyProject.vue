@@ -46,11 +46,14 @@
         </div>
         </base-dialog>
         
-        <button class="projectadd" @click="addproject">+</button>
+        <button v-if="computedisUserLoggedIn" class="projectadd" @click="addproject">+</button>
         <h2>Projects</h2>
-        <div class="singleitems" v-for="facultyProject in facultyProjects" :key="facultyProject._id">
+        <div class="singleitems">
+            <div  v-for="facultyProject in facultyProjects" :key="facultyProject._id">
             <project-card :id="id" :facultyproject="facultyProject" ></project-card>
         </div>
+        </div>
+        
     </div>
 </template>
 
@@ -171,8 +174,8 @@ li{
     list-style: none;
 }
 .singleitems{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .para{
     min-height: 100px ;
@@ -188,7 +191,7 @@ li{
     margin-bottom: 4px;
 }
 h2{
-    font-family: "Montserrat", sans-serif;
+   font-family: 'Quicksand', sans-serif;
   position: relative;
     top:20px;
     left:20px;  

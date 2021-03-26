@@ -14,12 +14,12 @@
             <ul>
                 <li> 
                     <div class="container-items">
-                         <i class="fas fa-home"></i><router-link class="navigation-item" to="/home" >Home</router-link> <span class="sr-only"></span>
+                         <router-link class="navigation-item" to="/home" ><i class="fas fa-home"></i> Home</router-link> <span class="sr-only"></span>
                     </div> 
                 </li>
                 <li>
                     <div class="container-items">
-                        <i class="fas fa-globe"></i> <p class="navigation-item">Network</p>
+                         <p class="navigation-item"> <i class="fas fa-globe"></i> Network</p>
                     </div> 
                 </li>
                 <div class="container-login" v-if="!isLoggedIn">
@@ -97,9 +97,7 @@ export default {
 }
 </script>
 <style scoped>
-.logo{
- 
-}
+
 .fixed{
   position: fixed;
   width: 100%;
@@ -141,6 +139,7 @@ export default {
 }
 .fas{
     font-size: 1.4rem;
+    margin-bottom: 5px;
     margin-left: 2px;
 }
 
@@ -186,8 +185,12 @@ header a {
 }
 
 h1 {
+  font-family: 'Bebas Neue', cursive;
+
+  font-size:2rem;
+  border-color: black;
   margin: 0;
-  padding-bottom: 16px;
+  padding-bottom: 8px;
 }
 
 h1 a {
@@ -223,7 +226,7 @@ header ul {
 
 li {
      flex-basis: 10%;
-     padding:8px 2px 2px 2px;
+     padding:0px 2px 2px 2px;
 }
 
 .container-items
@@ -231,6 +234,8 @@ li {
     text-align: center;
 }
 .container-login{
+    font-weight: bold;
+    padding-top:10px;
     padding-bottom: 16px;
     padding-left: 2%;
 }

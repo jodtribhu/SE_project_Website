@@ -129,8 +129,8 @@ export default {
   height: 180px;
   width: 180px;
   z-index: 1;
-  top: 120px;
-  left: 360px;
+  top: 140px;
+  left: 300px;
   position: absolute;
 }
 .profile-picture-button {
@@ -140,8 +140,8 @@ export default {
     height: 40px;
     width: 40px;
     z-index: 1;
-    top: 260px;
-    left: 480px;
+    top: 280px;
+    left: 440px;
     position: absolute;
 }
 .dialogprofilebutton{

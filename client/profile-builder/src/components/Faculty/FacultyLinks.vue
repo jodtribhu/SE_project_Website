@@ -33,9 +33,19 @@
             <p class="eachlink" v-else-if="singlelink.link.includes('stackoverflow')">
                <i class="fab fa-stack-overflow"></i><a :href="singlelink.link">{{singlelink.link}}</a>
             </p>
+            <p class="eachlink" v-else-if="singlelink.link.includes('medium')">
+               <i class="fab fa-medium"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+            </p>
+            <p class="eachlink" v-else-if="singlelink.link.includes('reddit')">
+               <i class="fab fa-reddit-square"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+            </p>
+             <p class="eachlink" v-else-if="singlelink.link.includes('google')">
+               <i class="fab fa-google"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+            </p>
              <p class="eachlink" v-else>
                <i class="fas fa-external-link-alt"></i><a :href="singlelink.link">{{singlelink.link}}</a>
             </p>
+            
             
         </div>
      </div>
@@ -138,8 +148,9 @@ input{
     font-size: 0px;
 } */
 i{
-    font-size:30px;
-    padding: 2px 12px 2px 12px;
+
+    font-size:20px;
+    padding: 2px 12px 2px 30px;
 }
 a:link {
   color: black;
@@ -180,7 +191,7 @@ a:hover {
   border: none;
 }
 h2{
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Quicksand', sans-serif;
      position: relative;
     top:20px;
     left:20px; 

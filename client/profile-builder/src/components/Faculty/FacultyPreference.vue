@@ -138,7 +138,7 @@ export default {
   border-color: #270041;
 }
 h2{
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Quicksand', sans-serif;
     position: relative;
     top:20px;
     left:20px; 

@@ -25,7 +25,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

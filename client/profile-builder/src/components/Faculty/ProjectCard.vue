@@ -98,7 +98,7 @@ export default {
 }
 .pname{
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem ;
+    font-size: 1.2rem ;
     font-weight: 500;
 }
 .cworking{
@@ -112,7 +112,7 @@ export default {
 }
 .date{
     font-family: 'Montserrat', sans-serif;
-    font-size: 1rem ;
+    font-size: 0.8rem ;
     font-weight: 400;
  
 }
@@ -136,10 +136,10 @@ export default {
    
 }
 .pdesc{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Work Sans', sans-serif;
     padding-top: 4%;
     padding-bottom: 4%;
-    font-size: 1.2rem ;
+    font-size: 1rem ;
     font-weight: 400;
 }
 li{
