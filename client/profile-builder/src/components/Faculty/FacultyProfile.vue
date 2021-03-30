@@ -27,8 +27,10 @@
       <h2>Is he logged in {{ isLoggedIn }}</h2>
     </base-card> -->
     <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
+    <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
+   
 <!-- BuildProfile Card -->
-
+  
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
       <h2 >Build Profile</h2>
       <div class="flex-container">
@@ -97,8 +99,9 @@ import FacultyLinks from "./FacultyLinks.vue";
 import FacultyPreference from "./FacultyPreference.vue";
 import FacultyImage from "./FacultyImage.vue";
 import FacultyProject from "./FacultyProject.vue";
+import FacultyPublications from "./FacultyPublications.vue";
 export default {
-  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject},
+  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications},
   data() {
     return {
       facultyId: "",
@@ -120,6 +123,10 @@ export default {
   },
 
   computed: {
+    facultyPublications(){
+      let facultyProfile = this.$store.getters["facultyprofile"];
+      return facultyProfile.publications;
+    },
     facultyProjects(){
       let facultyProfile = this.$store.getters["facultyprofile"];
       return facultyProfile.projects;

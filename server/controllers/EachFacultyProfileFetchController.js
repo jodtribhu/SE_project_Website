@@ -87,4 +87,14 @@ module.exports={
         }
     });
   },
+  addFacultyPublication(req,res){
+    FacultyProfile.findOneAndUpdate({ _id: req.body.id },
+        { $push: { publications: {publicationName:req.body.publicationname,link:req.body.link,startdate:req.body.startdate,enddate:req.body.enddate}} },function (error, success) {
+        if (error) {
+        console.log(error);
+        } else {
+        res.send({message:"success"})
+    }
+});
+  }
 }

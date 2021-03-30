@@ -19,6 +19,9 @@ export default{
     },
     addFacultyProject(credentials){
         return Api().post('addFacultyProject',credentials);
-    }
+    },
+    addFacultyPublications(credentials){
+        return Api().post('addFacultyPublication',credentials);
+    },
     
 }

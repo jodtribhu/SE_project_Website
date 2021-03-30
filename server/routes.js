@@ -120,7 +120,7 @@ app.post('/addFacultyBasicDetails',EachFacultyProfileFetchController.addFacultyB
 app.post('/addFacultyLinks',EachFacultyProfileFetchController.addFacultyLinks);
 app.post('/addFacultyPreferences',EachFacultyProfileFetchController.addFacultyPreferences);
 app.post('/addFacultyProject',EachFacultyProfileFetchController.addFacultyProject);
-
+app.post('/addFacultyPublication',EachFacultyProfileFetchController.addFacultyPublication);
 
 
 

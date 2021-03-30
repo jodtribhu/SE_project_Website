@@ -11,6 +11,12 @@ const ProjectSchema = new mongoose.Schema({
      project_url:String,
      project_description:String
     });
+const PublicationSchema=new mongoose.Schema({
+    publicationName: String ,
+    startdate:Date,
+    enddate:Date,
+    link: String 
+   });
 const FacultyProfileSchema=new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -41,6 +47,7 @@ const FacultyProfileSchema=new mongoose.Schema({
         required:[true,"Description has not been entered"]
     },
     links:[LinkSchema],
+    publications:[PublicationSchema],
     projects:[ProjectSchema],
     preferences:{
         type:Array
