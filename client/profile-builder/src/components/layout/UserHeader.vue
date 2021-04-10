@@ -3,15 +3,12 @@
         <header class="background" >
         <nav>
             <h1>
-                <router-link to="/"> Profile Builder</router-link>
-               
+                <router-link to="/"> Profile Builder</router-link> 
             </h1>
-             <div class="search-bar">
-                    
-                    <span><i class="fas fa-search"></i> <input type="search" autoComplete="on" :list="allFacultyProfiles" v-model="search" class="search" placeholder="Search" ></span>
-                    
+             <div class="search-bar">     
+                    <span><input type="text" autoComplete="on" :list="allFacultyProfiles" v-model="search" class="search" placeholder="Search" ><i class="fas fa-search"></i> </span>
             </div>
-            <ul>
+            <ul class="navigation-items">
                 <li> 
                     <div class="container-items">
                          <router-link class="navigation-item" to="/home" ><i class="fas fa-home"></i> Home</router-link> <span class="sr-only"></span>
@@ -33,9 +30,14 @@
             </ul>
         </nav>
     </header>
-    <ul class="SelectItems">
-      <li   v-on:click="goToSearch($event)" class="SelectListItems" v-for="facultyprofile in allFacultyProfiles" :id="facultyprofile._id" :key="facultyprofile._id">{{facultyprofile.FirstName}}  {{facultyprofile.LastName}} </li>
-    </ul>
+    <div class="makeflex">
+      <ul class="SelectItems">
+      <li   v-on:click="goToSearch($event)" class="SelectListItems" v-for="facultyprofile in allFacultyProfiles" :id="facultyprofile._id" :key="facultyprofile._id" >
+        <p class="imagePreviewWrapper" :style="{ 'background-image': `url(${link(facultyprofile.ProfilePhotoPath)})` }" ></p>
+        <p class="searcht">{{facultyprofile.FirstName}}  {{facultyprofile.LastName}}</p> </li>
+      </ul>
+    </div>
+   
     
    </div>
 </template>
@@ -72,6 +74,13 @@ export default {
         },
   },
   methods:{
+    link(thelink){
+      console.log("the link"+thelink);
+      if(thelink==null){
+        return "http://localhost:8081/upload/"+"default.png";
+      }
+      return "http://localhost:8081/upload/"+thelink.replace(/^.*[\\]/, '');
+    },
     async goToSearch(event){
      
       await this.$router.push("/faculties/"+event.currentTarget.id);
@@ -97,30 +106,49 @@ export default {
 }
 </script>
 <style scoped>
-
+.searcht{
+  padding-left: 10%;
+ 
+}
+.imagePreviewWrapper {
+    float: left;
+   border-radius: 100%;
+    height: 35px;
+    width: 35px;
+    margin: 8px 8px 8px 8px;
+    background-size: cover;
+    background-position: center center;
+   
+}
+.makeflex{
+ 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .fixed{
   position: fixed;
   width: 100%;
   top:0;
   left:0;
   z-index: 100;
+  display: flex;
+  /* background-color: aqua; */
 }
 .SelectItems{
   position: relative;
-  left: 21%;
-  max-width: 30%;
+  
+  width: 36%;
   margin-top: 3.6%;
    list-style-type: none;
-   
   z-index:9999;
 }
 .SelectListItems{
    font-family: 'Montserrat', sans-serif;
   border-radius: 5px;
-  padding-left: 2px;
+
   box-shadow: rgb(99, 97, 96);
-  margin-top:0.5px;
-  padding: 8px 2px 8px 8px;
+  padding: 8px 2px 2px 8px;
   
   border-bottom: 4px solid rgb(145, 137, 137);
   background-color: white;
@@ -134,7 +162,7 @@ export default {
     top: 0;
     width: 100%;
     left: 0;
-    
+    display: flex;
     background-color: whitesmoke
 }
 .fas{
@@ -149,8 +177,30 @@ export default {
     
 }
 .search {
-   height: 30px;
-    width: 400px;    
+   height: 35px;
+    width: 25rem;    
+    border-radius: 100px;
+    border: none;
+    transition: all 0.2s;
+    margin-right:-2rem;
+    padding-left: 15px;
+    -webkit-appearance: none;
+}
+
+.search:focus {
+    outline:none;
+    height: 35px;
+    width: 26rem;    
+    border-radius: 100px;
+    border: none;
+    margin-right:-2rem;
+}
+
+.search::placeholder{
+  padding-left:5%;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+
 }
 .search-bar{
     
@@ -169,18 +219,14 @@ header {
   
   width: 100%;
   height: 4rem;
-  display: flex;
- 
-  font-family: 'Montserrat', sans-serif;
-  justify-content: center;
-  align-items: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 header a {
   text-decoration: none;
   color: #fb743e;
   display: inline-block;
-  padding: 0.75rem 0.5rem;
+  padding: 0.75rem 1rem;
   border: 1px solid transparent;
 }
 
@@ -209,35 +255,35 @@ header nav {
   width: 100%;
   margin: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 header ul {
-  
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  width: 40%;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: center;
 }
 
 li {
      flex-basis: 10%;
-     padding:0px 2px 2px 2px;
+     
 }
 
 .container-items
 {
+   
     text-align: center;
 }
 .container-login{
+
     font-weight: bold;
     padding-top:10px;
     padding-bottom: 16px;
-    padding-left: 2%;
+    
 }
 </style>
 

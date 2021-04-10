@@ -51,3 +51,5 @@ WebApp V1.55->Corrected the size of the dialog box
 WebApp V1.56->Fixed the styles and spacing in faculty profile and User Header
 WebApp V1.57->Finished The Publications for Faculty
 WebApp V1.58->Tried out Testing
+////////////////////////// SPRINT 2 /////////////////////////////////////
+WebApp V2.1->Updated the navbar with new search and profile photo
