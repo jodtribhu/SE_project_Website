@@ -45,7 +45,7 @@ module.exports={
         var preferencelist = req.body.preference;
         console.log(preferencelist);
         console.log(req.body.id );
-        FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $addToSet:{'preferences': req.body.preference}},function (error, success) {
+        FacultyProfile.findOneAndUpdate({ _id: req.body.id },{'preferences': req.body.preference},function (error, success) {
             if (error) {
             console.log(error);
             } else {

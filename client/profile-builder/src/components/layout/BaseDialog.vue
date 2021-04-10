@@ -2,12 +2,13 @@
   <teleport to="body">
     <div v-if="show" @click="tryClose" class="backdrop"></div>
     <transition name="dialog">
-      <dialog class="scroll" open v-if="show">
+      <dialog open v-if="show">
         <header>
           <slot name="header">
             <h2>{{ title }}</h2>
           </slot>
         </header>
+        <div class="scroll">
         <section>
           <slot></slot>
         </section>
@@ -15,7 +16,9 @@
           <slot name="actions">
             <a @click="tryClose">Close</a>
           </slot>
-        </menu>
+        </menu>          
+        </div>
+
       </dialog>
     </transition>
   </teleport>
@@ -69,6 +72,8 @@ dialog {
   top: 10vh;
   left: 10%;
   width: 80%;
+  
+  
   z-index: 100;
   border-radius: 12px;
   border: none;
@@ -127,8 +132,8 @@ menu {
 }
 
 .scroll{
-  overflow-y: scroll;
-  max-height: 80%;
+  overflow: auto;
+  max-height:70vh;
 }
 
 

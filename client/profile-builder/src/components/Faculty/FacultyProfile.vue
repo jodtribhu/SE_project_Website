@@ -3,23 +3,26 @@
      <user-header @messageFromUserHeader="UserHasChanged"></user-header>
      <div class="page">
          <div v-if="Object.keys(facultyProfile).length != 0 " >
-         <faculty-image  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyprofilephotolink="facultyprofilephotolink" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProfilePhoto="refreshTheContent"></faculty-image>
-      <div class="background-field">
-       <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-image" />
-      </div>
-      <div class="profile-info">
-        <div class="buttonposition">
-          <button href="#"  v-if="computedisUserLoggedIn" class="myButton">Edit Profile</button>
-        </div>
+         
+         
+            <div class="background-field">
+              <faculty-image  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyprofilephotolink="facultyprofilephotolink" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProfilePhoto="refreshTheContent"></faculty-image>
+              <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-image" />
+            </div>
+            <div class="profile-info">
+              <div class="buttonposition">
+                <button href="#"  v-if="computedisUserLoggedIn" class="myButton">Edit Profile</button>
+              </div>
         
-        <h2 class="profile-name">{{facultyProfile.FirstName}} {{facultyProfile.LastName}}</h2>
-        <h3 class="profile-intro">{{facultyProfile.Description}}</h3>
-        <div class="detailsstyle">
-          <h3 class="profile-details"><i class="fas fa-map-marker-alt"></i> {{facultyProfile.Address}}</h3>
-        <h3 class="profile-details"><i class="fas fa-phone-alt"></i>{{facultyProfile.PhoneNo}}</h3>
-        </div>
-      </div>
-    </div>
+              <h2 class="profile-name">{{facultyProfile.FirstName}} {{facultyProfile.LastName}}</h2>
+              <h3 class="profile-intro">{{facultyProfile.Description}}</h3>
+              <div class="detailsstyle">
+                <h3 class="profile-details"><i class="fas fa-map-marker-alt"></i> {{facultyProfile.Address}}</h3>
+                <h3 class="profile-details"><i class="fas fa-phone-alt"></i>{{facultyProfile.PhoneNo}}</h3>
+              </div>
+             </div>
+             
+          </div>
      <faculty-links  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilelinks="facultyProfilelinks" :computedisUserLoggedIn="computedisUserLoggedIn" @addedALink="refreshTheContent" ></faculty-links>
     <faculty-preference v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilePreferences="facultyProfilePreferences" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPreference="refreshTheContent"></faculty-preference>
     <!-- <base-card v-if="Object.keys(facultyProfile).length != 0">
@@ -230,6 +233,7 @@ export default {
 </script>
 
 <style scoped>
+
 .buttonposition{
   position: relative;
 }

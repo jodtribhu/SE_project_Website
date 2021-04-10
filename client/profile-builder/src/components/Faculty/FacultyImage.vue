@@ -124,14 +124,14 @@ export default {
    display: block;
    background-size: cover;
     background-position: center center;
-     margin: 0 auto 30px;
+     margin: 0 30px 30px 30px;
   border-radius: 100%;
   height: 180px;
   width: 180px;
   z-index: 1;
-  top: 140px;
-  left: 300px;
   position: absolute;
+
+ 
 }
 .profile-picture-button {
     background-color: rgb(121, 116, 116);
@@ -140,8 +140,8 @@ export default {
     height: 40px;
     width: 40px;
     z-index: 1;
-    top: 280px;
-    left: 440px;
+    top: 260px;
+    left: 460px;
     position: absolute;
 }
 .dialogprofilebutton{

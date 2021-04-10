@@ -3,17 +3,17 @@
      <base-dialog :show=showDialog class="dialogbox" title="Select Preferences" @close="opencloseDialog">
             <div>
                 <h3>Selected preferences</h3>
-                 <button class="selectedtags" v-for="preference in selectedpreferences" :key="preference" >{{preference}}</button>
+                 <button  @click="removefromselectedpreferences(preference2)" class="selectedtags" v-for="preference2 in AlreadyPreferences()" :key="preference2" >{{preference2}}</button>
             </div>
             <div>
                 <h3>Available preferences</h3>
                  <button @click="addtoselectedpreferences(preference)" class="tags" v-for="preference in Availablepreferences" :key="preference" >{{preference}}</button>
             </div>
-           <button class="dialogpreferencebutton"  @click="addNewPreference"> Add</button>
+           <button class="dialogpreferencebutton"  @click="addNewPreference"> &#10003;</button>
       
      </base-dialog>
      <h2>Preferences</h2>
-      <button  v-if="computedisUserLoggedIn && Availablepreferences.length!=0" class="linkbutton" @click="opencloseDialog">Select Preferences</button>
+      <button  v-if="computedisUserLoggedIn " class="linkbutton" @click="opencloseDialog">Select Preferences</button>
       <div class="center">
            <button class="displayedtags" v-for="preference in facultyProfilePreferences" :key="preference" >{{preference}}</button>
       </div>
@@ -32,15 +32,21 @@ export default {
             error:""
         }
     },
-     
+
     computed:{
+        
         Availablepreferences(){
-            var difference = this.preferences.filter(x => this.facultyProfilePreferences.indexOf(x) === -1);
+            var difference = this.preferences.filter(x => this.selectedpreferences.indexOf(x) === -1);
             return difference
         }
     },
     methods:{
+        AlreadyPreferences(){
+            return  this.selectedpreferences;
+        },
         async addNewPreference(){
+            console.log("inside add");
+            console.log(this.selectedpreferences);
             if(this.selectedpreferences.length==0){
                 this.showDialog=true; 
                 this.error="Input has not been entered"
@@ -65,11 +71,21 @@ export default {
         
             this.showDialog=!this.showDialog;
             this.link="";
-            this.selectedpreferences=[];
+            var difference = this.preferences.filter(x => this.facultyProfilePreferences.indexOf(x) != -1);
+            this.selectedpreferences=difference
            
         },
         addtoselectedpreferences(preference){
-            this.selectedpreferences.push(preference)
+            this.selectedpreferences.push(preference);
+        },
+        removefromselectedpreferences(preference){
+            console.log(preference);
+            console.log(this.selectedpreferences);
+            var index = this.selectedpreferences.indexOf(preference);
+            if (index !== -1) {
+            this.selectedpreferences.splice(index, 1);
+            }
+            console.log(this.selectedpreferences);
         }
         
     }
@@ -104,7 +120,7 @@ export default {
 }
 .dialogpreferencebutton{
       text-align:center;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1rem;
   font-family: 'Montserrat', sans-serif;
   background-color: #271d57;
   border: 1px solid #3a0061;
@@ -112,8 +128,9 @@ export default {
   cursor: pointer;
   border-radius: 10px;
   position:absolute; 
-    bottom:20px;
-   left:20px
+    bottom:10px;
+   left:20px;
+  
 }
 .dialogbox{
      font-family: 'Montserrat', sans-serif;
