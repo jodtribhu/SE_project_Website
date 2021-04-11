@@ -1,6 +1,6 @@
 <template>
   <div class="fullpage">
-     <user-header @messageFromUserHeader="UserHasChanged"></user-header>
+     <user-header   @messageFromUserHeader="UserHasChanged"></user-header>
      <div class="page">
          <div v-if="Object.keys(facultyProfile).length != 0 " >
          
@@ -120,12 +120,13 @@ export default {
   },
   created() {
     this.facultyId = this.$route.params.id;
- 
+
     this.loadfacultyprofile();
    
   },
 
   computed: {
+
     facultyPublications(){
       let facultyProfile = this.$store.getters["facultyprofile"];
       return facultyProfile.publications;
@@ -212,6 +213,7 @@ export default {
         }
         
     },
+
     async loadfacultyprofile() {
       try {
        await this.$store.dispatch("loadallfacultyprofiles");

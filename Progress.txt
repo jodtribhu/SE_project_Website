@@ -63,3 +63,4 @@ WebApp V1.58->Tried out Testing
 ////////////////////////// SPRINT 2 /////////////////////////////////////
 WebApp V2.1->Updated the navbar with new search and profile photo
 WebApp V2.2->Finished the Edit Preferences Setting Fixed Some bugs related to screen size
+WebApp V2.3->Finished the navbar with profile phot to navigate to his /her own profile
