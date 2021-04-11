@@ -89,7 +89,7 @@ export default {
 
           var facultyprofile_photo=profiles.find(item => item._id ===user_id );
           var filename;
-          if(facultyprofile_photo==null){
+          if(facultyprofile_photo.ProfilePhotoPath==null){
             filename= "default.png"
           }
           else{
