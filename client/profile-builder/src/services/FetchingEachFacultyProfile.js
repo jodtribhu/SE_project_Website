@@ -23,5 +23,8 @@ export default{
     addFacultyPublications(credentials){
         return Api().post('addFacultyPublication',credentials);
     },
+    editFacultyLinks(credentials){
+        return Api().post('editFacultyLinks',credentials);
+    }
     
 }

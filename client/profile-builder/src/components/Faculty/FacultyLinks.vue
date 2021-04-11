@@ -6,7 +6,8 @@
             <label class="dialogbox" for="url">Enter the link:  </label>
             <input v-model="link" type="text" name="link">
             <span class="space">
-                <button class="dialoglinkbutton" @click="addnewLink"> Add</button>
+                <button class="dialoglinkbutton" @click="addnewLink" v-if="!doedit"> Add</button>
+                <button class="dialoglinkbutton" @click="addnewLink" v-if="doedit"> Edit</button>
             </span>
             <p class="error" v-if="error">{{error}}</p>
         </div> 
@@ -16,34 +17,44 @@
       <div class="linkspadding">
         <div  class="divpadding" v-for="singlelink in facultyProfilelinks" :key="singlelink._id">
             <p class="eachlink" v-if="singlelink.link.includes('linkedin')">
-                <i class="fab fa-linkedin"></i> <a :href="singlelink.link">{{singlelink.link}}</a>
+                <i class="fab fa-linkedin"></i> <a :href="singlelink.link">{{singlelink.link}} </a>
+                <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
             <p class="eachlink" v-else-if="singlelink.link.includes('github')">
-                <i class="fab fa-github-square"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+                <i class="fab fa-github-square"></i><a :href="singlelink.link">{{singlelink.link}} </a>
+                <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
             <p class="eachlink" v-else-if="singlelink.link.includes('facebook')">
                 <i class="fab fa-facebook-square"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+                <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
              <p class="eachlink" v-else-if="singlelink.link.includes('instagram')">
                <i class="fab fa-instagram-square"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+               <i  v-if="computedisUserLoggedIn"  @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
             <p class="eachlink" v-else-if="singlelink.link.includes('twitter')">
                <i class="fab fa-twitter-square"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+               <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
             <p class="eachlink" v-else-if="singlelink.link.includes('stackoverflow')">
                <i class="fab fa-stack-overflow"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+               <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
             <p class="eachlink" v-else-if="singlelink.link.includes('medium')">
                <i class="fab fa-medium"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+               <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
             <p class="eachlink" v-else-if="singlelink.link.includes('reddit')">
                <i class="fab fa-reddit-square"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+               <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
              <p class="eachlink" v-else-if="singlelink.link.includes('google')">
                <i class="fab fa-google"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+               <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
              <p class="eachlink" v-else>
                <i class="fas fa-external-link-alt"></i><a :href="singlelink.link">{{singlelink.link}}</a>
+               <i  v-if="computedisUserLoggedIn" @click="edit(singlelink)" class="far fa-edit"></i>
             </p>
             
             
@@ -60,7 +71,9 @@ export default {
         return{
             showDialog:false,
             link:"",
-            error:""
+            error:"",
+            doedit:false,
+            linkid:"",
         }
     },
     methods:{
@@ -69,13 +82,19 @@ export default {
             this.link="";
             this.error="";
         },
+        edit(link){
+            this.showDialog=!this.showDialog;
+            this.link=link.link;
+            this.doedit=true;
+            this.linkid=link._id;
+        },
         async addnewLink(){
             if(this.link==""){
                 this.showDialog=true; 
                 this.error="Input has not been entered"
             }
-            else{
-                 this.showDialog=false;
+            else if(this.doedit!=true){
+                this.showDialog=false;
                 try {
                     const response=await FetchingEachFacultyProfile.addFacultyLinks({id:this.id,link:this.link});
                     if(response.data.message==="success"){
@@ -88,6 +107,22 @@ export default {
                      this.error=error;
                     this.error=error.response.data.error;
                 }
+            }
+            else if(this.doedit===true){
+                      this.showDialog=false;
+                try {
+                    const response=await FetchingEachFacultyProfile.editFacultyLinks({id:this.id,linkid:this.linkid,link:this.link});
+                    if(response.data.message==="success"){
+                        this.$emit('addedALink')
+                        this.link=""
+                         this.error=""
+                    }
+                } catch (error) {
+                    console.log(error);
+                     this.error=error;
+                    this.error=error.response.data.error;
+                }
+                this.doedit=false;
             }
            
          

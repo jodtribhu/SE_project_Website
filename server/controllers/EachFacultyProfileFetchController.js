@@ -95,6 +95,23 @@ module.exports={
         } else {
         res.send({message:"success"})
     }
-});
-  }
+    });
+  },
+
+//Editing
+editFacultyLinks(req,res){
+        console.log("Id" +req.body.id);
+        console.log("link" +req.body.link);
+        console.log("link" +req.body.linkid);
+        FacultyProfile.updateOne({'links._id':req.body.linkid},
+            {'$set': {
+                'links.$.link': req.body.link,}},function(err,model) {
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.send({message:"success"})
+                }
+        });
+    }
 }

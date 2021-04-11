@@ -121,7 +121,7 @@ app.post('/addFacultyLinks',EachFacultyProfileFetchController.addFacultyLinks);
 app.post('/addFacultyPreferences',EachFacultyProfileFetchController.addFacultyPreferences);
 app.post('/addFacultyProject',EachFacultyProfileFetchController.addFacultyProject);
 app.post('/addFacultyPublication',EachFacultyProfileFetchController.addFacultyPublication);
-
+app.post('/editFacultyLinks',EachFacultyProfileFetchController.editFacultyLinks);
 
 
 
