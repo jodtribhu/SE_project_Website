@@ -83,10 +83,18 @@ export default {
       var fileloc="";
       var user_id=this.$store.getters.idofuserloggedIn;
       var profiles=this.allPhotoProfiles;
+      
       if(user_id!=null && profiles.length!=0)
       {
+
           var facultyprofile_photo=profiles.find(item => item._id ===user_id );
-          var filename = facultyprofile_photo.ProfilePhotoPath.replace(/^.*[\\]/, '');
+          var filename;
+          if(facultyprofile_photo==null){
+            filename= "default.png"
+          }
+          else{
+            filename = facultyprofile_photo.ProfilePhotoPath.replace(/^.*[\\]/, '');
+          }
           fileloc="http://localhost:8081/upload/"+filename;
       }
       else
