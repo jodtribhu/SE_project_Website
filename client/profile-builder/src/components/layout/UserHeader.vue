@@ -20,8 +20,9 @@
                     </div> 
                 </li>
                 <li>
-                    <div class="container-items">
-                         <p class="navigation-item"> <i class="fas fa-globe"></i> Network</p>
+                    <div class="container-items" v-if="isLoggedIn">
+                      <router-link class="navigation-item" :to=statsRoute ><i class="fas fa-globe"></i> Stats</router-link> <span class="sr-only"></span>
+                        
                     </div> 
                 </li>
                 <div class="container-login" v-if="!isLoggedIn">
@@ -54,6 +55,10 @@ export default {
     }
   },
    computed:{
+     statsRoute(){
+       console.log("the route "+this.$route);
+       return "/faculties/"+this.$store.getters.idofuserloggedIn +"/stats"
+     },
     isLoggedIn(){
       return this.$store.getters.isUserLoggedIn;
     },

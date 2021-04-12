@@ -11,6 +11,7 @@ import TheHeader from './components/layout/TheHeader.vue';
 import UserHeader from './components/layout/UserHeader.vue';
 
 import ProjectCard from './components/Faculty/ProjectCard.vue';
+import VueApexCharts from "vue3-apexcharts";
 
 const app=createApp(App);
 app.component('base-card',BaseCard);
@@ -20,7 +21,7 @@ app.component('admin-sidebar',AdminSidebar);
 app.component('the-header',TheHeader);
 app.component('user-header',UserHeader);
 app.component('project-card',ProjectCard);
-
+app.use(VueApexCharts);
 app.use(router);
 app.use(store);
 

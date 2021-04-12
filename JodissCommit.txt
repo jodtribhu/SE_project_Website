@@ -57,3 +57,4 @@ WebApp V2.2->Finished the Edit Preferences Setting Fixed Some bugs related to sc
 WebApp V2.3->Finished the navbar with profile photo to navigate to his /her own profile
 WebApp V2.4->Finished the Edit Links Part.
 WebApp V2.6->Fixed the bug of the profile photo
+WebApp V2.7->Created the stats Page which shows Profile Visits

@@ -217,6 +217,7 @@ export default {
     async loadfacultyprofile() {
       try {
        await this.$store.dispatch("loadallfacultyprofiles");
+      
        const response =await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
        
         if(Object.keys(response).length === 0 && !this.isUserLoggedIn())
