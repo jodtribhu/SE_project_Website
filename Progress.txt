@@ -68,3 +68,4 @@ WebApp V2.4->Finished the Edit Links Part.
 WebApp V2.5->Navbar profile pic issue detected.
 WebApp V2.6->Fixed the bug of the profile photo
 WebApp V2.7->Created the stats Page which shows Profile Visits
+WebApp V2.8->Finished the stats Page

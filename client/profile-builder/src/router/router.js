@@ -63,6 +63,12 @@ router.beforeEach(async function(to,_,next){
     else if(to.meta.requiresAuthorization && !store.getters.isAuthenticated){
         next('/NotFound');
     }
+    else if(to.meta.requiresAuthorization && store.getters.isAuthenticated){
+        await store.dispatch("loadthefacultyprofile",{id:to.params.id});
+       
+        next();
+    }
+
     else
     {
         // console.log("Inside else next");
