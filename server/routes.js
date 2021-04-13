@@ -122,7 +122,7 @@ app.post('/addFacultyPreferences',EachFacultyProfileFetchController.addFacultyPr
 app.post('/addFacultyProject',EachFacultyProfileFetchController.addFacultyProject);
 app.post('/addFacultyPublication',EachFacultyProfileFetchController.addFacultyPublication);
 app.post('/editFacultyLinks',EachFacultyProfileFetchController.editFacultyLinks);
-
+app.post('/addPublicationCount',EachFacultyProfileFetchController.addPublicationCount);
 
 
 app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );

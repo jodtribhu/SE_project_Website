@@ -184,5 +184,11 @@ const FacultyProfileSchema=new mongoose.Schema({
     fDecember:{
         type:Number
     },
+    npublicationCount:{
+        type:Number  
+    },
+    fpublicationCount:{
+        type:Number
+    },
 })
 module.exports=mongoose.model("FacultyProfile",FacultyProfileSchema);

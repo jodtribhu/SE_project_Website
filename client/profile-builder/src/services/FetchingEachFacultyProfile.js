@@ -25,6 +25,9 @@ export default{
     },
     editFacultyLinks(credentials){
         return Api().post('editFacultyLinks',credentials);
+    },
+    addPublicationCount(credentials){
+        return Api().post('addPublicationCount',credentials);
     }
     
 }

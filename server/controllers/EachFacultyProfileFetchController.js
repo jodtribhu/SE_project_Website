@@ -2,6 +2,22 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
 const FacultyProfile=require('../models/FacultyProfile');
 module.exports={
+    addPublicationCount(req,res){
+        if(req.body.loggedInId!=null){
+            if(req.body.loggedInId!=req.body.id){
+                FacultyProfile.findByIdAndUpdate({_id:req.body.id},{'$inc': {'fpublicationCount':1}},{new:true})
+                .then((data)=>console.log("updated"))
+                .catch((err)=> console.log(err))
+            }
+        }
+        else
+        {           
+            FacultyProfile.findByIdAndUpdate({_id:req.body.id},{'$inc': {'npublicationCount':1}},{new:true})
+            .then((data)=>console.log("updated"))
+            .catch((err)=> console.log(err))
+
+        }        
+    },
     fetchEachFacultyProfile(req,res){
         FacultyProfile.findOne({_id:req.body.id}, function(err, facultyProfile){
             if (err){

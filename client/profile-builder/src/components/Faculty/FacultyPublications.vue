@@ -30,7 +30,7 @@
      <button v-if="computedisUserLoggedIn" class="publicationbutton" @click="opencloseDialog">Add a new Publication</button>
      <div class="publicationPadding">
         <div  v-for="singlePublication in facultyPublications" :key="singlePublication._id">
-            <p class="ptitle"><a :href="singlePublication.link">{{singlePublication.publicationName}}</a></p>
+            <p class="ptitle"><a @click="addViewCount(singlePublication._id)" :href="singlePublication.link">{{singlePublication.publicationName}}</a></p>
             <p class="pdate">{{startDate(singlePublication.startdate)}} to {{endDate(singlePublication.enddate)}}</p>  
               <hr>
         </div>
@@ -78,6 +78,10 @@ export default {
             this.link="";
             this.error="";
         },
+        async addViewCount(publ_id){
+             var loggedinUser=localStorage.getItem('userId');
+             await FetchingEachFacultyProfile.addPublicationCount({id:this.$route.params.id,publicatio_id:publ_id,loggedInId:loggedinUser});
+        },
         async addnewPublication(){
             if(this.link==""){
                 this.showDialog=true; 
@@ -108,13 +112,15 @@ export default {
 
 <style scoped>
 .pdate{
+    padding: 0;
     text-decoration: None;
     font-size: 0.9rem;
     margin:0;
 }
 .ptitle{
+ 
     font-size: 1.2rem;
-    line-height: 0;
+    /* line-height: 0; */
 }
 .publicationPadding{
     padding-top:8px;

@@ -3,6 +3,7 @@
         <user-header></user-header>
 
         <div  class=" stats">
+            <h1 class="h3_heading">STASTICS</h1>
             <div class="center">
                  <div class="container">
                         <div class="container-items"><p class="block">{{facultyProfileOne.fvisits}} </p> <p class="block"> Faculty Visits</p> </div>
@@ -66,6 +67,24 @@
 
                 </div>
           </div>
+            <div class="center">
+                 <div class="container">
+                        <div class="container-items"><p class="block">{{facultyProfileOne.fpublicationCount}} </p> <p class="block"> Faculty Publication Visits</p> </div>
+                        <div class="container-items"><p class="block">{{facultyProfileOne.npublicationCount}} </p><p class="block"> Other Publication Visits</p></div>
+                        <div class="container-items"><p class="block">{{facultyProfileOne.fpublicationCount+facultyProfileOne.npublicationCount}} </p><p class="block"> Total Publication Visits</p> </div>
+                </div>            
+                <div class="pcard">
+                   <div class="outer_container">
+            
+                    <div class="centergraph">
+                        <h3 class="h3_heading">Publication View Count Ratio </h3>
+                        <apexchart width="380" type="donut" :options="publicationchartOptions" :series="publicationseries"></apexchart>
+                    </div>
+                   </div>
+
+
+                </div>
+            </div>          
             
         </div>
        
@@ -165,7 +184,17 @@ export default {
                         },
                        labels:['Faculty Visits','Others']
                         },
-            dseries: [this.views('fvisits'), this.ViewsEachMonth('tcount')],                    
+            dseries: [this.views('fvisits'), this.ViewsEachMonth('tcount')],   
+            publicationchartOptions: {
+                       chart: {fontFamily: 'Montserrat, sans-serif'},
+                       colors:['#e76f51', '#e9c46a'],
+                       dataLabels: {
+                             style: {
+                                colors: ['#e6e6e6',] }
+                        },
+                       labels:['Faculty Visits','Others']
+                        },
+            publicationseries: [this.views('npublicationCount'), this.ViewsEachMonth('fpublicationCount')],                 
         };
   },
 
@@ -185,7 +214,7 @@ export default {
         },    
         ChangeTo(){
             this.week=!this.week;
-        }   , 
+        }, 
         views(person){
             var facultyProf=this.$store.getters["facultyprofile"];  
             if(facultyProf[person]==null){
@@ -194,7 +223,6 @@ export default {
             return facultyProf[person];
         },
          ViewsEachDay(day){
-           console.log("Before finished");
             var facultyProf=this.$store.getters["facultyprofile"]; 
             if(facultyProf[day]==null){
                 return 0;
@@ -269,7 +297,7 @@ export default {
     position: absolute;
     top: 85%;
     left: 50%;
-    transform: translate(-50%, -45%);
+    transform: translate(-50%, -38%);
     
 }
 .Month{
@@ -297,6 +325,17 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;
   margin: 0 auto;
+  background-color: #f6f6f6;
+  width: 60rem;
+  display: flex;
+  justify-content: center;
+}
+.pcard {
+  position: relative;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+  margin-bottom: 20px;
   background-color: #f6f6f6;
   width: 60rem;
   display: flex;
