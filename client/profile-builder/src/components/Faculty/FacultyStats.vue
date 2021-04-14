@@ -3,7 +3,7 @@
         <user-header></user-header>
 
         <div  class=" stats">
-            <h1 class="h3_heading">STASTICS</h1>
+            <h1 class="h3_heading">STATISTICS</h1>
             <div class="center">
                  <div class="container">
                         <div class="container-items"><p class="block">{{facultyProfileOne.fvisits}} </p> <p class="block"> Faculty Visits</p> </div>
@@ -25,7 +25,7 @@
             <div class="center">
                 <div class="card">
                     <div class="Week" v-if="week">
-                        <h2 class="card_heading">Week-Wise Stastics</h2>
+                        <h2 class="card_heading">Week-Wise Statistics</h2>
                         <div class="tab">
                             <button  type="button" @click="WeeklyTab()">Faculty View Counts</button>
                             <button type="button" @click="WeeklyTab()">Other View Counts</button>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div  v-if="!week" class="Month">
-                        <h2 class="card_heading">Month-Wise Stastics</h2>
+                        <h2 class="card_heading">Month-Wise Statistics</h2>
                         <div class="tab">
                             <button  type="button" @click="MonthTab()">Faculty View Counts</button>
                             <button type="button" @click="MonthTab()">Other View Counts</button>

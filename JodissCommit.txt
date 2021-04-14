@@ -60,3 +60,4 @@ WebApp V2.6->Fixed the bug of the profile photo
 WebApp V2.7->Created the stats Page which shows Profile Visits
 WebApp V2.8->Finished the stats Page
 WebApp V2.9->Finished the stats Page along with Publication Stats
+WebApp V2.10->Fixed the Spelling Error
