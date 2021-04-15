@@ -30,7 +30,7 @@
      <button v-if="computedisUserLoggedIn" class="publicationbutton" @click="opencloseDialog">Add a new Publication</button>
      <div class="publicationPadding">
         <div  v-for="singlePublication in facultyPublications" :key="singlePublication._id">
-            <p class="ptitle"><a @click="addViewCount(singlePublication._id)" :href="singlePublication.link">{{singlePublication.publicationName}}</a></p>
+            <p class="ptitle"><a @click="addViewCount(singlePublication._id)" :href="singlePublication.link">{{singlePublication.publicationName}}</a><i v-on:click="editpublication(singlePublication) " class=" edit fas fa-pen"></i></p>
             <p class="pdate">{{startDate(singlePublication.startdate)}} to {{endDate(singlePublication.enddate)}}</p>  
               <hr>
         </div>
@@ -50,7 +50,10 @@ export default {
             link:"",
             error:"",
             enddate:"",
-            startdate:""
+            doedit:false,
+            startdate:"",
+            publicationid:""
+            
         }
     },
     methods:{
@@ -77,6 +80,17 @@ export default {
             this.showDialog=!this.showDialog;
             this.link="";
             this.error="";
+            this.publicationid=""
+        },
+        editpublication(publication){
+            this.showDialog=!this.showDialog;
+             this.doedit=true;
+             this.pname=publication.publicationName;
+             this.link=publication.link;
+             this.publicationid=publication._id;
+             this.startdate=publication.startdate;
+             this.enddate=publication.enddate;
+
         },
         async addViewCount(publ_id){
              var loggedinUser=localStorage.getItem('userId');
@@ -89,20 +103,43 @@ export default {
             }
             else{
                  this.showDialog=false;
-                try {
-                    const response=await FetchingEachFacultyProfile.addFacultyPublications({id:this.id,publicationname:this.pname,link:this.link,startdate:this.startdate,enddate:this.enddate});
+                 if(this.doedit==true){
+                 try {
+                    const response=await FetchingEachFacultyProfile.editpublication({id:this.id,publicationId:this.publicationid,publicationname:this.pname,publicationlink:this.link,startdate:this.startdate,enddate:this.enddate});
                     if(response.data.message==="success"){
-                        this.$emit('addedAPublication')
-                        this.link=""
-                        this.enddate=""
-                        this.startdate=""
-                        this.error=""
+                            this.$emit('addedAPublication')
+                            this.link=""
+                            this.enddate=""
+                            this.startdate=""
+                            this.error=""
+                            this.publicationid=""
                     }
                 } catch (error) {
                     console.log(error);
                      this.error=error;
                     this.error=error.response.data.error;
                 }
+                this.doedit=false;                          
+
+                 }
+                 else{
+                    try {
+                        const response=await FetchingEachFacultyProfile.addFacultyPublications({id:this.id,publicationname:this.pname,link:this.link,startdate:this.startdate,enddate:this.enddate});
+                        if(response.data.message==="success"){
+                            this.$emit('addedAPublication')
+                            this.link=""
+                            this.enddate=""
+                            this.startdate=""
+                            this.error=""
+                            this.publicationid=""
+                        }
+                    } catch (error) {
+                        console.log(error);
+                        this.error=error;
+                        this.error=error.response.data.error;
+                }                    
+                 }
+
             }
         },
 
@@ -120,7 +157,7 @@ export default {
 .ptitle{
  
     font-size: 1.2rem;
-    /* line-height: 0; */
+    line-height: 1.4rem;
 }
 .publicationPadding{
     padding-top:8px;
@@ -269,5 +306,8 @@ input{
 .publication-end-date{
     position: absolute;
     right: 15px;
+}
+.edit{
+    padding-top:5px;
 }
 </style>

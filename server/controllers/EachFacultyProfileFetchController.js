@@ -18,6 +18,7 @@ module.exports={
 
         }        
     },
+    
     fetchEachFacultyProfile(req,res){
         FacultyProfile.findOne({_id:req.body.id}, function(err, facultyProfile){
             if (err){
@@ -227,5 +228,29 @@ editFacultyLinks(req,res){
                     res.send({message:"success"})
                 }
         });
+    },
+    editPublication(req,res){
+        console.log("Id" +req.body.id);
+        console.log("link" +req.body.publicationlink);
+        console.log("Id of pbl" +req.body.publicationId);
+        console.log("Publication Name" +req.body.publicationname);
+        console.log("startdate" +req.body.startdate);
+        console.log("enddate" +req.body.enddate);
+        FacultyProfile.updateOne({'publications._id':req.body.publicationId},
+            {'$set': {
+                'publications.$.link': req.body.publicationlink,
+                'publications.$.publicationName': req.body.publicationname,
+                'publications.$.startdate': req.body.startdate,
+                'publications.$.enddate': req.body.enddate,
+            }},function(err,model) {
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.send({message:"success"})
+                }
+        });
     }
+
 }
+

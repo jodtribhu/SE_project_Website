@@ -123,7 +123,7 @@ app.post('/addFacultyProject',EachFacultyProfileFetchController.addFacultyProjec
 app.post('/addFacultyPublication',EachFacultyProfileFetchController.addFacultyPublication);
 app.post('/editFacultyLinks',EachFacultyProfileFetchController.editFacultyLinks);
 app.post('/addPublicationCount',EachFacultyProfileFetchController.addPublicationCount);
-
+app.post('/editPublication',EachFacultyProfileFetchController.editPublication);
 
 app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );
 
