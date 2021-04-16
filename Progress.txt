@@ -71,4 +71,5 @@ WebApp V2.7->Created the stats Page which shows Profile Visits
 WebApp V2.8->Finished the stats Page
 WebApp V2.9->Finished the stats Page along with Publication Stats
 WebApp V2.10->Fixed the Spelling Errors
-WebApp V2.11->Finished the Edit  Publications Part
+WebApp V2.11->Finished the Edit Publications Part
+WebApp V2.12->Finished the Edit Project Part

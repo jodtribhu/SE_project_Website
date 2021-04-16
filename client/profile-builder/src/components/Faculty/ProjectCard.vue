@@ -1,9 +1,10 @@
 <template>
 <div class="relative card" >
       <ul class="topspacing">
-                <li class="pname">{{facultyproject.projectName}}</li>
+                <li class="pname">{{facultyproject.projectName}} <p  class="cworking" v-if="facultyproject.currentlyworking"> <span class="dot">&#8226;</span> In Progress</p> </li>
                 <li class="date">  {{startDate(facultyproject.startdate)}} <span v-if="facultyproject.enddate!=null"> to </span>  {{endDate(facultyproject.enddate)}}</li>
-                <li class="cworking" v-if="facultyproject.currentlyworking"> <span class="dot">&#8226;</span> In Progress{{}}</li>
+                <li><i v-on:click="editProject() " class=" edit fas fa-pen"></i></li>
+                <li class="cworking" v-if="facultyproject.currentlyworking"> </li>
                  
                 
                 <li  class="show" @click="showtheDescription" v-if="!showDescription"><i class="fas fa-chevron-down"></i></li>
@@ -35,6 +36,9 @@ export default {
         
     },
     methods:{
+        editProject(){
+            this.$emit('editCalled')
+        },
         startDate(startdate){
             var d = new Date(startdate);
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -63,6 +67,11 @@ export default {
 
 
 <style scoped>
+.edit{
+    position: absolute;
+    top:20px;
+    right:20px;
+}
 .noline{
     text-decoration: none;
 }

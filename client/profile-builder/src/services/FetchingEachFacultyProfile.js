@@ -29,6 +29,9 @@ export default{
     editpublication(credentials){
         return Api().post('editPublication',credentials);
     },
+    editFacultyProject(credentials){
+        return Api().post('editFacultyProject',credentials);
+    },
     addPublicationCount(credentials){
         return Api().post('addPublicationCount',credentials);
     }

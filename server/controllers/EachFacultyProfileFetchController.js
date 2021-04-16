@@ -250,7 +250,38 @@ editFacultyLinks(req,res){
                     res.send({message:"success"})
                 }
         });
-    }
+    },
+    editFacultyProject(req,res){
+        console.log("Id" +req.body.id);
+        console.log("projectname" +req.body.projectName);
+        console.log("Id of project" +req.body.project_id);
+        console.log("currently working" +req.body.currentlyworking);
+        console.log("startdate" +req.body.startdate);
+        console.log("enddate" +req.body.enddate);
+        console.log("contributers" +req.body.contributers);
+        console.log("associated_with" +req.body.associated_with);
+        console.log("project_url" +req.body.project_url);
+        console.log("project_description" +req.body.project_description);
+        FacultyProfile.updateOne({'projects._id':req.body.project_id},
+            {'$set': {
+                'projects.$.projectName': req.body.projectName,
+                'projects.$.currentlyworking': req.body.currentlyworking,
+                'projects.$.startdate': req.body.startdate,
+                'projects.$.enddate': req.body.enddate,
+                'projects.$.contributers': req.body.contributers,
+                'projects.$.associated_with': req.body.associated_with,
+                'projects.$.project_url': req.body.project_url,
+                'projects.$.project_description': req.body.project_description,
+            }},function(err,model) {
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.send({message:"success"})
+                }
+        });
+    },
+
 
 }
 

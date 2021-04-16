@@ -50,7 +50,7 @@
         <h2>Projects</h2>
         <div class="singleitems">
             <div  v-for="facultyProject in facultyProjects" :key="facultyProject._id">
-            <project-card :id="id" :facultyproject="facultyProject" ></project-card>
+            <project-card v-on:editCalled="editProject(facultyProject)"  :id="id" :facultyproject="facultyProject" ></project-card>
         </div>
         </div>
         
@@ -72,7 +72,9 @@ export default {
             contributers:"",
             associated_with:"",
             project_url:"",
-            project_description:""
+            project_description:"",
+            doedit:false,
+            project_id:""
         }
     },
     methods:{
@@ -88,36 +90,81 @@ export default {
             this.showDialog=!this.showDialog;
             this.link="";
             this.error="";
+            this.project_id="";
         },
         addproject(){
             this.showDialog=!this.showDialog;
               
         },
+       editProject(project){
+            this.showDialog=!this.showDialog;
+            this.projectName=project.projectName;
+            this.currentlyworking=project.currentlyworking;
+            this.startdate=project.startdate;
+            this.enddate=project.enddate;
+            this.contributers=project.contributers;
+            this.associated_with=project.associated_with;
+            this.project_url=project.project_url;
+            this.project_description=project.project_description;
+            this.project_id=project._id;
+            this.doedit=true;
+       },
         async submitButton(){
                 this.showDialog=false;
-                try {
-                    const response=await FetchingEachFacultyProfile.addFacultyProject(
-                        {
-                        id:this.id,
-                        projectName:this.projectName,
-                        currentlyworking:this.currentlyworking,
-                        startdate:this.startdate,
-                        enddate:this.enddate,
-                        contributers:this.contributers,
-                        associated_with:this.associated_with,
-                        project_url:this.project_url,
-                        project_description:this.project_description
-                        });
-                    if(response.data.message==="success"){
-                        this.$emit('addedAProject')
-                        this.link=""
-                         this.error=""
-                    }
-                } catch (error) {
-                    console.log(error);
-                     this.error=error;
-                    this.error=error.response.data.error;
+                if(this.doedit==true)
+                {
+                    try {
+                        const response=await FetchingEachFacultyProfile.editFacultyProject(
+                            {
+                            id:this.id,
+                            project_id: this.project_id,
+                            projectName:this.projectName,
+                            currentlyworking:this.currentlyworking,
+                            startdate:this.startdate,
+                            enddate:this.enddate,
+                            contributers:this.contributers,
+                            associated_with:this.associated_with,
+                            project_url:this.project_url,
+                            project_description:this.project_description
+                            });
+                        if(response.data.message==="success"){
+                            this.$emit('addedAProject')
+                            this.link=""
+                            this.error=""
+                        }
+                    } catch (error) {
+                        console.log(error);
+                        this.error=error;
+                        this.error=error.response.data.error;
+                    } 
+                    this.doedit=false;                   
                 }
+                else{
+                    try {
+                        const response=await FetchingEachFacultyProfile.addFacultyProject(
+                            {
+                            id:this.id,
+                            projectName:this.projectName,
+                            currentlyworking:this.currentlyworking,
+                            startdate:this.startdate,
+                            enddate:this.enddate,
+                            contributers:this.contributers,
+                            associated_with:this.associated_with,
+                            project_url:this.project_url,
+                            project_description:this.project_description
+                            });
+                        if(response.data.message==="success"){
+                            this.$emit('addedAProject')
+                            this.link=""
+                            this.error=""
+                        }
+                    } catch (error) {
+                        console.log(error);
+                        this.error=error;
+                        this.error=error.response.data.error;
+                    }
+                }
+
         }
     }
 }

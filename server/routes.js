@@ -124,6 +124,7 @@ app.post('/addFacultyPublication',EachFacultyProfileFetchController.addFacultyPu
 app.post('/editFacultyLinks',EachFacultyProfileFetchController.editFacultyLinks);
 app.post('/addPublicationCount',EachFacultyProfileFetchController.addPublicationCount);
 app.post('/editPublication',EachFacultyProfileFetchController.editPublication);
+app.post('/editFacultyProject',EachFacultyProfileFetchController.editFacultyProject);
 
 app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );
 
