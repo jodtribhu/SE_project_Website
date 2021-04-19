@@ -281,6 +281,34 @@ editFacultyLinks(req,res){
                 }
         });
     },
+    editDetails(req,res){
+        console.log("Id" +req.body.id);
+        console.log("projectname" +req.body.projectName);
+        console.log("Id of project" +req.body.project_id);
+        console.log("currently working" +req.body.currentlyworking);
+        console.log("startdate" +req.body.startdate);
+        console.log("enddate" +req.body.enddate);
+        console.log("contributers" +req.body.contributers);
+        console.log("associated_with" +req.body.associated_with);
+        console.log("project_url" +req.body.project_url);
+        console.log("project_description" +req.body.project_description);
+        FacultyProfile.updateOne({'_id':req.body.id},
+            {'$set': {
+                'FirstName': req.body.fname,
+                'LastName': req.body.lname,
+                'Address': req.body.address,
+                'City': req.body.city,
+                'PhoneNo': req.body.phoneNo,
+                'Description': req.body.description,
+            }},function(err,model) {
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    res.send({message:"success"})
+                }
+        });
+    }
 
 
 }

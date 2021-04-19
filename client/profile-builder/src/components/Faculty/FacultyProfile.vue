@@ -31,7 +31,7 @@
     </base-card> -->
     <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
     <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
-    <edit-profile v-if="editDialog" :id=$route.params.id @finished="openeditDialog"></edit-profile>
+    <edit-profile v-if="editDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openeditDialog"></edit-profile>
 <!-- BuildProfile Card -->
   
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
@@ -163,6 +163,7 @@ export default {
   methods: {
     openeditDialog(){
       console.log("inisde openedit");
+      this.loadfacultyprofile();
       this.editDialog=!this.editDialog;
     },
     refreshTheContent(){

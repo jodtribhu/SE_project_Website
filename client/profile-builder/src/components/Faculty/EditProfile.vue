@@ -26,7 +26,35 @@
                 
             </div>
             <div v-if="changedetails">
-                <h4>Change Personal </h4>
+                <div class="c">
+                    <h5  class="h">First Name : </h5>
+                    <input class="i" type="text" v-model="fname" >
+                </div>
+                <div class="c" >
+                    <h5 class="h">Last Name : </h5>
+                    <input class="i" type="text" v-model="lname" >
+                </div>
+                <div class="c">
+                    <h5 class="h">Address : </h5>
+                    <input class="i"  type="text" v-model="address" >
+                </div>
+                <div class="c">
+                    <h5 class="h" >City : </h5>
+                    <input class="i" type="text"  v-model="city" >
+                </div>
+                <div class="c">
+                    <h5 class="h">Phone Number :</h5>
+                     <input class="i" type="text" v-model="phoneNo" >
+                </div>
+                <div class="c">
+                    <h5 class="h">Description :</h5>
+                    <input class="i" type="text"  v-model="description">
+                </div>
+                <p class="err" v-if="error!=''">{{derror}}</p>
+                <div class="c ">
+                    
+                    <button class="pbutton" @click="editpersonal">Edit</button>
+                </div>
             </div>
         </div>
 
@@ -38,14 +66,22 @@
 <script>
 import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 export default {
-    props:['id'],
+    props:['id','facultyprofile'],
     data(){
         return{
             changepassword:true,
             changedetails:false,
             oldpass:"",
             newpass:"",
-            perror:""
+            perror:"",
+            fname:this.facultyprofile.FirstName,
+            lname:this.facultyprofile.LastName,
+            address:this.facultyprofile.Address,
+            city:this.facultyprofile.City,
+            phoneNo:this.facultyprofile.PhoneNo,
+            description:this.facultyprofile.Description,
+            derrror:""
+
         }
     },
     methods:{
@@ -61,6 +97,24 @@ export default {
         changetabs_d(){
             this.changepassword=false;
             this.changedetails=true;
+        },
+        async editpersonal(){
+            if(this.fname=="" || this.lname==""|| this.address==""||this.city==""||this.phoneNo==""||this.description=="")
+            {
+                this.derror="Fields Not Entered"
+            }
+            else{
+                const response=await FetchingEachFacultyProfile.editDetails({id:this.id,fname:this.fname,lname:this.lname,address:this.address,city:this.city,phoneNo:this.phoneNo,description:this.description});
+                    if(response.data.message==="success"){
+                        this.$emit('finished')
+                        this.oldpass=""
+                        this.newpass=""
+                         this.perror=""
+                    }
+                    else{
+                        this.perror=response.data.message;
+                    }
+            }
         },
         async changePassword(){
             if(this.oldpass=="")
@@ -89,6 +143,24 @@ export default {
 </script>
 
 <style scoped>
+.h{
+    width: 50%;
+    text-align: center;
+}
+.i{
+ 
+    width: 50%;
+    font-family: 'Montserrat', sans-serif; 
+    height:24px;
+}
+.c{
+    
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
 .password{
     height:50%
 }

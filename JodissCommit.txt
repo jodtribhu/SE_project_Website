@@ -64,3 +64,4 @@ WebApp V2.10->Fixed the Spelling Error
 WebApp V2.11->Finished the Edit Publications Part
 WebApp V2.12->Finished the Edit Project Part
 WebApp V2.13->Finished the Change Password Part 
+WebApp V2.14->Finished the Edit Details Part(Forget Password and Edit Personal Details)

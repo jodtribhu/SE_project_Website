@@ -126,6 +126,7 @@ app.post('/addPublicationCount',EachFacultyProfileFetchController.addPublication
 app.post('/editPublication',EachFacultyProfileFetchController.editPublication);
 app.post('/editFacultyProject',EachFacultyProfileFetchController.editFacultyProject);
 app.post('/editPassword',AuthenticationController.editPassword);
+app.post('/editDetails',EachFacultyProfileFetchController.editDetails);
 
 app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );
 

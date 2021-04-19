@@ -35,6 +35,9 @@ export default{
     editPassword(credentials){
         return Api().post('editPassword',credentials);
     },
+    editDetails(credentials){
+        return Api().post('editDetails',credentials);
+    },
     addPublicationCount(credentials){
         return Api().post('addPublicationCount',credentials);
     }
