@@ -32,6 +32,9 @@ export default{
     editFacultyProject(credentials){
         return Api().post('editFacultyProject',credentials);
     },
+    editPassword(credentials){
+        return Api().post('editPassword',credentials);
+    },
     addPublicationCount(credentials){
         return Api().post('addPublicationCount',credentials);
     }

@@ -11,7 +11,7 @@
             </div>
             <div class="profile-info">
               <div class="buttonposition">
-                <button href="#"  v-if="computedisUserLoggedIn" class="myButton">Edit Profile</button>
+                <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton">Edit Profile</button>
               </div>
         
               <h2 class="profile-name">{{facultyProfile.FirstName}} {{facultyProfile.LastName}}</h2>
@@ -31,7 +31,7 @@
     </base-card> -->
     <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
     <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
-   
+    <edit-profile v-if="editDialog" :id=$route.params.id @finished="openeditDialog"></edit-profile>
 <!-- BuildProfile Card -->
   
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
@@ -102,11 +102,13 @@ import FacultyLinks from "./FacultyLinks.vue";
 import FacultyPreference from "./FacultyPreference.vue";
 import FacultyImage from "./FacultyImage.vue";
 import FacultyProject from "./FacultyProject.vue";
+import EditProfile from "./EditProfile.vue";
 import FacultyPublications from "./FacultyPublications.vue";
 export default {
-  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications},
+  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications,EditProfile},
   data() {
     return {
+      editDialog:false,
       facultyId: "",
       profileFirstName:"",
       profileLastName:"",
@@ -120,7 +122,7 @@ export default {
   },
   created() {
     this.facultyId = this.$route.params.id;
-
+    this.editDialog=false;
     this.loadfacultyprofile();
    
   },
@@ -159,6 +161,10 @@ export default {
     }
   },
   methods: {
+    openeditDialog(){
+      console.log("inisde openedit");
+      this.editDialog=!this.editDialog;
+    },
     refreshTheContent(){
       console.log("inside refresh content");
       this.loadfacultyprofile();

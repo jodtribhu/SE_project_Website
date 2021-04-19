@@ -4,6 +4,7 @@ const jwt= require('jsonwebtoken');
 const config=require('../config/config')
 const crypto=require('crypto');
 const mongoose = require("mongoose");
+const Joi=require('joi');
 mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
 const ONE_WEEK=60*60*24*7;
 function jwtSignUser(user)
@@ -72,6 +73,45 @@ module.exports={
                 });
                 
             }
+        });
+    },
+    async editPassword(req,res){
+        console.log(req.body.oldpass);
+        console.log(req.body.newpass);
+        console.log("Passwords");
+        User.findOne({ _id: req.body.id}, function (err, user) {
+            validatePassword(req.body.oldpass,user.hash,user.salt).then(function(isPasswordValid){
+                console.log(isPasswordValid);
+                if(!isPasswordValid)
+                    {
+                    res.send({message:"The Old Password entered is wrong"});
+                    }
+                else{
+                    const schema=Joi.object({
+                        password:Joi.string().regex(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
+                    })
+                    const { error, value } = schema.validate({ password: req.body.newpass});
+                    if(error==null){
+                        const userpassworddetails= genPassword(req.body.newpass);
+                        User.findByIdAndUpdate(req.body.id,{"salt": userpassworddetails.salt,hash:userpassworddetails.hash,modified_at:new Date()}, function(err, result){
+                            if(err)
+                            {
+                                console.log(err);
+                                res.send({message:err});
+                            }
+                            else{
+                                res.send({message:"success"});
+                            }
+                        });
+                    }
+                    else
+                    {
+                        res.send({message:"Password Does Not Match the Criteria"});
+                    }
+
+                }
+            })
+            
         });
     },
     async register(req,res){
