@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
 const FacultyProfile=require('../models/FacultyProfile');
+const Students=require('../models/Student');
 module.exports={
     addPublicationCount(req,res){
         if(req.body.loggedInId!=null){
@@ -308,7 +309,42 @@ editFacultyLinks(req,res){
                     res.send({message:"success"})
                 }
         });
-    }
+    },
+    sentRequest(req,res){
+        Students.findOne({ studentRollNo: req.body.studentRollNo},function(err,student){
+            if(student!=null){
+                if(student.student_token==req.body.studentToken){
+                    var request = { studentRollNo:req.body.studentRollNo,
+                        studentDescription:req.body.studentMessage,
+                     };
+                    FacultyProfile.findOne({'requests.studentRollNo':req.body.studentRollNo},function(err,st){
+                        if(st==null){
+                            FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $push: { requests: request} },function (error, success) {
+                                if (error) {
+                                console.log(error);
+                                } else {
+                                res.send({message:"success"})
+                            }
+                        });                            
+                        }
+                        else
+                        {
+                            res.send({message:"Only 1 request allowed"})
+                        }
+                    }) 
+ 
+                }
+                else
+                {
+                    res.send({message:"Invalid Request"})
+                }
+            }
+            else{
+                res.send({message:"Invalid Request"})
+            }
+        });
+        
+    },
 
 
 }

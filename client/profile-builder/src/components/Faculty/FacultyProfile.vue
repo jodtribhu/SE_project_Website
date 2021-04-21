@@ -10,9 +10,13 @@
               <img :src="require(`@/assets/cover-image.png`)"  alt="cover-picture" class="cover-image" />
             </div>
             <div class="profile-info">
-              <div class="buttonposition">
-                <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton">Edit Profile</button>
-              </div>
+        
+                <div class="buttonposition">
+                  <button  href="#" @click="openstudentRequestDialog()"  v-if="isAnyUserLoggedIn"  class="myButton"><i class="far fa-paper-plane"></i>Sent Request</button>
+                  <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton"><i class="fas fa-cog"></i>Edit Profile</button>
+                </div>
+             
+
         
               <h2 class="profile-name">{{facultyProfile.FirstName}} {{facultyProfile.LastName}}</h2>
               <h3 class="profile-intro">{{facultyProfile.Description}}</h3>
@@ -32,6 +36,7 @@
     <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
     <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
     <edit-profile v-if="editDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openeditDialog"></edit-profile>
+    <student-request  v-if="studentDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openstudentRequestDialog"></student-request>
 <!-- BuildProfile Card -->
   
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
@@ -103,9 +108,10 @@ import FacultyPreference from "./FacultyPreference.vue";
 import FacultyImage from "./FacultyImage.vue";
 import FacultyProject from "./FacultyProject.vue";
 import EditProfile from "./EditProfile.vue";
+import StudentRequest from "./StudentRequest.vue";
 import FacultyPublications from "./FacultyPublications.vue";
 export default {
-  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications,EditProfile},
+  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications,EditProfile,StudentRequest},
   data() {
     return {
       editDialog:false,
@@ -117,7 +123,8 @@ export default {
       profileAddress:"",
       profileDescription:"",
       search:'',
-      isLoggedIn:false
+      isLoggedIn:false,
+      studentDialog:false,
     };
   },
   created() {
@@ -128,7 +135,14 @@ export default {
   },
 
   computed: {
-
+    isAnyUserLoggedIn(){
+      if (this.$store.getters.idofuserloggedIn==null){
+        return true;
+      }
+      else{
+        return false;
+      }
+    },
     facultyPublications(){
       let facultyProfile = this.$store.getters["facultyprofile"];
       return facultyProfile.publications;
@@ -162,9 +176,13 @@ export default {
   },
   methods: {
     openeditDialog(){
-      console.log("inisde openedit");
+    
       this.loadfacultyprofile();
       this.editDialog=!this.editDialog;
+    },
+    openstudentRequestDialog(){
+      this.loadfacultyprofile();
+      this.studentDialog=!this.studentDialog;
     },
     refreshTheContent(){
       console.log("inside refresh content");
@@ -243,9 +261,20 @@ export default {
 </script>
 
 <style scoped>
-
-.buttonposition{
+.far,.fa-cog{
+  font-size: 150%;
+  padding:4px 8px;
+}
+.relatve{
   position: relative;
+}
+.buttonposition{
+   position: absolute;
+   width:20%;
+   bottom:40%;
+   right:20px;
+  display: flex;
+  justify-content: space-between;
 }
 .page
 {
@@ -311,6 +340,7 @@ h3 {
 }
 
 .profile-info {
+  position: relative;
   margin: auto;
   height: 2%;
   max-width: 60%;
@@ -324,7 +354,7 @@ h3 {
   margin-top: 0;
 
 }
-.fas{
+.fa-map-marker-alt,.fa-phone-alt{
   padding: 2px 10px 2px 0px;
 }
 .profile-name {
@@ -359,19 +389,17 @@ h3 {
   background-color: #79bbff;
   border-radius: 5px;
   border: 1px solid #337bc4;
-  
   cursor: pointer;
   color: #ffffff;
   font-family: Arial;
   font-size: 16px;
   font-weight: bold;
-  padding: 12px 44px;
+  padding:1rem 1rem;
+  border-radius: 100px;
+  width:100%;
+  text-align: center;
   text-decoration: none;
-  position: absolute;
   text-shadow: 0px 1px 0px #276bb0;
-  top:20px;
-   right:20px
-
 }
 .editButton{
     background-color: #79bbff;

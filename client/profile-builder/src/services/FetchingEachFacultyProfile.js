@@ -38,6 +38,9 @@ export default{
     editDetails(credentials){
         return Api().post('editDetails',credentials);
     },
+    sentRequest(credentials){
+        return Api().post('sentRequest',credentials);
+    },
     addPublicationCount(credentials){
         return Api().post('addPublicationCount',credentials);
     }
