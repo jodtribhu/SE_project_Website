@@ -6,6 +6,7 @@ import NotFound from '../components/pages/NotFound.vue';
 // import FacultyContact from '../components/Faculty/FacultyContact.vue';
 import FacultyProfile from '../components/Faculty/FacultyProfile.vue';
 import FacultyStats from '../components/Faculty/FacultyStats.vue';
+import FacultyRequests from '../components/Faculty/FacultyRequests.vue';
 import FacultiesPage from '../components/Faculty/FacultiesPage.vue';
 // import FacultyRequest from '../components/Faculty/FacultyRequest.vue';
 import StudentRegister from '../components/Admin/StudentRegister.vue';
@@ -27,6 +28,7 @@ const router=createRouter({
         {path:'/login',component:Login,meta:{ requiresUnauth:true}},
         {path:'/home',component:FacultiesPage,},
         {path:'/faculties/:id/stats',component:FacultyStats,meta:{ requiresAuthorization:true}},
+        {path:'/faculties/:id/requests',component:FacultyRequests,meta:{ requiresAuthorization:true}},
         {path:'/faculties/:id',component:FacultyProfile},
         // {path:'/requests',component:TeacherRequest},
         {path:'/admin',name: 'admin',component:Admin,meta:{ requiresAdminAuth:true,title: 'Admin'}},

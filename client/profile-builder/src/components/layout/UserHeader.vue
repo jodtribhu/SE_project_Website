@@ -25,6 +25,12 @@
                         
                     </div> 
                 </li>
+                <li>
+                    <div class="container-items" v-if="isLoggedIn">
+                      <router-link class="navigation-item" :to=requestsRoute ><i class="fas fa-globe"></i> Requests</router-link> <span class="sr-only"></span>
+                        
+                    </div> 
+                </li>
                 <div class="container-login" v-if="!isLoggedIn">
                       <li><router-link to="/login" v-if="!isLoggedIn">Login</router-link></li>
                 </div>
@@ -58,6 +64,9 @@ export default {
      statsRoute(){
        console.log("the route "+this.$route);
        return "/faculties/"+this.$store.getters.idofuserloggedIn +"/stats"
+     },
+     requestsRoute(){
+       return "/faculties/"+this.$store.getters.idofuserloggedIn +"/requests"
      },
     isLoggedIn(){
       return this.$store.getters.isUserLoggedIn;

@@ -21,6 +21,10 @@ const RequestSchema=new mongoose.Schema({
     studentRollNo: String ,
     studentDescription:String,
    }); 
+const AcceptedRequestSchema=new mongoose.Schema({
+    studentRollNo: String ,
+    studentDescription:String,
+   }); 
 const FacultyProfileSchema=new mongoose.Schema({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -54,6 +58,7 @@ const FacultyProfileSchema=new mongoose.Schema({
     publications:[PublicationSchema],
     projects:[ProjectSchema],
     requests:[RequestSchema],
+    acceptedrequests:[AcceptedRequestSchema],
     preferences:{
         type:Array
     },

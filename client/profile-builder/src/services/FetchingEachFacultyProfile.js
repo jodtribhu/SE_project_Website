@@ -43,6 +43,11 @@ export default{
     },
     addPublicationCount(credentials){
         return Api().post('addPublicationCount',credentials);
+    },
+    sendEmail(data)
+    {
+        // https://api.emailjs.com/api/v1.0/email/send
+        return Api().post('sample',data);
     }
     
 }
