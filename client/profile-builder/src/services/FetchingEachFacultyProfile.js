@@ -48,6 +48,9 @@ export default{
     {
         // https://api.emailjs.com/api/v1.0/email/send
         return Api().post('sample',data);
-    }
+    },
+    updateRequest(credentials){
+        return Api().post('updateRequest',credentials);
+    },
     
 }

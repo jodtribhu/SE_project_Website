@@ -127,11 +127,16 @@ app.post('/editPublication',EachFacultyProfileFetchController.editPublication);
 app.post('/editFacultyProject',EachFacultyProfileFetchController.editFacultyProject);
 app.post('/editPassword',AuthenticationController.editPassword);
 app.post('/editDetails',EachFacultyProfileFetchController.editDetails);
-app.post('/sentRequest',EachFacultyProfileFetchController.sentRequest)
+app.post('/sentRequest',EachFacultyProfileFetchController.sentRequest);
+app.post('/updateRequest',EachFacultyProfileFetchController.updateRequest)
+
 
 app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );
 
 
 //AllFacultyProfiles
 app.get('/fetchallfacultyprofiles',AllFacultyProfileFetchController.fetchAllFacultyProfiles);
+
+//Sample
+app.post('/sample',EachFacultyProfileFetchController.sample);
 }
