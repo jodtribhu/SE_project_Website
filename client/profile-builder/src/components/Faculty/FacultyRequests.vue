@@ -2,20 +2,21 @@
     <div class="topContainer">
         <user-header></user-header>
         <div class="container">
-            <div class="tab">
+            <div @click="pending()" class="tab">
                 <p class="tab_text">Pending Requests</p>
             </div>
-            <div class="tab">
+            <div @click="accepted()" class="tab">
                 <p class="tab_text">Accepted Requests</p>
             </div>
-            <div class="tab">
+            <div @click="settings()" class="tab">
                 <p class="tab_text">Request Settings</p>
             </div>
 
         </div>
         <div  class=" card ">
             <div class="send" v-for="request in requests" :key=request.studentRollNo>
-                <request-card :request=request :facultyProfileOne=facultyProfileOne></request-card>
+                <request-card v-if="pendingrequest" :request=request :facultyProfileOne=facultyProfileOne></request-card>
+                <acceptedrequest-card v-if="accepted" :request=request :facultyProfileOne=facultyProfileOne></acceptedrequest-card>
             </div>
         
         </div>
@@ -25,11 +26,15 @@
 // import emailjs from 'emailjs-com';
 
 import RequestCard from "./RequestCard.vue";
+import AcceptedrequestCard from "./AcceptedRequestCard.vue";
 export default {
-    components:{RequestCard},
+    components:{RequestCard,AcceptedrequestCard},
     data(){
         return{
             facultyProfileOne:{},
+            pendingrequest:false,
+            acceptedrequest:false,
+            requestsetting:false,
         }
 
     },
@@ -44,6 +49,21 @@ export default {
          this.facultyProfileOne=this.$store.getters["facultyprofile"];
     },
     methods:{
+        pending(){
+              this.acceptedrequest=false;
+              this.pendingrequest=true;
+              this.requestsetting=false;
+        },
+        accepted(){
+              this.acceptedrequest=true;
+              this.pendingrequest=false;
+              this.requestsetting=false;
+        },
+        settings(){
+              this.acceptedrequest=false;
+              this.pendingrequest=false;
+              this.requestsetting=true;
+        },
         async loadfacultyprofile() 
             {
                 await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
