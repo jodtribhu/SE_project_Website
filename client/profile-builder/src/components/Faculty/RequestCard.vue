@@ -6,8 +6,7 @@
                     <p class="content">{{request.studentRollNo}}</p>
                 </div>
                 <div v-if="showDescription">
-                  
-                    <p class="content">{{request.studentDescription}}</p>
+                    <p class="content_description">{{request.studentDescription}}</p>
                 </div>
             </div>
                 <div class="padding">
@@ -58,8 +57,8 @@ export default {
                         console.log({error})
                     }
     
-           
-     },        
+
+    },        
     }
 }
 </script>
@@ -85,8 +84,13 @@ export default {
 
     font-family: "Montserrat", sans-serif;
 }
+.content_description{
+    font-size:1rem;
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif; 
+}
 .far{
-     font-size:2.5rem;
+    font-size:2.5rem;
 }
 .fa-check-circle{
     color: green;

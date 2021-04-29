@@ -14,10 +14,18 @@
 
         </div>
         <div  class=" card ">
-            <div class="send" v-for="request in requests" :key=request.studentRollNo>
-                <request-card v-if="pendingrequest" :request=request :facultyProfileOne=facultyProfileOne></request-card>
-                <acceptedrequest-card v-if="accepted" :request=request :facultyProfileOne=facultyProfileOne></acceptedrequest-card>
+            <div v-if="pendingrequest">
+                <div class="send" v-for="request in requests" :key=request.studentRollNo>
+                    <request-card  :request=request :facultyProfileOne=facultyProfileOne></request-card>
+                </div>
             </div>
+            <div v-if="acceptedrequest">
+                <div class="send" v-for="acceptedrequest in acceptedrequests" :key=acceptedrequest.studentRollNo>
+                    <acceptedrequest-card  :request=acceptedrequest :facultyProfileOne=facultyProfileOne></acceptedrequest-card>
+                </div>
+            </div>
+
+
         
         </div>
     </div>
@@ -41,28 +49,31 @@ export default {
     computed:{
         requests(){
             return this.facultyProfileOne.requests
+        },
+        acceptedrequests(){
+            return this.facultyProfileOne.acceptedrequests
         }
     },
     created() {
         this.facultyId = this.$route.params.id;
-         this.loadfacultyprofile();
-         this.facultyProfileOne=this.$store.getters["facultyprofile"];
+        this.loadfacultyprofile();
+        this.facultyProfileOne=this.$store.getters["facultyprofile"];
     },
     methods:{
         pending(){
-              this.acceptedrequest=false;
-              this.pendingrequest=true;
-              this.requestsetting=false;
+            this.acceptedrequest=false;
+            this.pendingrequest=true;
+            this.requestsetting=false;
         },
         accepted(){
-              this.acceptedrequest=true;
-              this.pendingrequest=false;
-              this.requestsetting=false;
+            this.acceptedrequest=true;
+            this.pendingrequest=false;
+            this.requestsetting=false;
         },
         settings(){
-              this.acceptedrequest=false;
-              this.pendingrequest=false;
-              this.requestsetting=true;
+            this.acceptedrequest=false;
+            this.pendingrequest=false;
+            this.requestsetting=true;
         },
         async loadfacultyprofile() 
             {
