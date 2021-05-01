@@ -317,9 +317,11 @@ editFacultyLinks(req,res){
                     var request = { studentRollNo:req.body.studentRollNo,
                         studentDescription:req.body.studentMessage,
                      };
-                    FacultyProfile.findOne({'requests.studentRollNo':req.body.studentRollNo},function(err,st){
+                    FacultyProfile.findOne({'_id':req.body.id,'requests.studentRollNo':req.body.studentRollNo},function(err,st){
+                        console.log("Student reuest");
+                        console.log(st);
                         if(st==null){
-                            FacultyProfile.findOne({'acceptedrequests.studentRollNo':req.body.studentRollNo},function(err,ast){
+                            FacultyProfile.findOne({'_id':req.body.id,'acceptedrequests.studentRollNo':req.body.studentRollNo},function(err,ast){
                                 if(ast==null){
                                         FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $push: { requests: request} },function (error, success) {
                                             if (error) {
@@ -330,7 +332,7 @@ editFacultyLinks(req,res){
                                     });                                         
                                     }
                                     else{
-                                        res.send({message:"Only 1 request allowed"})
+                                        res.send({message:"Only 1 accepted request allowed"})
                                     }   
                                 });                         
                         }
@@ -368,7 +370,32 @@ editFacultyLinks(req,res){
                 res.send({message:"success"})
         }
         });
-    }
+    },
+    rejectEmail(req,res){
+        FacultyProfile.findOneAndUpdate({_id: req.body.id}, {$pull: {requests: {_id: req.body.request._id}}}, function(err, data){
+            res.send({message:"success"})
+        });
+    },
+    deleterequest(req,res){
+        FacultyProfile.findOneAndUpdate({_id: req.body.id}, {$pull: {acceptedrequests: {_id: req.body.request._id}}}, function(err, data){
+            res.send({message:"success"})
+        });
+    },
+    updateSettings(req,res){
+        console.log("inside update settings");
+        FacultyProfile.updateOne({'_id':req.body.id},
+        {'$set': {
+            'requestContactMe': req.body.requests_select,
+            'requestCap': req.body.requests_cap,
+        }},function(err,model) {
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send({message:"success"})
+            }
+    });
+    },
 
 
 }

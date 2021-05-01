@@ -15,16 +15,35 @@
         </div>
         <div  class=" card ">
             <div v-if="pendingrequest">
+                <p class="content" v-if="requests.length==0">No Pending Requests</p>
                 <div class="send" v-for="request in requests" :key=request.studentRollNo>
-                    <request-card  :request=request :facultyProfileOne=facultyProfileOne></request-card>
+                    <request-card  :request=request :facultyProfileOne=facultyProfileOne @reload="refresh()"></request-card>
                 </div>
             </div>
             <div v-if="acceptedrequest">
+                <p class="content"  v-if="acceptedrequests.length==0">No Accepted Requests</p>
                 <div class="send" v-for="acceptedrequest in acceptedrequests" :key=acceptedrequest.studentRollNo>
-                    <acceptedrequest-card  :request=acceptedrequest :facultyProfileOne=facultyProfileOne></acceptedrequest-card>
+                    <acceptedrequest-card  :request=acceptedrequest :facultyProfileOne=facultyProfileOne @reload="refresh()"></acceptedrequest-card>
                 </div>
             </div>
-
+            <div v-if="requestsetting">
+                <h3>Request Setting</h3>
+                 <div class="container_settings">
+                     <label class="label_settings" for="RequestCap">Total No of Requests Allowed:  </label>
+                     <input class="input_settings"  type="number" v-model="requests_cap">
+                 </div>
+                 <div  class="container_settings">
+                     <label class="label_settings"  for="ContactMe">Contact Me : </label>
+                     <select class="input_settings"  name="cars" id="cars" v-model="requests_select">
+                        <option value="phone">Phone Number</option>
+                        <option value="email">Email</option>
+                        <option v-for="singlecontact in contactme" :key="singlecontact" :value="singlecontact.link">{{singlecontact.link}}</option>
+                    </select>
+                 </div>
+                 <div class="center">
+                     <button class="pbutton" @click="updateSettings()">Update</button>
+                 </div>
+            </div>   
 
         
         </div>
@@ -32,7 +51,7 @@
 </template>
 <script>
 // import emailjs from 'emailjs-com';
-
+import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 import RequestCard from "./RequestCard.vue";
 import AcceptedrequestCard from "./AcceptedRequestCard.vue";
 export default {
@@ -40,9 +59,11 @@ export default {
     data(){
         return{
             facultyProfileOne:{},
-            pendingrequest:false,
+            pendingrequest:true,
             acceptedrequest:false,
             requestsetting:false,
+            requests_cap:0,
+            requests_select:''
         }
 
     },
@@ -52,19 +73,31 @@ export default {
         },
         acceptedrequests(){
             return this.facultyProfileOne.acceptedrequests
-        }
+        },
+        contactme(){
+          return this.facultyProfileOne.links;  
+         
+        },
     },
     created() {
         this.facultyId = this.$route.params.id;
         this.loadfacultyprofile();
         this.facultyProfileOne=this.$store.getters["facultyprofile"];
+        this.requests_cap=  this.facultyProfileOne.requestCap;
+        this.requests_select=  this.facultyProfileOne.requestContactMe;
     },
     methods:{
+        async refresh(){
+                await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
+                this.facultyProfileOne=this.$store.getters["facultyprofile"];
+                console.log("inside refresh");  
+        },
         pending(){
             this.acceptedrequest=false;
             this.pendingrequest=true;
             this.requestsetting=false;
         },
+        
         accepted(){
             this.acceptedrequest=true;
             this.pendingrequest=false;
@@ -80,11 +113,38 @@ export default {
                 await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
                 console.log("finished");   
             },
+        async updateSettings(){
+            console.log("inside updateSettings");
+            await FetchingEachFacultyProfile.updateSettings({id:this.facultyId,requests_cap:this.requests_cap,requests_select:this.requests_select});
+            this.refresh();
+        }
 
 }
 }
 </script>
 <style scoped>
+.center{
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+}
+.container_settings{
+    display:flex;
+    padding:0.5rem;
+    
+}
+.input_settings{
+    width:50%;
+    height:1.5rem;
+    font-size:0.8rem;
+    font-family: "Montserrat", sans-serif;
+}
+.label_settings{
+    width:50%;
+    height:1.5rem;
+    font-size:1rem;
+    font-family: "Montserrat", sans-serif;
+}
 hr{
     margin: 2rem 0;
 }
@@ -140,5 +200,21 @@ hr{
     font-size:1rem;
 
     font-family: "Montserrat", sans-serif;
+}
+.pbutton{
+  text-align:center;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #271d57;
+  border: 1px solid #3a0061;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+.pbutton:hover,
+.pbutton:active {
+  background-color: #316e97;
+  border-color: #270041;
 }
 </style>

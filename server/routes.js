@@ -128,9 +128,10 @@ app.post('/editFacultyProject',EachFacultyProfileFetchController.editFacultyProj
 app.post('/editPassword',AuthenticationController.editPassword);
 app.post('/editDetails',EachFacultyProfileFetchController.editDetails);
 app.post('/sentRequest',EachFacultyProfileFetchController.sentRequest);
-app.post('/updateRequest',EachFacultyProfileFetchController.updateRequest)
-
-
+app.post('/updateRequest',EachFacultyProfileFetchController.updateRequest);
+app.post('/rejectEmail',EachFacultyProfileFetchController.rejectEmail);
+app.post('/deleterequest',EachFacultyProfileFetchController.deleterequest)
+app.post('/updateSettings',EachFacultyProfileFetchController.updateSettings)
 app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );
 
 
@@ -139,4 +140,5 @@ app.get('/fetchallfacultyprofiles',AllFacultyProfileFetchController.fetchAllFacu
 
 //Sample
 app.post('/sample',EachFacultyProfileFetchController.sample);
+
 }

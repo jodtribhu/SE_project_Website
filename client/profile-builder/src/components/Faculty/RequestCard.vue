@@ -3,7 +3,7 @@
         <div class="top_card_container">
             <div class="sub_container">
                 <div>
-                    <p class="content">{{request.studentRollNo}}</p>
+                    <p> <span class="content">Student Roll Number:</span> <span class="content_p">{{ request.studentRollNo}}</span>  </p>
                 </div>
                 <div v-if="showDescription">
                     <p class="content_description">{{request.studentDescription}}</p>
@@ -12,7 +12,7 @@
                 <div class="padding">
                     <div class="card_container"> 
                         <i @click="sendEmail(request)" class="far fa-check-circle"></i>
-                        <i  @click="reject(request)" class="far fa-times-circle"></i>
+                        <i  @click="reject()" class="far fa-times-circle"></i>
                     </div>
                 </div>  
         </div> 
@@ -34,7 +34,11 @@ export default {
         show(){
             this.showDescription=!this.showDescription;
         },
-            async sendEmail(req){
+        async reject(){
+            await FetchingEachFacultyProfile.rejectEmail({id:this.facultyProfileOne._id,request:this.request});
+            this.$emit('reload');
+        },
+        async sendEmail(req){
                 var to_send=req.studentRollNo+"@cb.students.amrita.edu";
                 console.log(to_send);
                 var data = {
@@ -56,8 +60,7 @@ export default {
                         console.log("There is an error");
                         console.log({error})
                     }
-    
-
+                this.$emit('reload');
     },        
     }
 }
@@ -84,6 +87,11 @@ export default {
 
     font-family: "Montserrat", sans-serif;
 }
+.content_p{
+    font-size:1.2rem;
+    letter-spacing: 1px;
+    font-family: "Montserrat", sans-serif; 
+}
 .content_description{
     font-size:1rem;
     font-weight: 400;
@@ -101,6 +109,7 @@ export default {
 }
 .show{
     text-align: center;
+    margin:0;
     font-family: "Montserrat", sans-serif;
 }
 </style>

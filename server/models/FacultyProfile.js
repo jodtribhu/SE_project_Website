@@ -59,6 +59,14 @@ const FacultyProfileSchema=new mongoose.Schema({
     projects:[ProjectSchema],
     requests:[RequestSchema],
     acceptedrequests:[AcceptedRequestSchema],
+    requestContactMe:{
+        type: String,
+        default:'Email',
+    },
+    requestCap:{
+        type: Number,
+        default:100,
+    },
     preferences:{
         type:Array
     },

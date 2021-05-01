@@ -7,6 +7,13 @@
             </h1>
              <div class="search-bar">     
                     <span><input type="text" autoComplete="on" :list="allFacultyProfiles" v-model="search" class="search" placeholder="Search" ><i class="fas fa-search"></i> </span>
+                    <div class="makeflex">
+                      <ul class="SelectItems">
+                      <li   v-on:click="goToSearch($event)" class="SelectListItems" v-for="facultyprofile in allFacultyProfiles" :id="facultyprofile._id" :key="facultyprofile._id" >
+                        <p class="imagePreviewWrapper" :style="{ 'background-image': `url(${link(facultyprofile.ProfilePhotoPath)})` }" ></p>
+                        <p class="searcht">{{facultyprofile.FirstName}}  {{facultyprofile.LastName}}</p> </li>
+                      </ul>
+                    </div>
             </div>
             <ul >
                 <li>
@@ -40,13 +47,7 @@
             </ul>
         </nav>
     </header>
-    <div class="makeflex">
-      <ul class="SelectItems">
-      <li   v-on:click="goToSearch($event)" class="SelectListItems" v-for="facultyprofile in allFacultyProfiles" :id="facultyprofile._id" :key="facultyprofile._id" >
-        <p class="imagePreviewWrapper" :style="{ 'background-image': `url(${link(facultyprofile.ProfilePhotoPath)})` }" ></p>
-        <p class="searcht">{{facultyprofile.FirstName}}  {{facultyprofile.LastName}}</p> </li>
-      </ul>
-    </div>
+
    </div>
 </template>
 <script>
@@ -174,6 +175,7 @@ export default {
   background-position: center center; 
 }
 .makeflex{
+  position: absolute;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -188,11 +190,11 @@ export default {
  
 }
 .SelectItems{
-  position: relative;
-  padding: 0;
-  width: 30%;
-  margin-left:-5rem;
-  margin-top: 3.6%;
+  position: absolute;
+  display: block;
+  width:30%;
+  left:0.5rem;
+  top:0.5rem;
   list-style-type: none;
   z-index:9999;
 }
@@ -266,7 +268,7 @@ header a {
   text-decoration: none;
   color: #fb743e;
   display: inline-block;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 0.6rem;
   border: 1px solid transparent;
 }
 h1 {
@@ -277,6 +279,7 @@ h1 {
   padding-bottom: 8px;
 }
 h1 a {
+  letter-spacing: 2px;
   color: #fb743e;
   margin: 0;
 }
@@ -297,21 +300,21 @@ header ul {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
 }
 li {
    margin: 0;
-  flex-basis: 10%;   
+  flex-basis: 1%;   
 }
 .container-items
 {
   text-align: center;
 }
 .container-login{
+  margin:0;
   font-weight: bold;
-  padding-top:10px;
-  padding-bottom: 16px;  
+  padding:0;
 }
 </style>
 

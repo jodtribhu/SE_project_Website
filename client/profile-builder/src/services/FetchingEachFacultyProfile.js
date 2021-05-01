@@ -52,5 +52,14 @@ export default{
     updateRequest(credentials){
         return Api().post('updateRequest',credentials);
     },
+    rejectEmail(credentials){
+        return Api().post('rejectEmail',credentials);
+    },
+    deleterequest(credentials){
+        return Api().post('deleterequest',credentials);
+    },
+    updateSettings(credentials){
+        return Api().post('updateSettings',credentials);
+    },
     
 }
