@@ -311,47 +311,62 @@ editFacultyLinks(req,res){
         });
     },
     sentRequest(req,res){
-        Students.findOne({ studentRollNo: req.body.studentRollNo},function(err,student){
-            if(student!=null){
-                if(student.student_token==req.body.studentToken){
-                    var request = { studentRollNo:req.body.studentRollNo,
-                        studentDescription:req.body.studentMessage,
-                     };
-                    FacultyProfile.findOne({'_id':req.body.id,'requests.studentRollNo':req.body.studentRollNo},function(err,st){
-                        console.log("Student reuest");
-                        console.log(st);
-                        if(st==null){
-                            FacultyProfile.findOne({'_id':req.body.id,'acceptedrequests.studentRollNo':req.body.studentRollNo},function(err,ast){
-                                if(ast==null){
-                                        FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $push: { requests: request} },function (error, success) {
-                                            if (error) {
-                                            console.log(error);
-                                            } else {
-                                            res.send({message:"success"})
-                                        }
-                                    });                                         
+        FacultyProfile.findOne({'_id':req.body.id},function(err,st){
+            if(st!=null){
+                maxcount=st.requestCap;
+                preqcount=st.requests.length;
+                areqcount=st.acceptedrequests.length;
+                tcount=preqcount+areqcount+1;
+                if(tcount>maxcount){
+                    res.send({message:"Requests Limit for the faculty exceeded"});
+                }
+                else{
+                    Students.findOne({ studentRollNo: req.body.studentRollNo},function(err,student){
+                        if(student!=null){
+                            if(student.student_token==req.body.studentToken){
+                                var request = { studentRollNo:req.body.studentRollNo,
+                                    studentDescription:req.body.studentMessage,
+                                 };
+                                FacultyProfile.findOne({'_id':req.body.id,'requests.studentRollNo':req.body.studentRollNo},function(err,st){
+                                    console.log("Student reuest");
+                                    console.log(st);
+                                    if(st==null){
+                                        FacultyProfile.findOne({'_id':req.body.id,'acceptedrequests.studentRollNo':req.body.studentRollNo},function(err,ast){
+                                            if(ast==null){
+                                                    FacultyProfile.findOneAndUpdate({ _id: req.body.id },{ $push: { requests: request} },function (error, success) {
+                                                        if (error) {
+                                                        console.log(error);
+                                                        } else {
+                                                        res.send({message:"success"})
+                                                    }
+                                                });                                         
+                                                }
+                                                else{
+                                                    res.send({message:"Only 1 accepted request allowed"})
+                                                }   
+                                            });                         
                                     }
-                                    else{
-                                        res.send({message:"Only 1 accepted request allowed"})
-                                    }   
-                                });                         
+                                    else
+                                    {
+                                        res.send({message:"Only 1 request allowed"})
+                                    }
+                                }) 
+             
+                            }
+                            else
+                            {
+                                res.send({message:"Invalid Request"})
+                            }
                         }
-                        else
-                        {
-                            res.send({message:"Only 1 request allowed"})
+                        else{
+                            res.send({message:"Invalid Request"})
                         }
-                    }) 
- 
-                }
-                else
-                {
-                    res.send({message:"Invalid Request"})
-                }
+                    });
+                }                
             }
-            else{
-                res.send({message:"Invalid Request"})
-            }
+      
         });
+
         
     },
     sample(req,res){
