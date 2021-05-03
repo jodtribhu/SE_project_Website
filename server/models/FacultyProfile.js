@@ -17,6 +17,12 @@ const PublicationSchema=new mongoose.Schema({
     enddate:Date,
     link: String 
    });
+const EndorseSchma=new mongoose.Schema({
+    endorsedfaculty:String,
+    facultyendorsing:String,
+    description:String,
+    endorsementdate:Date,
+})
 const RequestSchema=new mongoose.Schema({
     studentRollNo: String ,
     studentDescription:String,
@@ -59,6 +65,7 @@ const FacultyProfileSchema=new mongoose.Schema({
     projects:[ProjectSchema],
     requests:[RequestSchema],
     acceptedrequests:[AcceptedRequestSchema],
+    endorsements:[EndorseSchma],
     requestContactMe:{
         type: String,
         default:'Email',

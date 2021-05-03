@@ -89,6 +89,7 @@ export default {
     methods:{
         async refresh(){
                 await this.$store.dispatch("loadthefacultyprofile",{id:this.facultyId});
+                 await this.$store.dispatch("loadallfacultyprofiles");  
                 this.facultyProfileOne=this.$store.getters["facultyprofile"];
                 console.log("inside refresh");  
         },
@@ -117,7 +118,8 @@ export default {
             console.log("inside updateSettings");
             await FetchingEachFacultyProfile.updateSettings({id:this.facultyId,requests_cap:this.requests_cap,requests_select:this.requests_select});
             this.refresh();
-        }
+        },
+       
 
 }
 }

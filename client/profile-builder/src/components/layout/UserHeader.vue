@@ -34,7 +34,7 @@
                 </li>
                 <li>
                     <div class="container-items" v-if="isLoggedIn">
-                      <router-link class="navigation-item" :to=requestsRoute ><i class="fas fa-globe"></i> Requests</router-link> <span class="sr-only"></span>
+                      <router-link class="navigation-item" :to=requestsRoute ><i class="far fa-comment-alt"></i>Requests <span v-if="requestsnumber()!=0" class="badge">{{requestsnumber()}}</span></router-link> <span class="sr-only"></span>
                         
                     </div> 
                 </li>
@@ -94,6 +94,21 @@ export default {
         },
   },
   methods:{
+    requestsnumber(){
+      var user_id=this.$store.getters.idofuserloggedIn;
+      var profiles=this.allPhotoProfiles;
+      var requestno=0;
+      if(user_id!=null && profiles.length!=0)
+      {
+          var facultyprofile=profiles.find(item => item._id ===user_id );
+          requestno=facultyprofile.requests.length;
+      }
+      else
+      {
+          return null;
+      }
+      return requestno;       
+     },
     facultyphotolink(){
       var fileloc="";
       var user_id=this.$store.getters.idofuserloggedIn;
@@ -163,6 +178,15 @@ export default {
   background-size: cover;
   background-position: center center;
 }
+ .badge {
+  position:absolute;
+  top:0.5px;
+  right:1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
 .headerimagePreviewWrapper {
   float: left;
   border-radius: 10px;
@@ -221,6 +245,11 @@ export default {
   font-size: 1.4rem;
   margin-bottom: 5px;
   margin-left: 2px;
+}
+.far{
+    font-size: 1.4rem;
+  margin-bottom: 5px;
+ 
 }
 .navigation-item{
   font-size: 0.8rem;
@@ -309,6 +338,7 @@ li {
 }
 .container-items
 {
+  position: relative;
   text-align: center;
 }
 .container-login{

@@ -14,6 +14,7 @@
                 <div class="buttonposition">
                   <button  href="#" @click="openstudentRequestDialog()"  v-if="isAnyUserLoggedIn"  class="myButton"><i class="far fa-paper-plane"></i>Sent Request</button>
                   <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton"><i class="fas fa-cog"></i>Edit Profile</button>
+                  <button href="#" @click="endorse()" v-if="!computedisUserLoggedIn && !isAnyUserLoggedIn" class="myButton">Endorse Profile</button>
                 </div>
              
 
@@ -238,7 +239,9 @@ export default {
         }
         
     },
-
+    endorse(){
+      
+    },
     async loadfacultyprofile() {
       try {
        await this.$store.dispatch("loadallfacultyprofiles");
@@ -392,7 +395,7 @@ h3 {
   cursor: pointer;
   color: #ffffff;
   font-family: Arial;
-  font-size: 16px;
+  font-size: 0.95rem;
   font-weight: bold;
   padding:1rem 1rem;
   border-radius: 100px;
