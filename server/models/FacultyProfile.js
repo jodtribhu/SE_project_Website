@@ -18,8 +18,9 @@ const PublicationSchema=new mongoose.Schema({
     link: String 
    });
 const EndorseSchma=new mongoose.Schema({
-    endorsedfaculty:String,
-    facultyendorsing:String,
+    endorsedfacultyId:String,
+    facultyendorsingId:String,
+    facultyendorsingName:String,
     description:String,
     endorsementdate:Date,
 })

@@ -19,7 +19,35 @@ module.exports={
 
         }        
     },
-    
+    endorseFaculty(req,res){
+        var endorsedFacultyId=req.body.endorsedfacultyid;
+        var endorsingFacultyId=req.body.facultyendorsing;
+        var endorseDate=req.body.date;
+        var endorseDescription=req.body.endorseDescription;
+        FacultyProfile.findOne({_id:endorsingFacultyId}, function(err, facultyProfile){
+            if (facultyProfile!=null){
+                FacultyProfile.findOne({_id:endorsedFacultyId}, function(err, facultyProfile2){
+                    if(facultyProfile2!=null){
+                        var endorse={endorsedfacultyId:endorsedFacultyId,
+                            facultyendorsingId:endorsingFacultyId,
+                            facultyendorsingName:facultyProfile.FirstName+" "+facultyProfile.LastName,
+                            description:endorseDescription,
+                            endorsementdate:endorseDate};
+                        FacultyProfile.findOneAndUpdate({ _id:endorsedFacultyId  },{ $push: { endorsements: endorse} },function (error, success) {
+                            if (error) {
+                            console.log(error);
+                            } else {
+                            res.send({message:"success"})
+                        }
+                        });
+                    }
+                });
+        
+
+            }
+        });
+
+    },
     fetchEachFacultyProfile(req,res){
         FacultyProfile.findOne({_id:req.body.id}, function(err, facultyProfile){
             if (err){

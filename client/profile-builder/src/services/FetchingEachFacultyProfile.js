@@ -61,5 +61,8 @@ export default{
     updateSettings(credentials){
         return Api().post('updateSettings',credentials);
     },
+    endorseFaculty(credentials){
+        return Api().post('endorseFaculty',credentials);
+    }
     
 }

@@ -14,7 +14,7 @@
                 <div class="buttonposition">
                   <button  href="#" @click="openstudentRequestDialog()"  v-if="isAnyUserLoggedIn"  class="myButton"><i class="far fa-paper-plane"></i>Sent Request</button>
                   <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton"><i class="fas fa-cog"></i>Edit Profile</button>
-                  <button href="#" @click="endorse()" v-if="!computedisUserLoggedIn && !isAnyUserLoggedIn" class="myButton">Endorse Profile</button>
+                  <button href="#" @click="openendorseDialog()" v-if="!computedisUserLoggedIn && !isAnyUserLoggedIn" class="myButton">Endorse Profile</button>
                 </div>
              
 
@@ -38,6 +38,7 @@
     <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
     <edit-profile v-if="editDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openeditDialog"></edit-profile>
     <student-request  v-if="studentDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openstudentRequestDialog"></student-request>
+    <endorse-faculty  v-if="endorseDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openendorseDialog"></endorse-faculty>
 <!-- BuildProfile Card -->
   
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
@@ -107,12 +108,13 @@ import BaseCard from "../layout/BaseCard.vue";
 import FacultyLinks from "./FacultyLinks.vue";
 import FacultyPreference from "./FacultyPreference.vue";
 import FacultyImage from "./FacultyImage.vue";
+import EndorseFaculty from "./EndorseFaculty.vue";
 import FacultyProject from "./FacultyProject.vue";
 import EditProfile from "./EditProfile.vue";
 import StudentRequest from "./StudentRequest.vue";
 import FacultyPublications from "./FacultyPublications.vue";
 export default {
-  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications,EditProfile,StudentRequest},
+  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications,EditProfile,StudentRequest,EndorseFaculty},
   data() {
     return {
       editDialog:false,
@@ -126,6 +128,7 @@ export default {
       search:'',
       isLoggedIn:false,
       studentDialog:false,
+      endorseDialog:false,
     };
   },
   created() {
@@ -176,6 +179,10 @@ export default {
     }
   },
   methods: {
+    openendorseDialog(){
+      this.loadfacultyprofile();
+      this.endorseDialog=!this.endorseDialog;
+    },
     openeditDialog(){
     
       this.loadfacultyprofile();

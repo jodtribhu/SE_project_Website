@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <div class="container-items" v-if="isLoggedIn">
-                      <router-link class="navigation-item" :to=statsRoute ><i class="fas fa-globe"></i> Stats</router-link> <span class="sr-only"></span>
+                      <router-link class="navigation-item" :to=statsRoute ><i class="fas fa-chart-bar"></i>Stats</router-link> <span class="sr-only"></span>
                         
                     </div> 
                 </li>

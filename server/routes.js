@@ -132,6 +132,9 @@ app.post('/updateRequest',EachFacultyProfileFetchController.updateRequest);
 app.post('/rejectEmail',EachFacultyProfileFetchController.rejectEmail);
 app.post('/deleterequest',EachFacultyProfileFetchController.deleterequest)
 app.post('/updateSettings',EachFacultyProfileFetchController.updateSettings)
+app.post('/endorseFaculty',EachFacultyProfileFetchController.endorseFaculty)
+
+
 app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFetchController.addFacultyProfilePhoto );
 
 
