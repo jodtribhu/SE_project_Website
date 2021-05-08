@@ -3,6 +3,21 @@ mongoose.connect("mongodb://localhost:27017/UserDB", { useNewUrlParser: true });
 const FacultyProfile=require('../models/FacultyProfile');
 const Students=require('../models/Student');
 module.exports={
+    deletelink(req,res){
+        FacultyProfile.findOneAndUpdate({_id: req.body.id}, {$pull: {links: {_id: req.body.linkid}}}, function(err, data){
+            res.send({message:"success"})
+        });
+    },
+    deletepublication(req,res){
+        FacultyProfile.findOneAndUpdate({_id: req.body.id}, {$pull: {publications: {_id: req.body.publicationId}}}, function(err, data){
+            res.send({message:"success"})
+        });
+    },
+    deleteProject(req,res){
+        FacultyProfile.findOneAndUpdate({_id: req.body.id}, {$pull: {projects: {_id: req.body.project_id}}}, function(err, data){
+            res.send({message:"success"})
+        });
+    },
     addPublicationCount(req,res){
         if(req.body.loggedInId!=null){
             if(req.body.loggedInId!=req.body.id){

@@ -37,7 +37,8 @@ export default {
     async endorse(){
             var endorsedfacultyid=this.id;
             var facultyendorsing=this.$store.getters.idofuserloggedIn;
-              await FetchingEachFacultyProfile.endorseFaculty({endorsedfacultyid:endorsedfacultyid,facultyendorsing:facultyendorsing,date:new Date(),endorseDescription:this.endorseDescription})
+            await FetchingEachFacultyProfile.endorseFaculty({endorsedfacultyid:endorsedfacultyid,facultyendorsing:facultyendorsing,date:new Date(),endorseDescription:this.endorseDescription})
+            this.$emit('finished');
         }
     }
 }

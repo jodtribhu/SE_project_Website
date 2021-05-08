@@ -63,6 +63,15 @@ export default{
     },
     endorseFaculty(credentials){
         return Api().post('endorseFaculty',credentials);
+    },
+    deletelink(credentials){
+        return Api().post('deletelink',credentials);
+    },
+    deletepublication(credentials){
+        return Api().post('deletepublication',credentials);
+    },
+    deleteProject(credentials){
+        return Api().post('deleteProject',credentials);
     }
     
 }

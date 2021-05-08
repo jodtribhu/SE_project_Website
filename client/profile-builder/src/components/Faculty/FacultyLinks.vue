@@ -8,6 +8,7 @@
             <span class="space">
                 <button class="dialoglinkbutton" @click="addnewLink" v-if="!doedit"> Add</button>
                 <button class="dialoglinkbutton" @click="addnewLink" v-if="doedit"> Edit</button>
+                <button class="dialoglinkbutton" @click="deletelink" v-if="doedit"> Delete</button>
             </span>
             <p class="error" v-if="error">{{error}}</p>
         </div> 
@@ -124,10 +125,11 @@ export default {
                 }
                 this.doedit=false;
             }
-           
-         
-             
-       
+        },
+        async deletelink(){
+             await FetchingEachFacultyProfile.deletelink({id:this.id,linkid:this.linkid});
+             this.$emit('addedALink');
+             this.showDialog=false;
         }
     }
 }
@@ -167,12 +169,12 @@ export default {
      border-radius: 2px;
      color: white;
      font-size:15px;
+     margin-left:0.2rem;
 }
 .dialogbox{
      font-family: 'Montserrat', sans-serif;
      padding: 2px 10px 2px 2px;
 }
-
 input{
     width: 40%;
     padding: 2px 2px 2px 2px;

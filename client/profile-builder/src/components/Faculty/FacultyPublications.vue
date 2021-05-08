@@ -17,14 +17,20 @@
             </div>
             <div class="relative">
                   <label class="padding" for="project-link">Project Link</label>
-                <input v-model="link" type="text" class="project-link full">
+                  <input v-model="link" type="text" class="project-link full">
             </div>
           
             </div>
         </div>
             <p class="error" v-if="error">{{error}}</p>
       
-        <button class="dialogpublicationbutton" @click="addnewPublication">Add</button>
+        
+        <div class="dialogbutton">
+            <button class="dialogpublicationbutton" @click="addnewPublication"  v-if="!doedit">Add</button>
+            <button class="dialogpublicationbutton" @click="addnewPublication"  v-if="doedit">Edit</button>
+            <button class="dialogdeletepublicationbutton" @click="deletePublication"  v-if="doedit">Delete</button>
+        </div>
+
      </base-dialog>
      <h2>Publications</h2>
      <button v-if="computedisUserLoggedIn" class="publicationbutton" @click="opencloseDialog">Add a new Publication</button>
@@ -52,11 +58,16 @@ export default {
             enddate:"",
             doedit:false,
             startdate:"",
-            publicationid:""
+            publicationid:"",
             
         }
     },
     methods:{
+        async deletePublication(){
+            await FetchingEachFacultyProfile.deletepublication({id:this.id,publicationId:this.publicationid});
+            this.$emit('addedAPublication');
+            this.showDialog=false;
+        },
          startDate(startdate){
             var d = new Date(startdate);
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -80,7 +91,11 @@ export default {
             this.showDialog=!this.showDialog;
             this.link="";
             this.error="";
-            this.publicationid=""
+            this.publicationid="";
+            this.pname="";
+            if(this.showDialog==false){
+                this.doedit=false;
+            }
         },
         editpublication(publication){
             this.showDialog=!this.showDialog;
@@ -186,10 +201,12 @@ export default {
   background-color: #f6f6f6;
   max-width: 60%;
 }
-.dialogpublicationbutton{
+.dialogbutton{
     position: absolute; 
     bottom: 10px;
     left:10px;
+}
+.dialogpublicationbutton{
     text-align:center;
     padding: 0.75rem 2rem;
     font-family: 'Montserrat', sans-serif;
@@ -197,6 +214,16 @@ export default {
     color: rgb(216, 208, 208);
     cursor: pointer;
     border-radius: 30px;
+}
+.dialogdeletepublicationbutton{
+    margin-left: 0.4rem;
+    text-align:center;
+    padding: 0.75rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a0b49;
+    color: rgb(216, 208, 208);
+    cursor: pointer;
+    border-radius: 30px; 
 }
 .dialogbox{
      font-family: 'Montserrat', sans-serif;

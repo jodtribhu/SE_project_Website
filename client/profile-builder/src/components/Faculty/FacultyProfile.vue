@@ -30,6 +30,7 @@
           </div>
      <faculty-links  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilelinks="facultyProfilelinks" :computedisUserLoggedIn="computedisUserLoggedIn" @addedALink="refreshTheContent" ></faculty-links>
     <faculty-preference v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilePreferences="facultyProfilePreferences" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPreference="refreshTheContent"></faculty-preference>
+    
     <!-- <base-card v-if="Object.keys(facultyProfile).length != 0">
       <h1>Hi Faculty {{ facultyId }}</h1>
       <h2>Is he logged in {{ isLoggedIn }}</h2>
@@ -38,7 +39,9 @@
     <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
     <edit-profile v-if="editDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openeditDialog"></edit-profile>
     <student-request  v-if="studentDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openstudentRequestDialog"></student-request>
-    <endorse-faculty  v-if="endorseDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openendorseDialog"></endorse-faculty>
+
+    <faculty-endorse v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfileEndorsements="facultyProfileEndorsements" :allprofiles_send="allprofiles" ></faculty-endorse>
+    <endorse-faculty  v-if="endorseDialog"   :id=$route.params.id @finished="openendorseDialog"></endorse-faculty>
 <!-- BuildProfile Card -->
   
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
@@ -113,8 +116,9 @@ import FacultyProject from "./FacultyProject.vue";
 import EditProfile from "./EditProfile.vue";
 import StudentRequest from "./StudentRequest.vue";
 import FacultyPublications from "./FacultyPublications.vue";
+import FacultyEndorse from "./FacultyEndorse.vue";
 export default {
-  components: { BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications,EditProfile,StudentRequest,EndorseFaculty},
+  components: { FacultyEndorse,BaseCard,FacultyLinks,FacultyPreference,FacultyImage,FacultyProject,FacultyPublications,EditProfile,StudentRequest,EndorseFaculty},
   data() {
     return {
       editDialog:false,
@@ -135,10 +139,15 @@ export default {
     this.facultyId = this.$route.params.id;
     this.editDialog=false;
     this.loadfacultyprofile();
+    this.loadAllfacultyProfiles();
    
   },
 
   computed: {
+    facultyProfileEndorsements(){
+      let facultyProfile = this.$store.getters["facultyprofile"];
+      return facultyProfile.endorsements;
+    },
     isAnyUserLoggedIn(){
       if (this.$store.getters.idofuserloggedIn==null){
         return true;
@@ -176,9 +185,16 @@ export default {
      computedisUserLoggedIn(){
         this.isUserLoggedIn()
        return  this.isLoggedIn;
-    }
+    },
+    allprofiles(){
+      let allfacultyprofiles = this.$store.getters['allFacultyProfiles'];
+      console.log("hi");
+      return allfacultyprofiles;
+    },
+
   },
   methods: {
+
     openendorseDialog(){
       this.loadfacultyprofile();
       this.endorseDialog=!this.endorseDialog;
@@ -266,7 +282,17 @@ export default {
         this.error = error.message || "Something went wrong";
       }
     },
+    async loadAllfacultyProfiles()
+    {
+      try {
+        await this.$store.dispatch("loadallfacultyprofiles");
+        
+      } catch (error) {
+        this.error = error.message || "Something went wrong";
+      }
+    },
   },
+
 };
 </script>
 

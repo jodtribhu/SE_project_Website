@@ -41,7 +41,10 @@
             </div>
                 <textarea v-model="project_description" type="text" class="project-desc para"></textarea>
             
-           <button @click="submitButton">Submit</button>
+           <button @click="submitButton" v-if="!doedit"  class="dialogprojectbutton">Add</button>
+           <button @click="submitButton" v-if="doedit"  class="dialogprojectbutton">Edit</button>
+           <button @click="deleteproject" v-if="doedit"  class="dialogprojectdeletebutton">Delete</button>
+           
         </div>
         </div>
         </base-dialog>
@@ -78,6 +81,11 @@ export default {
         }
     },
     methods:{
+        async deleteproject(){
+                await FetchingEachFacultyProfile.deleteProject({ id:this.id,project_id: this.project_id}); 
+                this.$emit('addedAProject') ;
+                this.showDialog=false;       
+        },
          opencloseDialog(){
             this.projectName="";
             this.currentlyworking=false;
@@ -91,6 +99,9 @@ export default {
             this.link="";
             this.error="";
             this.project_id="";
+            if(this.showDialog==false){
+                this.doedit=false;
+            }
         },
         addproject(){
             this.showDialog=!this.showDialog;
@@ -171,6 +182,24 @@ export default {
 </script>
 
 <style scoped>
+.dialogprojectbutton{
+    text-align:center;
+    padding: 0.75rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a0b49;
+    color: rgb(216, 208, 208);
+    cursor: pointer;
+    border-radius: 30px;
+}
+.dialogprojectdeletebutton{
+    text-align:center;
+    padding: 0.75rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a0b49;
+    color: rgb(216, 208, 208);
+    cursor: pointer;
+    border-radius: 30px;
+}
 .labelcontributers
 {
     position: relative;
