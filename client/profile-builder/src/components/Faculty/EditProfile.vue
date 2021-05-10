@@ -47,9 +47,14 @@
                      <input class="i" type="text" v-model="phoneNo" >
                 </div>
                 <div class="c">
+                    <h5 class="h">Department :</h5>
+                    <input class="i" type="text"  v-model="department">
+                </div>
+                <div class="c">
                     <h5 class="h">Description :</h5>
                     <input class="i" type="text"  v-model="description">
                 </div>
+                
                 <p class="err" v-if="error!=''">{{derror}}</p>
                 <div class="c ">
                     
@@ -74,6 +79,7 @@ export default {
             oldpass:"",
             newpass:"",
             perror:"",
+            department:this.facultyprofile.Department,
             fname:this.facultyprofile.FirstName,
             lname:this.facultyprofile.LastName,
             address:this.facultyprofile.Address,
@@ -104,7 +110,7 @@ export default {
                 this.derror="Fields Not Entered"
             }
             else{
-                const response=await FetchingEachFacultyProfile.editDetails({id:this.id,fname:this.fname,lname:this.lname,address:this.address,city:this.city,phoneNo:this.phoneNo,description:this.description});
+                const response=await FetchingEachFacultyProfile.editDetails({id:this.id,fname:this.fname,lname:this.lname,address:this.address,city:this.city,phoneNo:this.phoneNo,department:this.department,description:this.description});
                     if(response.data.message==="success"){
                         this.$emit('finished')
                         this.oldpass=""

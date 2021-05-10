@@ -221,6 +221,7 @@ module.exports={
             City:req.body.city,
             PhoneNo:req.body.phoneNo,
             Description:req.body.description,
+            Department:req.body.department,
             created_at:new Date(),
             modified_at:new Date()});
         facultyprofile.save().then((facultyprofile) => {
@@ -343,6 +344,7 @@ editFacultyLinks(req,res){
                 'Address': req.body.address,
                 'City': req.body.city,
                 'PhoneNo': req.body.phoneNo,
+                'Department':req.body.department,
                 'Description': req.body.description,
             }},function(err,model) {
                 if(err){

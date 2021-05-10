@@ -61,6 +61,9 @@ const FacultyProfileSchema=new mongoose.Schema({
         type:String,
         required:[true,"Description has not been entered"]
     },
+    Department:{
+        type:String,
+    },
     links:[LinkSchema],
     publications:[PublicationSchema],
     projects:[ProjectSchema],

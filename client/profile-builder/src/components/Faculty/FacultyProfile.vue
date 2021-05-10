@@ -77,12 +77,19 @@
           class="flex-items"
           name="profilePhoneNo"
           type="text"
-          placeholder="Phone No"
+          placeholder="Phone Number"
           v-model="profilePhoneNo"
         />
+        <label class="flex-items" for="department">Department:</label>
+        <input
+          class="flex-items"
+          name="department"
+          type="text"
+          placeholder="Department"
+          v-model="department"
+        />
 
-        <label class="flex-items" for="profileAddress"
-          >Home Address or Work Address:
+        <label class="flex-items" for="profileAddress">Home Address:
         </label>
         <input
           class="flex-items"
@@ -130,6 +137,7 @@ export default {
       profileAddress:"",
       profileDescription:"",
       search:'',
+      department:'',
       isLoggedIn:false,
       studentDialog:false,
       endorseDialog:false,
@@ -247,6 +255,7 @@ export default {
                     address:this.profileAddress,
                     phoneNo:this.profilePhoneNo,
                     city:this.profileCity,
+                    department:this.department,
                     description:this.profileDescription
                     })
                        
