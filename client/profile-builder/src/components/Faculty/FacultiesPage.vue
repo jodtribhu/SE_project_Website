@@ -2,7 +2,30 @@
     <div >
         <user-header ></user-header>
         <div class="bellowzindex">
-       
+         <base-card>
+            <h1>Find your faculty.</h1>
+            <div class='search-bar'>
+                  <input type="text" class='mainbar input' placeholder="Search">
+                  <input type="text" class="locationbar input" placeholder="Location">
+              </div>
+              <div class="filters">
+                <input type="button" id="publications" class="filter-btn" value="Publication"  />
+                <input type="button" id="project" class="filter-btn" value="Project" />
+                <input type="button" id="skills" class="filter-btn" value="Skills" />
+                <input type="button" id="availability" class="filter-btn" value="Available for project" />
+                <div class="department-section">
+                    <select name="department" class="department input" id="department">
+                        <option value="none" selected disabled hidden>Department</option>
+                        <option value="cse">CSE</option>
+                        <option value="ece">ECE</option>
+                        <option value="mech">Mechanical</option>
+                        <option value="civil">Civil</option>
+                        <option value="eee">EEE</option>
+                        <option value="eie">EIE</option>
+                    </select>
+                  </div>
+              </div>
+          </base-card>
           <base-card>
           <h4 class="heading">People</h4>
              <div class="eachpeople" v-for="facultyprofile in allFacultyProfiles" :key="facultyprofile._id">
@@ -121,4 +144,68 @@ li{
   top: 100px;
   z-index:-999;
 }
+
+/*Yadhu*/
+h1{
+  text-align: center;
+}
+.mainspace{
+    width:60%;
+    border-radius: 20px 20px;
+    background-color: white;
+    font-family: "Nunito Sans", sans-serif;
+}
+.search-bar{
+     display:flex;
+      padding-bottom:1rem;
+}
+.input{
+    height: 35px;
+    border-radius:20px 20px;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+    border-width:1px
+}
+.input:focus{
+    outline: none;
+}
+::placeholder{
+    padding: 0 10px;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+}
+.mainbar{
+    width: 35%;
+    margin-right: 25px;
+}
+.locationbar{
+    width:35%
+}
+.department{
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+    height: 40px;
+}
+.filter-btn{
+    border-radius: 20px 20px;
+    margin-right:0.2rem;
+    height: 40px;
+    color: grey;
+    padding-left:1.5rem;
+    padding-right:1.5rem;
+    font-family: "Nunito Sans", sans-serif;
+    background-color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    border-width: 1px;
+  
+
+}
+
+.filters{
+  display:flex;
+
+}
+
+
 </style>
