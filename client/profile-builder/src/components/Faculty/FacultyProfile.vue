@@ -12,7 +12,7 @@
             <div class="profile-info">
         
                 <div class="buttonposition">
-                  <button  href="#" @click="openstudentRequestDialog()"  v-if="isAnyUserLoggedIn"  class="myButton"><i class="far fa-paper-plane"></i>Sent Request</button>
+                  <button  href="#" @click="openstudentRequestDialog()"  v-if="isAnyUserLoggedIn && facultyisAvailable"  class="myButton"><i class="far fa-paper-plane"></i>Sent Request</button>
                   <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton"><i class="fas fa-cog"></i>Edit Profile</button>
                   <button href="#" @click="openendorseDialog()" v-if="!computedisUserLoggedIn && !isAnyUserLoggedIn" class="myButton">Endorse Profile</button>
                 </div>
@@ -155,6 +155,10 @@ export default {
     facultyProfileEndorsements(){
       let facultyProfile = this.$store.getters["facultyprofile"];
       return facultyProfile.endorsements;
+    },
+    facultyisAvailable(){
+      let facultyProfile = this.$store.getters["facultyprofile"];
+      return facultyProfile.ProjectAvailability;
     },
     isAnyUserLoggedIn(){
       if (this.$store.getters.idofuserloggedIn==null){
