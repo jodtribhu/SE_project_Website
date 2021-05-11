@@ -5,48 +5,64 @@
          <base-card>
             <h1>Find your faculty.</h1>
             <div class='search-bar'>
-                  <input type="text" class='mainbar input' placeholder="Search">
-                  <input type="text" class="locationbar input" placeholder="Location">
+                  <input type="text" v-model="search" class='mainbar input' v-if="publication" placeholder="Enter Publication">
+                  <input type="text" v-model="search" class='mainbar input' v-else-if="skills" placeholder="Enter Skills">
+                  <input type="text" v-model="search" class='mainbar input' v-else-if="project" placeholder="Enter Projects">
+                   <input type="text" v-model="search" class='mainbar input' v-else placeholder="Search">
+                  <input type="text" v-model="location" class="locationbar input" placeholder="Location">
               </div>
               <div class="filters">
-                <input type="button" id="publications" class="filter-btn" value="Publication"  />
-                <input type="button" id="project" class="filter-btn" value="Project" />
-                <input type="button" id="skills" class="filter-btn" value="Skills" />
-                <input type="button" id="availability" class="filter-btn" value="Available for project" />
+                <button type="button" id="publications" class="filter-btn" @click="togglePublication()">Publication</button>
+                <button type="button" id="project" class="filter-btn" @click="toggleProject()">Project</button>
+                <button type="button" id="skills" class="filter-btn" @click="toggleSkills()">Skills</button>
+                <button type="button" id="availability" class="filter-btn" @click="toggleAvailable()">Available for project</button>
                 <div class="department-section">
-                    <select name="department" class="department input" id="department">
-                        <option value="none" selected disabled hidden>Department</option>
-                        <option value="cse">CSE</option>
-                        <option value="ece">ECE</option>
-                        <option value="mech">Mechanical</option>
-                        <option value="civil">Civil</option>
-                        <option value="eee">EEE</option>
-                        <option value="eie">EIE</option>
+                    <select name="department" class="department input" id="department" v-model="searchdepartment" >
+                        <option value="None" selected>None</option>
+                        <option value="Computer Science">CSE</option>
+                        <option value="Electronics and Communication">ECE</option>
+                        <option value="Mechanical">Mechanical</option>
+                        <option value="Civil">Civil</option>
+                        <option value="Electrical and Engineering">EEE</option>
+                        <option value="Electronics and Instrumentation">EIE</option>
+        
                     </select>
                   </div>
               </div>
           </base-card>
-          <base-card>
-          <h4 class="heading">People</h4>
-             <div class="eachpeople" v-for="facultyprofile in allFacultyProfiles" :key="facultyprofile._id">
+          <base-card v-if="search!=''"> 
+          <h4 class="heading">Search Results</h4>
+             <div class="eachpeople" v-for="facultyprofile in searchedProfile()" :key="facultyprofile._id">
                <search-item>
-                
                 <div :style="{ 'background-image': `url(${converturl(facultyprofile.ProfilePhotoPath) })` }"  class="profile-picture" />
-                 
-                 
-               <li class="name">
-                 {{facultyprofile.FirstName}} {{facultyprofile.LastName}}  
-               </li>
-               <li  class="description">
-                 {{facultyprofile.Description}}
-               </li>
-               <li class="city">
-                 {{facultyprofile.City}}
-               </li>    
+                  <li class="name">
+                    {{facultyprofile.FirstName}} {{facultyprofile.LastName}}  
+                  </li>
+                  <li  class="description">
+                    {{facultyprofile.Description}}
+                  </li>
+                  <li class="city">
+                    {{facultyprofile.City}}
+                  </li>    
                 </search-item> 
              </div>
-         
-        
+          </base-card>
+          <base-card>
+          <h4 class="heading">People You May Know</h4>
+             <div class="eachpeople" v-for="facultyprofile in allFacultyProfiles" :key="facultyprofile._id">
+               <search-item>
+                <div :style="{ 'background-image': `url(${converturl(facultyprofile.ProfilePhotoPath) })` }"  class="profile-picture" />
+                  <li class="name">
+                    {{facultyprofile.FirstName}} {{facultyprofile.LastName}}  
+                  </li>
+                  <li  class="description">
+                    {{facultyprofile.Description}}
+                  </li>
+                  <li class="city">
+                    {{facultyprofile.City}}
+                  </li>    
+                </search-item> 
+             </div>
           </base-card>
             
         </div>
@@ -63,11 +79,20 @@ export default {
   },
   data(){
     return{
-      serverpath:"http://localhost:8081/upload/ "
+      serverpath:"http://localhost:8081/upload/ ",
+      available:false,
+      publication:false,
+      skills:false,
+      project:false,
+      search:"",
+      searchdepartment:"",
+      location:""
+
     }
   },
     computed:{
-          allFacultyProfiles(){
+
+      allFacultyProfiles(){
             let allfacultyprofiles = this.$store.getters['allFacultyProfiles'];
             console.log("Inside all faculty Profiels");
             console.log(allfacultyprofiles);
@@ -75,6 +100,203 @@ export default {
         },
     },
     methods: {
+      searchedProfile(){
+        var rprofiles;
+        let profiles = this.$store.getters['allFacultyProfiles'];
+        console.log("LLLLLLLLLLLLLLLLLLLLlllllll");
+        console.log(profiles);
+        console.log(this.search);
+        if(this.publication==true && this.search!=""){
+          console.log("LLLLLLLLLLLLLLLLLLLLlllllldddddddddl");
+           rprofiles=profiles.filter((profiles) => {
+                console.log(profiles);
+               var publications=profiles.publications.filter((publication)=>{
+                  if (publication.publicationName.toUpperCase().includes(this.search.toUpperCase())) {
+                    return true;
+                    }
+                });
+                if(publications.length>0){
+                  return true;
+                }
+            });
+          if(this.searchdepartment!="None"){
+            rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
+                return true;
+               }
+            });
+          }
+          if(this.location!=""){
+            rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                return true;
+               }
+               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+               {
+                 return true;
+               }
+            });
+          }
+          return rprofiles;
+        }
+       else if(this.skills==true && this.search!=""){
+           rprofiles=profiles.filter((profiles) => {
+                console.log(profiles);
+               var preferences=profiles.preferences.filter((preference)=>{
+                  if (preference.toUpperCase().includes(this.search.toUpperCase())) {
+                    return true;
+                    }
+                });
+                if(preferences.length>0){
+                  return true;
+                }
+            });
+        if(this.searchdepartment!="None"){
+          rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
+                return true;
+               }
+            });
+        }
+        if(this.location!=""){
+            rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                return true;
+               }
+               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+               {
+                 return true;
+               }
+            });
+          }
+        return rprofiles;
+        }
+       else if(this.project==true && this.search!=""){
+           rprofiles=profiles.filter((profiles) => {
+                console.log(profiles);
+               var projects=profiles.projects.filter((project)=>{
+                  if (project.projectName.toUpperCase().includes(this.search.toUpperCase())) {
+                    return true;
+                    }
+                  else if(project.associated_with.toUpperCase().includes(this.search.toUpperCase())){
+                    return true;
+                  }
+                });
+                if(projects.length>0){
+                  return true;
+                }
+            });
+        if(this.searchdepartment!="None"){
+          rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
+                return true;
+               }
+            });
+        }
+        if(this.location!=""){
+            rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                return true;
+               }
+               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+               {
+                 return true;
+               }
+            });
+          }
+        return rprofiles;
+        } 
+      else if(this.project==true && this.search!=""){
+           rprofiles=profiles.filter((profiles) => {
+                console.log(profiles);
+               var projects=profiles.projects.filter((project)=>{
+                  if (project.projectName.toUpperCase().includes(this.search.toUpperCase())) {
+                    return true;
+                    }
+                  else if(project.associated_with.toUpperCase().includes(this.search.toUpperCase())){
+                    return true;
+                  }
+                });
+                if(projects.length>0){
+                  return true;
+                }
+            });
+        if(this.searchdepartment!="None"){
+          rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
+                return true;
+               }
+            });
+        }
+        if(this.location!=""){
+            rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                return true;
+               }
+               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+               {
+                 return true;
+               }
+            });
+          }
+        return rprofiles;
+        }     
+        else if( this.publication==false && this.skills==false && this.project==false && this.search!=""){
+          console.log("Insiddddddddddddddddddd");
+          rprofiles=profiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.FirstName.toUpperCase().includes(this.search.toUpperCase()) || allFacultyProfile.LastName.toUpperCase().includes(this.search.toUpperCase())  ) {
+                return true;
+               }
+            });
+         if(this.searchdepartment!="None"){
+          rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
+                return true;
+               }
+            });
+        }
+        if(this.location!=""){
+            rprofiles=rprofiles.filter((allFacultyProfile) => {
+              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                return true;
+               }
+               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+               {
+                 return true;
+               }
+            });
+          }
+          return rprofiles;
+        }  
+        else{
+          return "";
+        }
+
+      },
+      toggleAvailable(){
+        this.available=!this.available;
+        this.publication=false;
+        this.skills=false;
+        this.project=false;
+      },
+      togglePublication(){
+        this.publication=!this.publication;
+        this.available=false;
+        this.skills=false;
+        this.project=false;
+      },      
+      toggleSkills(){
+        this.skills=!this.skills;
+        this.publication=false;
+        this.available=false;
+        this.project=false;
+      },
+      toggleProject(){
+        this.project=!this.project;
+        this.publication=false;
+        this.skills=false;
+        this.available=false;
+      },
       converturl(filepath){
         console.log("inside ffffffffffff");
            
@@ -175,11 +397,11 @@ h1{
     font-size: 1rem;
 }
 .mainbar{
-    width: 35%;
+    width: 40%;
     margin-right: 25px;
 }
 .locationbar{
-    width:35%
+    width:40%
 }
 .department{
     padding-left:1.5rem;

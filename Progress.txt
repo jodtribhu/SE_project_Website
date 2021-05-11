@@ -87,3 +87,4 @@ WebApp V2.23->Finished Endorse Buttons
 WebApp V2.24->Finished Endorsements and delete functionality of all  
 WebApp V2.25->Added Department to Profiles(need to add for already users)
 WebApp V2.26->Designed the search bar(Yadhu CSS)
+WebApp V2.27->Finished the implementation of search Bar
