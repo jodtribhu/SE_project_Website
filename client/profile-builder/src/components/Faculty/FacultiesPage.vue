@@ -12,10 +12,10 @@
                   <input type="text" v-model="location" class="locationbar input" placeholder="Location">
               </div>
               <div class="filters">
-                <button type="button" id="publications" class="filter-btn" @click="togglePublication()">Publication</button>
-                <button type="button" id="project" class="filter-btn" @click="toggleProject()">Project</button>
-                <button type="button" id="skills" class="filter-btn" @click="toggleSkills()">Skills</button>
-                <button type="button" id="availability" class="filter-btn" @click="toggleAvailable()">Available for project</button>
+                <button type="button" id="publications" class="filter-btn" :class="{'blue-color':publication===true}" @click="togglePublication()">Publication</button>
+                <button type="button" id="project" class="filter-btn" :class="{'blue-color':project===true}" @click="toggleProject()">Project</button>
+                <button type="button" id="skills" class="filter-btn" :class="{'blue-color':skills===true}"  @click="toggleSkills()">Skills</button>
+                <button type="button" id="availability" class="filter-btn" :class="{'blue-color':available===true}"  @click="toggleAvailable()">Available for project</button>
                 <div class="department-section">
                     <select name="department" class="department input" id="department" v-model="searchdepartment" >
                         <option value="None" selected>None</option>
@@ -128,11 +128,9 @@ export default {
       searchedProfile(){
         var rprofiles;
         let profiles = this.$store.getters['allFacultyProfiles'];
-        console.log("LLLLLLLLLLLLLLLLLLLLlllllll");
         console.log(profiles);
         console.log(this.search);
         if(this.publication==true && this.search!=""){
-          console.log("LLLLLLLLLLLLLLLLLLLLlllllldddddddddl");
            rprofiles=profiles.filter((profiles) => {
                 console.log(profiles);
                var publications=profiles.publications.filter((publication)=>{
@@ -162,6 +160,13 @@ export default {
                   }
                 });
               }
+            if(this.available==true){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.ProjectAvailability==true) {
+                    return true;
+                  }
+                });
+            }
           return rprofiles;
         }
        else if(this.skills==true && this.search!=""){
@@ -194,11 +199,17 @@ export default {
                   }
                 });
              }
+            if(this.available==true){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.ProjectAvailability==true) {
+                    return true;
+                  }
+                });
+            }
         return rprofiles;
         }
        else if(this.project==true && this.search!=""){
            rprofiles=profiles.filter((profiles) => {
-                console.log(profiles);
                var projects=profiles.projects.filter((project)=>{
                   if (project.projectName.toUpperCase().includes(this.search.toUpperCase())) {
                     return true;
@@ -229,6 +240,13 @@ export default {
                   }
                 });
               }
+            if(this.available==true){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.ProjectAvailability==true) {
+                    return true;
+                  }
+                });
+            }
         return rprofiles;
         } 
       else if(this.project==true && this.search!=""){
@@ -253,6 +271,13 @@ export default {
                   }
                 });
             }
+            if(this.available==true){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.ProjectAvailability==true) {
+                    return true;
+                  }
+                });
+            }
             if(this.location!=""){
                 rprofiles=rprofiles.filter((allFacultyProfile) => {
                   if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
@@ -266,8 +291,7 @@ export default {
               }
         return rprofiles;
         }     
-        else if( this.publication==false && this.skills==false && this.project==false && this.search!=""){
-          console.log("Insiddddddddddddddddddd");
+        else if(  this.publication==false && this.skills==false && this.project==false && this.search!=""){
           rprofiles=profiles.filter((allFacultyProfile) => {
               if (allFacultyProfile.FirstName.toUpperCase().includes(this.search.toUpperCase()) || allFacultyProfile.LastName.toUpperCase().includes(this.search.toUpperCase())  && allFacultyProfile._id!=this.$store.getters.idofuserloggedIn ) {
                 return true;
@@ -280,6 +304,13 @@ export default {
                }
             });
         }
+        if(this.available==true){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.ProjectAvailability==true) {
+                    return true;
+                  }
+                });
+         }
         if(this.location!=""){
             rprofiles=rprofiles.filter((allFacultyProfile) => {
               if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
@@ -300,9 +331,6 @@ export default {
       },
       toggleAvailable(){
         this.available=!this.available;
-        this.publication=false;
-        this.skills=false;
-        this.project=false;
       },
       togglePublication(){
         this.publication=!this.publication;
@@ -448,7 +476,10 @@ h1{
   
 
 }
-
+.blue-color{
+  background-color:rgb(78, 78, 238);
+  color:white;
+}
 .filters{
   display:flex;
 

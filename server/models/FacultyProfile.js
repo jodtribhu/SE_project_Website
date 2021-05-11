@@ -45,6 +45,11 @@ const FacultyProfileSchema=new mongoose.Schema({
         type:String,
         required:[true,"LastName has not been entered"]
     },
+    ProjectAvailability:{
+        type:Boolean,
+        default:true,
+        required:[true,"ProjectAvailability has not been entered"]
+    },
     Address:{
         type:String,
         required:[true,"Address has not been entered"]

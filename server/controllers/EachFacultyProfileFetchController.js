@@ -346,6 +346,7 @@ editFacultyLinks(req,res){
                 'PhoneNo': req.body.phoneNo,
                 'Department':req.body.department,
                 'Description': req.body.description,
+                'ProjectAvailability':req.body.availability
             }},function(err,model) {
                 if(err){
                     console.log(err);

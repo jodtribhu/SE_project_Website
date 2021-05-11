@@ -54,6 +54,10 @@
                     <h5 class="h">Description :</h5>
                     <input class="i" type="text"  v-model="description">
                 </div>
+                <div class="c">
+                    <h5 class="h">Project Availability :</h5>
+                    <input class="i" type="checkbox"  v-model="availability">
+                </div>
                 
                 <p class="err" v-if="error!=''">{{derror}}</p>
                 <div class="c ">
@@ -86,6 +90,7 @@ export default {
             city:this.facultyprofile.City,
             phoneNo:this.facultyprofile.PhoneNo,
             description:this.facultyprofile.Description,
+            availability:this.facultyprofile.ProjectAvailability,
             derrror:""
 
         }
@@ -110,7 +115,7 @@ export default {
                 this.derror="Fields Not Entered"
             }
             else{
-                const response=await FetchingEachFacultyProfile.editDetails({id:this.id,fname:this.fname,lname:this.lname,address:this.address,city:this.city,phoneNo:this.phoneNo,department:this.department,description:this.description});
+                const response=await FetchingEachFacultyProfile.editDetails({id:this.id,fname:this.fname,lname:this.lname,address:this.address,city:this.city,phoneNo:this.phoneNo,department:this.department,description:this.description,availability:this.availability});
                     if(response.data.message==="success"){
                         this.$emit('finished')
                         this.oldpass=""
