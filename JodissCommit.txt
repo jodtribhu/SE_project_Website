@@ -79,3 +79,4 @@ WebApp V2.25->Added Department to Profiles(need to add for already users)
 WebApp V2.27->Finished the implementation of search Bar
 WebApp V2.28->Finished the People you may know and also removed his profile from search results
 WebApp V2.29->Finished the Availability and toggle button functionality
+WebApp V2.30->Finished The SE WEB PROJECT.Check for bugs
