@@ -32,6 +32,7 @@
           </base-card>
           <base-card v-if="search!=''"> 
           <h4 class="heading">Search Results</h4>
+             <h5 class="msg" v-if="searchedProfile().length==0">No search Results</h5>
              <div v-on:click="goToSearch(facultyprofile)" class="eachpeople" v-for="facultyprofile in searchedProfile()" :key="facultyprofile._id">
                <search-item >
                 <div :style="{ 'background-image': `url(${converturl(facultyprofile.ProfilePhotoPath) })` }"  class="profile-picture" />
@@ -381,6 +382,10 @@ export default {
 </script>
 
 <style scoped>
+.msg{
+  font-family: "Montserrat", sans-serif;
+  font-size:1rem;
+}
 .profile-picture {
   float: left;
    display: block;
@@ -444,11 +449,7 @@ h1{
 .input:focus{
     outline: none;
 }
-::placeholder{
-    padding: 0 10px;
-    font-family: "Nunito Sans", sans-serif;
-    font-size: 1rem;
-}
+
 .mainbar{
     width: 40%;
     margin-right: 25px;
@@ -484,6 +485,10 @@ h1{
   display:flex;
 
 }
-
-
+input{
+    padding: 0 1rem;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+    color:black;
+}
 </style>
