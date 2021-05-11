@@ -32,8 +32,8 @@
           </base-card>
           <base-card v-if="search!=''"> 
           <h4 class="heading">Search Results</h4>
-             <div class="eachpeople" v-for="facultyprofile in searchedProfile()" :key="facultyprofile._id">
-               <search-item>
+             <div v-on:click="goToSearch(facultyprofile)" class="eachpeople" v-for="facultyprofile in searchedProfile()" :key="facultyprofile._id">
+               <search-item >
                 <div :style="{ 'background-image': `url(${converturl(facultyprofile.ProfilePhotoPath) })` }"  class="profile-picture" />
                   <li class="name">
                     {{facultyprofile.FirstName}} {{facultyprofile.LastName}}  
@@ -47,7 +47,7 @@
                 </search-item> 
              </div>
           </base-card>
-          <base-card>
+          <base-card v-if="!isAnyUserLoggedIn">
           <h4 class="heading">People You May Know</h4>
              <div class="eachpeople" v-for="facultyprofile in allFacultyProfiles" :key="facultyprofile._id">
                <search-item>
@@ -91,15 +91,40 @@ export default {
     }
   },
     computed:{
-
+    isAnyUserLoggedIn(){
+      if (this.$store.getters.idofuserloggedIn==null){
+        return true;
+      }
+      else{
+        return false;
+      }
+    },
       allFacultyProfiles(){
             let allfacultyprofiles = this.$store.getters['allFacultyProfiles'];
+            var user_id=this.$store.getters.idofuserloggedIn;
+            var facultyprofile=allfacultyprofiles.find(item => item._id ===user_id );
+            var profiles;
+     
+            profiles=allfacultyprofiles.filter((Fprofile) => {
+                  if (Fprofile.Department.includes(facultyprofile.Department) && Fprofile._id!=this.$store.getters.idofuserloggedIn ) {
+                    return true;
+                  }
+                });
+           profiles= this.shuffle(profiles);
             console.log("Inside all faculty Profiels");
-            console.log(allfacultyprofiles);
-            return allfacultyprofiles;
+            var tprofiles = profiles.slice(1, 4);
+            return tprofiles;
         },
     },
     methods: {
+      shuffle(array) {
+          array.sort(() => Math.random() - 0.5);
+          return array;
+      },
+    async goToSearch(fprofile){
+      await this.$router.push("/faculties/"+fprofile._id);
+      this.$store.dispatch("loadthefacultyprofile",{id:this.$route.params.id});
+    },
       searchedProfile(){
         var rprofiles;
         let profiles = this.$store.getters['allFacultyProfiles'];
@@ -111,64 +136,64 @@ export default {
            rprofiles=profiles.filter((profiles) => {
                 console.log(profiles);
                var publications=profiles.publications.filter((publication)=>{
-                  if (publication.publicationName.toUpperCase().includes(this.search.toUpperCase())) {
+                  if (publication.publicationName.toUpperCase().includes(this.search.toUpperCase()) ) {
                     return true;
                     }
                 });
-                if(publications.length>0){
+                if(publications.length>0 && profiles._id!=this.$store.getters.idofuserloggedIn){
                   return true;
                 }
             });
-          if(this.searchdepartment!="None"){
-            rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
-                return true;
-               }
-            });
-          }
-          if(this.location!=""){
-            rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
-                return true;
-               }
-               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
-               {
-                 return true;
-               }
-            });
-          }
+              if(this.searchdepartment!="None"){
+                rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase()) ) {
+                    return true;
+                  }
+                });
+              }
+              if(this.location!=""){
+                rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())  ) {
+                    return true;
+                  }
+                  else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()) )
+                  {
+                    return true;
+                  }
+                });
+              }
           return rprofiles;
         }
        else if(this.skills==true && this.search!=""){
            rprofiles=profiles.filter((profiles) => {
                 console.log(profiles);
                var preferences=profiles.preferences.filter((preference)=>{
-                  if (preference.toUpperCase().includes(this.search.toUpperCase())) {
+                  if (preference.toUpperCase().includes(this.search.toUpperCase()) ) {
                     return true;
                     }
                 });
-                if(preferences.length>0){
+                if(preferences.length>0 && profiles._id!=this.$store.getters.idofuserloggedIn){
                   return true;
                 }
             });
-        if(this.searchdepartment!="None"){
-          rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
-                return true;
-               }
-            });
-        }
-        if(this.location!=""){
-            rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
-                return true;
-               }
-               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
-               {
-                 return true;
-               }
-            });
-          }
+            if(this.searchdepartment!="None"){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase()) ) {
+                    return true;
+                  }
+                });
+            }
+            if(this.location!=""){
+                rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                    return true;
+                  }
+                  else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+                  {
+                    return true;
+                  }
+                });
+             }
         return rprofiles;
         }
        else if(this.project==true && this.search!=""){
@@ -182,28 +207,28 @@ export default {
                     return true;
                   }
                 });
-                if(projects.length>0){
+                if(projects.length>0  && profiles._id!=this.$store.getters.idofuserloggedIn){
                   return true;
                 }
             });
-        if(this.searchdepartment!="None"){
-          rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
-                return true;
-               }
-            });
-        }
-        if(this.location!=""){
-            rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
-                return true;
-               }
-               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
-               {
-                 return true;
-               }
-            });
-          }
+            if(this.searchdepartment!="None"){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
+                    return true;
+                  }
+                });
+            }
+            if(this.location!=""){
+                rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                    return true;
+                  }
+                  else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+                  {
+                    return true;
+                  }
+                });
+              }
         return rprofiles;
         } 
       else if(this.project==true && this.search!=""){
@@ -217,34 +242,34 @@ export default {
                     return true;
                   }
                 });
-                if(projects.length>0){
+                if(projects.length>0  && profiles._id!=this.$store.getters.idofuserloggedIn){
                   return true;
                 }
             });
-        if(this.searchdepartment!="None"){
-          rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
-                return true;
-               }
-            });
-        }
-        if(this.location!=""){
-            rprofiles=rprofiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
-                return true;
-               }
-               else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
-               {
-                 return true;
-               }
-            });
-          }
+            if(this.searchdepartment!="None"){
+              rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
+                    return true;
+                  }
+                });
+            }
+            if(this.location!=""){
+                rprofiles=rprofiles.filter((allFacultyProfile) => {
+                  if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
+                    return true;
+                  }
+                  else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
+                  {
+                    return true;
+                  }
+                });
+              }
         return rprofiles;
         }     
         else if( this.publication==false && this.skills==false && this.project==false && this.search!=""){
           console.log("Insiddddddddddddddddddd");
           rprofiles=profiles.filter((allFacultyProfile) => {
-              if (allFacultyProfile.FirstName.toUpperCase().includes(this.search.toUpperCase()) || allFacultyProfile.LastName.toUpperCase().includes(this.search.toUpperCase())  ) {
+              if (allFacultyProfile.FirstName.toUpperCase().includes(this.search.toUpperCase()) || allFacultyProfile.LastName.toUpperCase().includes(this.search.toUpperCase())  && allFacultyProfile._id!=this.$store.getters.idofuserloggedIn ) {
                 return true;
                }
             });

@@ -63,6 +63,7 @@ const FacultyProfileSchema=new mongoose.Schema({
     },
     Department:{
         type:String,
+        required:[true,"Department has not been entered"]
     },
     links:[LinkSchema],
     publications:[PublicationSchema],
