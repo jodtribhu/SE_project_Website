@@ -317,6 +317,7 @@ editFacultyLinks(req,res){
                 'projects.$.associated_with': req.body.associated_with,
                 'projects.$.project_url': req.body.project_url,
                 'projects.$.project_description': req.body.project_description,
+                'projects.$.studentVisibility': req.body.studentVisibility,
             }},function(err,model) {
                 if(err){
                     console.log(err);

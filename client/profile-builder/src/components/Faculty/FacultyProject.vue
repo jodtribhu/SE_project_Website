@@ -40,7 +40,10 @@
                 <label for="project-desc">Project Description</label>
             </div>
                 <textarea v-model="project_description" type="text" class="project-desc para"></textarea>
-            
+            <div v-if="doedit"  class="visible">
+                <h5 class="h">Project Visibility To students :</h5>
+                <input class="i" type="checkbox"  v-model="studentVisibility">
+            </div>
            <button @click="submitButton" v-if="!doedit"  class="dialogprojectbutton">Add</button>
            <button @click="submitButton" v-if="doedit"  class="dialogprojectbutton">Edit</button>
            <button @click="deleteproject" v-if="doedit"  class="dialogprojectdeletebutton">Delete</button>
@@ -53,7 +56,7 @@
         <h2>Projects</h2>
         <div class="singleitems">
             <div  v-for="facultyProject in facultyProjects" :key="facultyProject._id">
-            <project-card v-on:editCalled="editProject(facultyProject)"  :id="id" :facultyproject="facultyProject" ></project-card>
+            <project-card v-on:editCalled="editProject(facultyProject)"  :id="id" :facultyproject="facultyProject" :computedisUserLoggedIn="computedisUserLoggedIn"   v-if="checktoShow(facultyProject)" ></project-card>
         </div>
         </div>
         
@@ -63,7 +66,7 @@
 <script>
 import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 export default {
-    props:['id','facultyProjects','computedisUserLoggedIn'],
+    props:['id','facultyProjects','computedisUserLoggedIn','isAnyUserLoggedIn'],
     data(){
         return{
              tags:["Machine Learning","Computer Networks","Front-End Development","Back-End Development","Artificial Intellegence"],
@@ -77,10 +80,24 @@ export default {
             project_url:"",
             project_description:"",
             doedit:false,
-            project_id:""
+            project_id:"",
+            studentVisibility:false
         }
     },
     methods:{
+        checktoShow(facultyProject){
+            console.log(":::::::::::::::;;;;;;;;");
+            console.log(this.isAnyUserLoggedIn);
+            if(!this.isAnyUserLoggedIn){
+                return true;
+            }
+            else if(facultyProject.studentVisibility==true){
+                return true;
+            }
+            else{
+                return false;
+            }
+        },
         async deleteproject(){
                 await FetchingEachFacultyProfile.deleteProject({ id:this.id,project_id: this.project_id}); 
                 this.$emit('addedAProject') ;
@@ -119,6 +136,7 @@ export default {
             this.project_description=project.project_description;
             this.project_id=project._id;
             this.doedit=true;
+            this.studentVisibility=project.studentVisibility;
        },
         async submitButton(){
                 this.showDialog=false;
@@ -136,7 +154,8 @@ export default {
                             contributers:this.contributers,
                             associated_with:this.associated_with,
                             project_url:this.project_url,
-                            project_description:this.project_description
+                            project_description:this.project_description,
+                            studentVisibility:this.studentVisibility
                             });
                         if(response.data.message==="success"){
                             this.$emit('addedAProject')
@@ -182,6 +201,24 @@ export default {
 </script>
 
 <style scoped>
+.visible{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.h{
+    width: 50%;
+    text-align: left;
+    font-size: 1rem ;
+
+}
+.i{
+    width: 50%;
+    font-family: 'Montserrat', sans-serif; 
+    height:1rem;
+}
+
+
 .dialogprojectbutton{
     text-align:center;
     padding: 0.75rem 2rem;

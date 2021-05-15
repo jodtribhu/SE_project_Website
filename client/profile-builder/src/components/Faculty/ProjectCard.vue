@@ -3,7 +3,7 @@
       <ul class="topspacing">
                 <li class="pname">{{facultyproject.projectName}} <p  class="cworking" v-if="facultyproject.currentlyworking"> <span class="dot">&#8226;</span> In Progress</p> </li>
                 <li class="date">  {{startDate(facultyproject.startdate)}} <span v-if="facultyproject.enddate!=null"> to </span>  {{endDate(facultyproject.enddate)}}</li>
-                <li><i v-on:click="editProject() " class=" edit fas fa-pen"></i></li>
+                <li v-if="computedisUserLoggedIn"><i v-on:click="editProject() " class=" edit fas fa-pen"></i></li>
                 <li class="cworking" v-if="facultyproject.currentlyworking"> </li>
                  
                 
@@ -28,7 +28,7 @@
 <script>
 
 export default {
-    props:['facultyproject','id'],
+    props:['facultyproject','id','computedisUserLoggedIn'],
     data(){
         return{
             showDescription:false

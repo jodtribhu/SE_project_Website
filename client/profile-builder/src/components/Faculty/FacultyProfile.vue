@@ -35,7 +35,7 @@
       <h1>Hi Faculty {{ facultyId }}</h1>
       <h2>Is he logged in {{ isLoggedIn }}</h2>
     </base-card> -->
-    <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
+    <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" :isAnyUserLoggedIn="isAnyUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
     <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
     <edit-profile v-if="editDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openeditDialog"></edit-profile>
     <student-request  v-if="studentDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openstudentRequestDialog"></student-request>

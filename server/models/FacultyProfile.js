@@ -9,6 +9,7 @@ const ProjectSchema = new mongoose.Schema({
      contributers:String,
      associated_with:String,
      project_url:String,
+     studentVisibility:{type:Boolean,default:true},
      project_description:String
     });
 const PublicationSchema=new mongoose.Schema({

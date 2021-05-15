@@ -36,7 +36,7 @@
      <button v-if="computedisUserLoggedIn" class="publicationbutton" @click="opencloseDialog">Add a new Publication</button>
      <div class="publicationPadding">
         <div  v-for="singlePublication in facultyPublications" :key="singlePublication._id">
-            <p class="ptitle"><a @click="addViewCount(singlePublication._id)" :href="singlePublication.link">{{singlePublication.publicationName}}</a><i v-on:click="editpublication(singlePublication) " class=" edit fas fa-pen"></i></p>
+            <p class="ptitle"><a @click="addViewCount(singlePublication._id)" :href="singlePublication.link">{{singlePublication.publicationName}}</a><i v-if="computedisUserLoggedIn" v-on:click="editpublication(singlePublication) " class=" edit fas fa-pen"></i></p>
             <p class="pdate">{{startDate(singlePublication.startdate)}} to {{endDate(singlePublication.enddate)}}</p>  
               <hr>
         </div>
