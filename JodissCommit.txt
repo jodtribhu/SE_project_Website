@@ -83,3 +83,4 @@ WebApp V2.30->Finished The SE WEB PROJECT.Check for bugs
 WebApp V2.31->Changed the button whether the faculty is available or not
 WebApp V2.32->Corrected the padding of the search bar
 WebApp V2.33->Done Project Visibility ability to students
+WebApp V2.34->Need to Try more features
