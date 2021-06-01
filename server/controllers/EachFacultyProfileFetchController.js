@@ -39,9 +39,9 @@ module.exports={
         var endorsingFacultyId=req.body.facultyendorsing;
         var endorseDate=req.body.date;
         var endorseDescription=req.body.endorseDescription;
-        FacultyProfile.findOne({_id:endorsingFacultyId}, function(err, facultyProfile){
+        FacultyProfile.findOne({_id:endorsingFacultyId}, function(err2, facultyProfile){
             if (facultyProfile!=null){
-                FacultyProfile.findOne({_id:endorsedFacultyId}, function(err, facultyProfile2){
+                FacultyProfile.findOne({_id:endorsedFacultyId}, function(err1, facultyProfile2){
                     if(facultyProfile2!=null){
                         var endorse={endorsedfacultyId:endorsedFacultyId,
                             facultyendorsingId:endorsingFacultyId,
@@ -148,12 +148,12 @@ module.exports={
         }
         else
         {
-            var wday=weekday[d.getDay()]; 
+             wday=weekday[d.getDay()]; 
             var month=months[d.getMonth()]; 
-            var update={}
+            update={}
             update[wday]=1;
         
-             var updateMonth={}
+            updateMonth={}
              updateMonth[month]=1;
               console.log(update);
             FacultyProfile.findByIdAndUpdate({_id:req.body.id},{'$inc': {'tcount':1}},{new:true})
@@ -166,11 +166,6 @@ module.exports={
             .then((data)=>console.log("updatded Day"))
             .catch((err)=> console.log(err))
         }
-
-        
-
- 
-
     },
     addFacultyLinks(req,res){
         var link = { link:req.body.link };
@@ -224,7 +219,7 @@ module.exports={
             Department:req.body.department,
             created_at:new Date(),
             modified_at:new Date()});
-        facultyprofile.save().then((facultyprofile) => {
+        facultyprofile.save().then(() => {
             res.send({registration:"Successfull"}); 
         })
         .catch((error) => {
@@ -287,7 +282,7 @@ editFacultyLinks(req,res){
                 'publications.$.publicationName': req.body.publicationname,
                 'publications.$.startdate': req.body.startdate,
                 'publications.$.enddate': req.body.enddate,
-            }},function(err,model) {
+            }},function(err) {
                 if(err){
                     console.log(err);
                 }
