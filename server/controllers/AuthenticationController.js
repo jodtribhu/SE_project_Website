@@ -25,7 +25,7 @@ function genPassword(password)
  function validatePassword(candiatepassword,hash,salt){
     var hashVerify=crypto.pbkdf2Sync(candiatepassword,String(salt),10000,60,'sha512').toString('hex');
     var bt=String(hash) === hashVerify;
-    return Promise.resolve(bt); ;
+    return Promise.resolve(bt); 
     }
 module.exports={
     async checkUser(req,res){
@@ -46,9 +46,9 @@ module.exports={
     //     });
     // },
     async changePassword(req,res){
-        defaultpass=req.body.email;
+        var defaultpass=req.body.email;
         console.log(defaultpass);
-        defaultpass=defaultpass.charAt(0).toUpperCase()+defaultpass.slice(1);;
+        defaultpass=defaultpass.charAt(0).toUpperCase()+defaultpass.slice(1);
         defaultpass="1"+defaultpass;
         console.log(defaultpass);
         const id=req.body.id;
@@ -61,10 +61,10 @@ module.exports={
                 res.status(400).send({err:err});
             }
             else{
-                ForgetRequest.findByIdAndUpdate(id,{completed:true}, function(err, result){
-                    if(err)
+                ForgetRequest.findByIdAndUpdate(id,{completed:true}, function(error, result){
+                    if(error)
                     {
-                        res.status(400).send({err:err});
+                        res.status(400).send({err:error});
                     }
                     else
                     {
@@ -90,14 +90,14 @@ module.exports={
                     const schema=Joi.object({
                         password:Joi.string().regex(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"))
                     })
-                    const { error, value } = schema.validate({ password: req.body.newpass});
+                    const { error } = schema.validate({ password: req.body.newpass});
                     if(error==null){
                         const userpassworddetails= genPassword(req.body.newpass);
-                        User.findByIdAndUpdate(req.body.id,{"salt": userpassworddetails.salt,hash:userpassworddetails.hash,modified_at:new Date()}, function(err, result){
-                            if(err)
+                        User.findByIdAndUpdate(req.body.id,{"salt": userpassworddetails.salt,hash:userpassworddetails.hash,modified_at:new Date()}, function(error1, result){
+                            if(error1)
                             {
-                                console.log(err);
-                                res.send({message:err});
+                                console.log(error1);
+                                res.send({message:error1});
                             }
                             else{
                                 res.send({message:"success"});
@@ -117,7 +117,7 @@ module.exports={
     async register(req,res){
         const userpassworddetails= genPassword(req.body.password);
         const user=new User({email:req.body.email,salt:userpassworddetails.salt, hash:userpassworddetails.hash,isAdmin:req.body.isAdmin,created_at:new Date(),modified_at:new Date()});
-        user.save().then((user) => {
+        user.save().then(() => {
             res.send({registration:"Successfull"}); 
         })
         .catch((error) => {
@@ -130,11 +130,12 @@ module.exports={
        
         try {
             const {email,password}=req.body;
-            const user =await User.findOne({
-                where:{
-                    email:email
-                }
-            });  
+            // const user =await User.findOne({
+            //     where:{
+            //         email:email
+            //     }
+            // });  
+
             User.findOne({ email: email}, function (err, user) {
                 if(!user)
                 {
@@ -148,7 +149,7 @@ module.exports={
                             res.status(403).send({errormessage:"The login information was incorrect"});
                             }
                             else{
-                                afterloginuser={
+                               var afterloginuser={
                                     email:user.email,
                                     id:user.id,
                                     isAdmin:user.isAdmin,
