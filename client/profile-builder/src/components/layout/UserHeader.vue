@@ -166,6 +166,14 @@ export default {
 }
 </script>
 <style scoped>
+@media only screen and (max-device-width: 480px) {
+h1 a {
+  color: #111110;
+  margin: 0;
+}
+
+}
+/*DESKTOP*/
 .searcht{
   padding-left: 10%;
 }

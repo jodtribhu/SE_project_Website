@@ -142,7 +142,7 @@ app.post('/uploadProfilePhoto',upload.single('profilepic'),EachFacultyProfileFet
 
 
 //AllFacultyProfiles
-app.get('/fetchallfacultyprofiles',AllFacultyProfileFetchController.fetchAllFacultyProfiles);
+app.post('/fetchallfacultyprofiles',AllFacultyProfileFetchController.fetchAllFacultyProfiles);
 
 //Sample
 app.post('/sample',EachFacultyProfileFetchController.sample);

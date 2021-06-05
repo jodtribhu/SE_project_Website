@@ -3,10 +3,10 @@
         <the-header></the-header>
        <div class="main-block">
         <h1>Add a new student </h1>
-        <label id="icon" for="name"><i class="fas fa-user"></i></label>
+        <label id="icon" for="name"><em class="fas fa-user"></em></label>
         <input type="text" name="student_roll_no" placeholder="Student Roll Number" v-model="studentRollNo" autocomplete="new-password">
         <br>
-        <label id="icon" for="token"><i class="fas fa-key"></i></label>
+        <label id="icon" for="token"><em class="fas fa-key"></em></label>
         <input type='text' name="student_token" placeholder="Student Token" v-model="student_token" autocomplete="new-password">
         <br>
         <div>

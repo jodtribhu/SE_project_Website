@@ -100,14 +100,17 @@ export default {
         return false;
       }
     },
-      allFacultyProfiles(){
-            let allfacultyprofiles = this.$store.getters['allFacultyProfiles'];
+       allFacultyProfiles(){
+            var allfacultyprofiles = this.$store.getters['allFacultyProfiles'];
+            console.log("ALL FACULTY PROFILES");
+            console.log(allfacultyprofiles);
             var user_id=this.$store.getters.idofuserloggedIn;
             var facultyprofile=allfacultyprofiles.find(item => item._id ===user_id );
             var profiles;
-     
-            profiles=allfacultyprofiles.filter((Fprofile) => {
-                  if (Fprofile.Department.includes(facultyprofile.Department) && Fprofile._id!=this.$store.getters.idofuserloggedIn ) {
+            console.log("FFFFFFFFFFF");
+            console.log(allfacultyprofiles);
+            profiles=allfacultyprofiles.filter((profile) => {
+                  if (profile.Department.includes(facultyprofile.Department) && profile._id!=this.$store.getters.idofuserloggedIn ) {
                     return true;
                   }
                 });

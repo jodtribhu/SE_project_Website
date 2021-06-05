@@ -310,6 +310,12 @@ export default {
 </script>
 
 <style scoped>
+@media (max-device-width: 480px) {
+.profile-name {
+  padding: 0 5px;
+}
+
+}
 .far,.fa-cog{
   font-size: 150%;
   padding:4px 8px;

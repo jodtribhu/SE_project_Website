@@ -13,6 +13,7 @@ import UserHeader from './components/layout/UserHeader.vue';
 import ProjectCard from './components/Faculty/ProjectCard.vue';
 import VueApexCharts from "vue3-apexcharts";
 
+
 const app=createApp(App);
 app.component('base-card',BaseCard);
 app.component('base-dialog',BaseDialog);
