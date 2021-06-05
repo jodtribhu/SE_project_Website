@@ -85,3 +85,4 @@ WebApp V2.32->Corrected the padding of the search bar
 WebApp V2.33->Done Project Visibility ability to students
 WebApp V2.34->Need to Try more features
 WebApp V2.35->Fixed the errors in the authenticatio controller
+WebApp V2.36->Fixed the errors 
