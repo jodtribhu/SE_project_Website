@@ -87,22 +87,18 @@ export default {
   font-family: 'Montserrat', sans-serif;
   color: black;
 }
- h1{
-   text-align: center;
- }
 .searchbar {
+  border: 1px solid #ccc;
   float: right;
   padding: 6px;
   border: none;
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
+ 
 }
 
-.searchbar {
-    border: 1px solid #ccc;
-  }
- 
+
 
 button {
   text-decoration: none;
@@ -141,6 +137,7 @@ button:active {
   background-color: #edd2ff;
 }
 h1{
+  text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
 </style>

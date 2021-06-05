@@ -4,11 +4,11 @@
         <div class="main-block">
         
         <h1>Add a new faculty </h1>
-        <label id="icon" for="name"><i class="fas fa-user"></i></label>
+        <label id="icon" for="name"><em class="fas fa-user"></em></label>
 
         <input type="email" name="email" placeholder="Email" v-model="email" autocomplete="new-password">
         <br>
-        <label id="icon" for="name"><i class="fas fa-key"></i></label>
+        <label id="icon" for="name"><em class="fas fa-key"></em></label>
 
         <input type="password" name="password" placeholder="Password" v-model="password" autocomplete="new-password">
         <br>

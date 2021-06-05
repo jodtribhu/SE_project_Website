@@ -91,11 +91,9 @@ export default {
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
+    border: 1px solid #ccc;
 }
 
-.searchbar {
-    border: 1px solid #ccc;
-  }
  
   html {
   font-family: "Roboto", sans-serif;
