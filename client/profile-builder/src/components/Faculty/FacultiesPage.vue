@@ -36,6 +36,7 @@
              <div v-on:click="goToSearch(facultyprofile)" class="eachpeople" v-for="facultyprofile in searchedProfile()" :key="facultyprofile._id">
                <search-item >
                 <div :style="{ 'background-image': `url(${converturl(facultyprofile.ProfilePhotoPath) })` }"  class="profile-picture" />
+                <ul>
                   <li class="name">
                     {{facultyprofile.FirstName}} {{facultyprofile.LastName}}  
                   </li>
@@ -44,7 +45,8 @@
                   </li>
                   <li class="city">
                     {{facultyprofile.City}}
-                  </li>    
+                  </li>                    
+                </ul>  
                 </search-item> 
              </div>
           </base-card>
@@ -53,6 +55,7 @@
              <div class="eachpeople" v-for="facultyprofile in allFacultyProfiles" :key="facultyprofile._id">
                <search-item>
                 <div :style="{ 'background-image': `url(${converturl(facultyprofile.ProfilePhotoPath) })` }"  class="profile-picture" />
+                <ul>
                   <li class="name">
                     {{facultyprofile.FirstName}} {{facultyprofile.LastName}}  
                   </li>
@@ -61,7 +64,9 @@
                   </li>
                   <li class="city">
                     {{facultyprofile.City}}
-                  </li>    
+                  </li>
+                </ul>
+    
                 </search-item> 
              </div>
           </base-card>
@@ -116,8 +121,7 @@ export default {
                 });
            profiles= this.shuffle(profiles);
             console.log("Inside all faculty Profiels");
-            var tprofiles = profiles.slice(1, 4);
-            return tprofiles;
+            return profiles.slice(1, 4);
         },
     },
     methods: {

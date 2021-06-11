@@ -6,7 +6,7 @@
                 <router-link to="/"> Profile Builder</router-link> 
             </h1>
              <div class="search-bar">     
-                    <span><input type="text" autoComplete="on" :list="allFacultyProfiles" v-model="search" class="search" placeholder="Search" ><i class="fas fa-search"></i> </span>
+                    <span><input type="text" autoComplete="on" :list="allFacultyProfiles" v-model="search" class="search" placeholder="Search" ><em class="fas fa-search"></em> </span>
                     <div class="makeflex">
                       <ul class="SelectItems">
                       <li   v-on:click="goToSearch($event)" class="SelectListItems" v-for="facultyprofile in allFacultyProfiles" :id="facultyprofile._id" :key="facultyprofile._id" >
@@ -23,18 +23,18 @@
                 </li>
                 <li> 
                     <div class="container-items">
-                         <router-link class="navigation-item" to="/home" ><i class="fas fa-home"></i> Home</router-link> <span class="sr-only"></span>
+                         <router-link class="navigation-item" to="/home" ><em class="fas fa-home"></em> Home</router-link> <span class="sr-only"></span>
                     </div> 
                 </li>
                 <li>
                     <div class="container-items" v-if="isLoggedIn">
-                      <router-link class="navigation-item" :to=statsRoute ><i class="fas fa-chart-bar"></i>Stats</router-link> <span class="sr-only"></span>
+                      <router-link class="navigation-item" :to=statsRoute ><em class="fas fa-chart-bar"></em>Stats</router-link> <span class="sr-only"></span>
                         
                     </div> 
                 </li>
                 <li>
                     <div class="container-items" v-if="isLoggedIn">
-                      <router-link class="navigation-item" :to=requestsRoute ><i class="far fa-comment-alt"></i>Requests <span v-if="requestsnumber()!=0" class="badge">{{requestsnumber()}}</span></router-link> <span class="sr-only"></span>
+                      <router-link class="navigation-item" :to=requestsRoute ><em class="far fa-comment-alt"></em>Requests <span v-if="requestsnumber()!=0" class="badge">{{requestsnumber()}}</span></router-link> <span class="sr-only"></span>
                         
                     </div> 
                 </li>

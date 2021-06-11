@@ -11,8 +11,8 @@
             </div>
                 <div class="padding">
                     <div class="card_container"> 
-                        <i @click="sendEmail(request)" class="far fa-check-circle"></i>
-                        <i  @click="reject()" class="far fa-times-circle"></i>
+                        <em @click="sendEmail(request)" class="far fa-check-circle"></em>
+                        <em  @click="reject()" class="far fa-times-circle"></em>
                     </div>
                 </div>  
         </div> 

@@ -281,7 +281,6 @@ export default {
  
     justify-content: center;
     align-items: center;
-    /*  */
 }
 .h3_heading{
         font-family: 'Quicksand', sans-serif;
@@ -294,7 +293,6 @@ export default {
 .stats{
     position: absolute;
     margin: 0;
-    position: absolute;
     top: 85%;
     left: 50%;
     transform: translate(-50%, -38%);

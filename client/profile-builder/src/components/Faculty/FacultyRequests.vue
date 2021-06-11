@@ -50,7 +50,6 @@
     </div>
 </template>
 <script>
-// import emailjs from 'emailjs-com';
 import FetchingEachFacultyProfile from '@/services/FetchingEachFacultyProfile';
 import RequestCard from "./RequestCard.vue";
 import AcceptedrequestCard from "./AcceptedRequestCard.vue";

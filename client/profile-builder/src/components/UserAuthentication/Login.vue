@@ -131,7 +131,6 @@ export default {
   font-weight: 500;
 }
 .box input[type = "email"],.box input[type = "password"]{
-  border:0;
   background: none;
   display: block;
   margin: 20px auto;
@@ -149,7 +148,6 @@ export default {
   border-color: #2ecc71;
 }
 .box button{
-  border:0;
   background: none;
   display: block;
   margin: 20px auto;
