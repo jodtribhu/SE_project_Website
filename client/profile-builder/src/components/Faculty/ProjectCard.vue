@@ -38,16 +38,17 @@ export default {
         editProject(){
             this.$emit('editCalled')
         },
-        startDate(startdate){
+          makedate(startdate){
             var d = new Date(startdate);
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
             return months[d.getMonth()]+" "+d.getFullYear();
         },
+        startDate(startdate){
+            return  this.makedate(startdate)
+        },
           endDate(enddate){
               if(enddate!=null){
-                   var d = new Date(enddate);
-                   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-                    return months[d.getMonth()]+" "+d.getFullYear();
+                    return this.makedate(enddate)
               }
               else
               {

@@ -91,7 +91,6 @@ export default {
   border: 1px solid #ccc;
   float: right;
   padding: 6px;
-  border: none;
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;

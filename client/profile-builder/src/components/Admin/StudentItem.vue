@@ -1,6 +1,6 @@
 <template>
     <div  class="card">
-        <i @click="deletestudent" class="fas  fa-user-times"></i>
+        <em @click="deletestudent" class="fas  fa-user-times"></em>
         <h4><em class="fas fa-id-card-alt"></em>  Student Roll Number: <span>{{rollno}}</span></h4>
         <h4><em class="fas fa-key"></em> Student Token: <span>{{ token }}</span></h4>
         <p class="left">Created At : {{ created_at }}  </p>

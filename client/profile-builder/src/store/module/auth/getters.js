@@ -25,8 +25,4 @@ export default{
       return state.isAdminLoggedIn;
     }
    
-  
-    // didAutoLogout(state){
-    //   return state.didAutoLogout;
-    // }
 }

@@ -1,6 +1,6 @@
 <template>
     <div  class="card">
-        <i @click="deleteuser" class="fas  fa-user-times"></i>
+        <em @click="deleteuser" class="fas  fa-user-times"></em>
         
         <h4><em class="far fa-id-badge"> </em>   Faculty Id: <span>{{id}}</span></h4>
         <h4><em class="far fa-envelope"></em> Faculty Email: <span>{{ email }}</span></h4>

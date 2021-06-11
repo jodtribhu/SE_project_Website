@@ -1,5 +1,3 @@
-import { mount } from '@vue/test-utils'
-import TheHeader from '@/components/layout/TheHeader.vue'
 import getters from '../../../src/store/module/auth/getters.js'
 const user={
     user:123456788,

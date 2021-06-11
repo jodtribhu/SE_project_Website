@@ -257,48 +257,7 @@ export default {
             }
         return rprofiles;
         } 
-      else if(this.project==true && this.search!=""){
-           rprofiles=profiles.filter((profiles) => {
-                console.log(profiles);
-               var projects=profiles.projects.filter((project)=>{
-                  if (project.projectName.toUpperCase().includes(this.search.toUpperCase())) {
-                    return true;
-                    }
-                  else if(project.associated_with.toUpperCase().includes(this.search.toUpperCase())){
-                    return true;
-                  }
-                });
-                if(projects.length>0  && profiles._id!=this.$store.getters.idofuserloggedIn){
-                  return true;
-                }
-            });
-            if(this.searchdepartment!="None"){
-              rprofiles=rprofiles.filter((allFacultyProfile) => {
-                  if (allFacultyProfile.Department.toUpperCase().includes(this.searchdepartment.toUpperCase())) {
-                    return true;
-                  }
-                });
-            }
-            if(this.available==true){
-              rprofiles=rprofiles.filter((allFacultyProfile) => {
-                  if (allFacultyProfile.ProjectAvailability==true) {
-                    return true;
-                  }
-                });
-            }
-            if(this.location!=""){
-                rprofiles=rprofiles.filter((allFacultyProfile) => {
-                  if (allFacultyProfile.City.toUpperCase().includes(this.location.toUpperCase())) {
-                    return true;
-                  }
-                  else if(allFacultyProfile.Address.toUpperCase().includes(this.location.toUpperCase()))
-                  {
-                    return true;
-                  }
-                });
-              }
-        return rprofiles;
-        }     
+     
         else if(  this.publication==false && this.skills==false && this.project==false && this.search!=""){
           rprofiles=profiles.filter((allFacultyProfile) => {
               if (allFacultyProfile.FirstName.toUpperCase().includes(this.search.toUpperCase()) || allFacultyProfile.LastName.toUpperCase().includes(this.search.toUpperCase())  && allFacultyProfile._id!=this.$store.getters.idofuserloggedIn ) {
