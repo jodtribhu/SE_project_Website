@@ -1,6 +1,6 @@
 <template>
     <div  class="card">
-        <i @click="deleteFacultyRequest" class="far fa-trash-alt"></i>
+        <em @click="deleteFacultyRequest" class="far fa-trash-alt"></em>
         <h4><em class="fas fa-envelope-open"></em>  Faculty Email: <span>{{email}}</span></h4>
         <h4><em class="fa fa-exclamation-circle"></em> Issue: <span>{{ problem }}</span></h4>
         
