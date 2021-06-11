@@ -12,8 +12,8 @@
             <div class="profile-info">
         
                 <div class="buttonposition">
-                  <button  href="#" @click="openstudentRequestDialog()"  v-if="isAnyUserLoggedIn && facultyisAvailable"  class="myButton"><i class="far fa-paper-plane"></i>Sent Request</button>
-                  <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton"><i class="fas fa-cog"></i>Edit Profile</button>
+                  <button  href="#" @click="openstudentRequestDialog()"  v-if="isAnyUserLoggedIn && facultyisAvailable"  class="myButton"><em class="far fa-paper-plane"></em>Sent Request</button>
+                  <button href="#" @click="openeditDialog()" v-if="computedisUserLoggedIn" class="myButton"><em class="fas fa-cog"></em>Edit Profile</button>
                   <button href="#" @click="openendorseDialog()" v-if="!computedisUserLoggedIn && !isAnyUserLoggedIn" class="myButton">Endorse Profile</button>
                 </div>
              
@@ -22,19 +22,14 @@
               <h2 class="profile-name">{{facultyProfile.FirstName}} {{facultyProfile.LastName}}</h2>
               <h3 class="profile-intro">{{facultyProfile.Description}}</h3>
               <div class="detailsstyle">
-                <h3 class="profile-details"><i class="fas fa-map-marker-alt"></i> {{facultyProfile.Address}}</h3>
-                <h3 class="profile-details"><i class="fas fa-phone-alt"></i>{{facultyProfile.PhoneNo}}</h3>
+                <h3 class="profile-details"><em class="fas fa-map-marker-alt"></em> {{facultyProfile.Address}}</h3>
+                <h3 class="profile-details"><em class="fas fa-phone-alt"></em>{{facultyProfile.PhoneNo}}</h3>
               </div>
              </div>
              
           </div>
      <faculty-links  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilelinks="facultyProfilelinks" :computedisUserLoggedIn="computedisUserLoggedIn" @addedALink="refreshTheContent" ></faculty-links>
     <faculty-preference v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfilePreferences="facultyProfilePreferences" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPreference="refreshTheContent"></faculty-preference>
-    
-    <!-- <base-card v-if="Object.keys(facultyProfile).length != 0">
-      <h1>Hi Faculty {{ facultyId }}</h1>
-      <h2>Is he logged in {{ isLoggedIn }}</h2>
-    </base-card> -->
     <faculty-project  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProjects="facultyProjects" :computedisUserLoggedIn="computedisUserLoggedIn" :isAnyUserLoggedIn="isAnyUserLoggedIn" @addedAProject="refreshTheContent"></faculty-project>
     <faculty-publications  v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyPublications="facultyPublications" :computedisUserLoggedIn="computedisUserLoggedIn" @addedAPublication="refreshTheContent"></faculty-publications>
     <edit-profile v-if="editDialog" :facultyprofile="facultyProfile"  :id=$route.params.id @finished="openeditDialog"></edit-profile>
@@ -42,8 +37,6 @@
 
     <faculty-endorse v-if="Object.keys(facultyProfile).length != 0 " :id=$route.params.id :facultyProfileEndorsements="facultyProfileEndorsements" :allprofiles_send="allprofiles" ></faculty-endorse>
     <endorse-faculty  v-if="endorseDialog"   :id=$route.params.id @finished="openendorseDialog"></endorse-faculty>
-<!-- BuildProfile Card -->
-  
     <base-card v-if="Object.keys(facultyProfile).length === 0 && isLoggedIn">
       <h2 >Build Profile</h2>
       <div class="flex-container">
@@ -223,7 +216,7 @@ export default {
     refreshTheContent(){
       console.log("inside refresh content");
       this.loadfacultyprofile();
-      this.facultyProfilelinks;
+      this.facultyProfilelinks();
       
     },
     handleUploaded(resp) {
@@ -274,9 +267,6 @@ export default {
             console.log("Empty Input");
         }
         
-    },
-    endorse(){
-      
     },
     async loadfacultyprofile() {
       try {
@@ -350,7 +340,6 @@ input {
   display: block;
   width: 100%;
   border: 1px solid #ccc;
-  font: inherit;
 }
 label {
   font-family: "Montserrat", sans-serif;
@@ -422,31 +411,14 @@ h3 {
   padding: 0 20px 20px 20px;
   font-family: "Lato", sans-serif;
 }
-/* .myButton {
-	background-color:#79bbff;
-	border-radius:5px;
-	border:1px solid #337bc4;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:16px;
-	font-weight:bold;
-	padding:12px 44px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #276bb0;
-    z-index: 5;
-    top: 230px;
-    right: 100px;
-    position: absolute;
-} */
+
 .myButton {
   background-color: #79bbff;
-  border-radius: 5px;
+ 
   border: 1px solid #337bc4;
   cursor: pointer;
   color: #ffffff;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   font-size: 0.95rem;
   font-weight: bold;
   padding:1rem 1rem;
@@ -463,7 +435,7 @@ h3 {
   display: inline-block;
   cursor: pointer;
   color: #ffffff;
-  font-family: Arial;
+  font-family: Arial,sans-serif;
   font-size: 16px;
   font-weight: bold;
   padding: 12px 44px;

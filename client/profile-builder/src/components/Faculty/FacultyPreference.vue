@@ -36,8 +36,7 @@ export default {
     computed:{
         
         Availablepreferences(){
-            var difference = this.preferences.filter(x => this.selectedpreferences.indexOf(x) === -1);
-            return difference
+            return this.preferences.filter(x => this.selectedpreferences.indexOf(x) === -1);
         }
     },
     methods:{

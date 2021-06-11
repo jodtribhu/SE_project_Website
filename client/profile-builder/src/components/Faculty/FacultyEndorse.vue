@@ -40,8 +40,7 @@ export default {
         date(date){
             var d = new Date(date);
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-            var s=months[d.getMonth()]+" "+d.getFullYear();
-            return s;
+            return months[d.getMonth()]+" "+d.getFullYear();
         },
     }
 

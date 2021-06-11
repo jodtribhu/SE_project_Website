@@ -36,7 +36,7 @@
      <button v-if="computedisUserLoggedIn" class="publicationbutton" @click="opencloseDialog">Add a new Publication</button>
      <div class="publicationPadding">
         <div  v-for="singlePublication in facultyPublications" :key="singlePublication._id">
-            <p class="ptitle"><a @click="addViewCount(singlePublication._id)" :href="singlePublication.link">{{singlePublication.publicationName}}</a><i v-if="computedisUserLoggedIn" v-on:click="editpublication(singlePublication) " class=" edit fas fa-pen"></i></p>
+            <p class="ptitle"><a @click="addViewCount(singlePublication._id)" :href="singlePublication.link">{{singlePublication.publicationName}}</a><em v-if="computedisUserLoggedIn" v-on:click="editpublication(singlePublication) " class=" edit fas fa-pen"></em></p>
             <p class="pdate">{{startDate(singlePublication.startdate)}} to {{endDate(singlePublication.enddate)}}</p>  
               <hr>
         </div>
@@ -71,15 +71,13 @@ export default {
          startDate(startdate){
             var d = new Date(startdate);
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-            var s=months[d.getMonth()]+" "+d.getFullYear();
-            return s;
+            return months[d.getMonth()]+" "+d.getFullYear();
         },
           endDate(enddate){
               if(enddate!=null){
                    var d = new Date(enddate);
                    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-                   var s=months[d.getMonth()]+" "+d.getFullYear();
-                    return s;
+                    return months[d.getMonth()]+" "+d.getFullYear();
               }
               else
               {
