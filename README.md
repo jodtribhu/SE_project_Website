@@ -1,6 +1,6 @@
 # Profile Builder
 ## Tech Stack used:
-Vue.js,Express.js,Passport.js,MongoDB
+Vue.js, Express.js, Passport.js, MongoDB, FireBase and Axios
 
 ## Login Screen:
 ![image](https://user-images.githubusercontent.com/51241236/124940442-9e5a5a80-e027-11eb-9b8c-d458b40abe6a.png)
