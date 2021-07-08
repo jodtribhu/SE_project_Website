@@ -1,8 +1,0 @@
-WebApp v1.21->Added faculty registeration form
-WebApp V1.28-> Added form for student registration.
-WebApp V1.29-> Changed style for faculty and student registration.
-WebApp V1.35-> Developed faculty profile layout
-WebApp V1.40-> Added navigation bar and cover picture for profile.
-WebApp V1.54->Fixed Add profie dialog box spacing.
-WebApp V2.5->Navbar profile pic issue detected.
-WebApp V2.26->Designed the search bar(Yadhu CSS)
