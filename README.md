@@ -2,6 +2,7 @@
 Profile builder is a platform where faculties of a university can put up their profile with all necessary information about themselves and their work to obtain a network of faculties from which students can collaborate with them on various projects.
 Life during a pandemic is completely contained on the internet. From classes to meetings everything is done through the vast network. Still the creativity of the students has not burnt out and their motivation to create and work on new projects is still going strong.This project aims to provide an organised platform for faculties to enlist
 themselves and their work for students to view in a systematic manner and select the perfect faculty for their project.
+Link to the site: https://profile-builder-deploy.herokuapp.com/home
 
 ## Tech Stack used:
 Vue.js, Express.js, Passport.js, MongoDB, FireBase and Axios
